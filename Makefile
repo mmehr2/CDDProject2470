@@ -5,6 +5,7 @@ CDDparm := $(CDDparm)
 CDDparm := 35
 
 obj-m := CDD2.o
+CDD2-objs := basic_ops.o main.o
 
 all: 	clean run
 	@make -s clean
@@ -19,7 +20,7 @@ run: CDD2 CDD2app
 	cat < /dev/CDD2;
 	echo "Hello World" > /dev/CDD2;
 	cat < /dev/CDD2;
-	./CDD2app; 
+	./CDD2app;
 	lsmod | grep CDD
 	sleep 5
 	-pkill CDD2app
@@ -28,7 +29,7 @@ load: CDD2.o
 	-su -c "{ insmod ./CDD2.ko CDDparm=$(CDDparm);} || \
 		{ echo CDDparm is not set;} ";
 
-CDD2: load 
+CDD2: load
 	-su -c "mknod -m 666 /dev/CDD2 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 0;"
 
 
@@ -48,4 +49,3 @@ unload:
 
 clean: unload
 	-@rm -fr *.o CDD2*.o CDD2*.ko .CDD2*.* CDD2*.*.* CDD2app .tmp_versions .[mM]odule* [mM]o*
-
