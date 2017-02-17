@@ -7,6 +7,7 @@ struct CDDdev_struct {
         unsigned int    counter;
         char            *CDD_storage;
         struct cdev     cdev;
+        int							append;
 };
 
 #endif

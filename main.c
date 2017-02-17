@@ -59,6 +59,7 @@ static struct file_operations CDD_fops =
 	open:	CDD_open, 	// open method
 	read:   CDD_read,	// read method
 	write:  CDD_write, 	// write method
+	llseek:  CDD_llseek, // llseek method
 	release:  CDD_release 	// release method
 };
 

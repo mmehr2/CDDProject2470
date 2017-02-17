@@ -10,5 +10,6 @@ extern ssize_t CDD_read (struct file *file, char *buf,
   size_t count, loff_t *ppos);
 extern ssize_t CDD_write (struct file *file, const char *buf,
   size_t count, loff_t *ppos);
+extern loff_t CDD_llseek (struct file *file, loff_t newpos, int whence);
 
 #endif
