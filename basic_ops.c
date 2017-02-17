@@ -29,7 +29,7 @@ int CDD_open (struct inode *inode, struct file *file)
     	if ( file->f_flags & O_APPEND )  {
         	printk(KERN_ALERT "file '%s' opened O_APPEND\n",
 	            file->f_path.dentry->d_name.name);
-          thisCDD->append = 0;
+          thisCDD->append = 1;
     	}
 
         file->private_data=thisCDD;
