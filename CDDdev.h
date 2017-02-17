@@ -4,6 +4,7 @@
 #include <linux/cdev.h>		// 2.6
 
 struct CDDdev_struct {
+        unsigned int    alloc_len;
         unsigned int    counter;
         char            *CDD_storage;
         struct cdev     cdev;

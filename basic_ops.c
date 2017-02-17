@@ -60,7 +60,7 @@ ssize_t CDD_read (struct file *file, char *buf,
   	printk(KERN_ALERT "CDD_read: count=%d\n", (int)count);
 
   	// bzero(buf,64);  // a bogus 64byte initialization
-  	memset(buf,0,64);  // a bogus 64byte initialization
+  	//memset(buf,0,64);  // a bogus 64byte initialization
   	err = copy_to_user(buf,&(thisCDD->CDD_storage[*ppos]),count);
   	if (err != 0) return -EFAULT;
 
@@ -76,6 +76,9 @@ ssize_t CDD_write (struct file *file, const char *buf,
   struct CDDdev_struct *thisCDD=file->private_data;
 
   pos=(thisCDD->append)?thisCDD->counter:*ppos;
+
+  // make sure we never overflow the buffer
+  if ((pos + count) > thisCDD->alloc_len) return -EFAULT;
 
 	err = copy_from_user(&(thisCDD->CDD_storage[pos]),buf,count);
 	if (err != 0) return -EFAULT;

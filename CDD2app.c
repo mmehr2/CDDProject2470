@@ -16,7 +16,7 @@
 #define MYSTR "Eureka!"
 #define MYSTR2 "Hello World 13049872138472130984721398749832174."
 
-main() {
+int main() {
 	int fd, len, wlen,i=0;
 	char str[128];
 	int num, rnum;

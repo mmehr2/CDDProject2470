@@ -5,7 +5,7 @@ CDDparm := $(CDDparm)
 CDDparm := 35
 
 obj-m := CDD2.o
-CDD2-objs := basic_ops.o main.o
+CDD2-objs := main.o basic_ops.o proc_ops.o
 
 all: 	clean run
 	@make -s clean
@@ -21,9 +21,11 @@ run: CDD2 CDD2app
 	echo "Hello World" > /dev/CDD2;
 	cat < /dev/CDD2;
 	./CDD2app;
-	lsmod | grep CDD
-	sleep 5
-	-pkill CDD2app
+	cat < /proc/CDD/myCDD2;
+	echo "1234" > /proc/CDD/myCDD2;
+	cat < /proc/CDD/myCDD2;
+	cat < /proc/CDD/myCDD2;
+	ls -l /proc/CDD/myCDD2 /dev/CDD2
 
 load: CDD2.o
 	-su -c "{ insmod ./CDD2.ko CDDparm=$(CDDparm);} || \

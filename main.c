@@ -26,6 +26,7 @@
 
 #include "basic_ops.h"
 #include "CDDdev.h"
+#include "proc_ops.h"
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,0)
 #include <linux/moduleparam.h>
@@ -38,6 +39,7 @@ MODULE_LICENSE("GPL");   /*  Kernel isn't tainted .. but doesn't
 #define CDDMAJOR  	35
 #define CDDMINOR  	0	// 2.6
 #define CDDNUMDEVS  	1	// 2.6
+#define STORAGE_LEN 4096
 
 static unsigned int CDDmajor = CDDMAJOR;
 static unsigned int CDDparm = CDDMAJOR;
@@ -68,7 +70,8 @@ static int CDD_init(void)
 	int i;
 	struct CDDdev_struct *thisCDD=&myCDD;
 
-	thisCDD->CDD_storage=vmalloc(4096);
+	thisCDD->CDD_storage=vmalloc(STORAGE_LEN);
+	thisCDD->alloc_len=STORAGE_LEN;
 
 	CDDmajor = CDDparm;
 
@@ -97,6 +100,8 @@ static int CDD_init(void)
  	i = cdev_add(&thisCDD->cdev, firstdevno, CDDNUMDEVS);
  	if (i) { printk(KERN_ALERT "Error (%d) adding CDD", i); return i; }
 
+	CDDproc_init();
+
  	return 0;
 
 }
@@ -106,6 +111,8 @@ static void CDD_exit(void)
  	struct CDDdev_struct *thisCDD=&myCDD;
 
 	vfree(thisCDD->CDD_storage);
+
+	CDDproc_exit();
 
  	//  Step 1 of 2:  unregister device with kernel
  	cdev_del(&thisCDD->cdev);
