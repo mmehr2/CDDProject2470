@@ -11,6 +11,7 @@
 #include <linux/sched.h>                // for current->pid
 
 #include "proc_ops.h"
+#include "CDDdev.h"
 
 #define CDD		"myCDD2" // proc entry
 #define myCDD  		"CDD" // proc outer directory
@@ -32,7 +33,7 @@ static struct CDDproc_struct CDDproc;
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static int eof[1];
 
-static ssize_t read_hello(struct file *file, char *buf,
+static ssize_t readproc_CDD2(struct file *file, char *buf,
 	size_t len, loff_t *ppos)
 #else
 static int readproc_CDD2(char *buf, char **start,
@@ -40,15 +41,25 @@ static int readproc_CDD2(char *buf, char **start,
 #endif
 {
   struct CDDproc_struct *usrsp=&CDDproc;
+  struct CDDdev_struct *thisCDD=get_CDDdev();
 
   if (*eof!=0) { *eof=0; return 0; }
-  else if (usrsp->CDD_procflag) {
-  	usrsp->CDD_procflag=0;
+  else {
 
-    snprintf(buf,len,"Hello..I got \"%s\"\n",usrsp->CDD_procvalue);
+    snprintf(buf,len,
+       "Mode: %s\n"
+       "Group Number: %d\n"
+       "Team Members: %s, %s\n"
+       "Buffer Length - Allocated: %u\n"
+       "Buffer Length - Used: %u\n"
+      , ((usrsp->CDD_procflag!=0)? "Written": "Readable")
+      , 42
+      , "Mike Mehr", usrsp->CDD_procvalue
+      , thisCDD->alloc_len
+      , thisCDD->counter
+    );
+    usrsp->CDD_procflag=0;
 	}
-  else
-   	snprintf(buf,len,"Hello from process %d\n", (int)current->pid);
 
   *eof = 1;
 	return (strlen(buf));
@@ -56,7 +67,7 @@ static int readproc_CDD2(char *buf, char **start,
 
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
-static ssize_t write_hello (struct file *file,const char * buf,
+static ssize_t writeproc_CDD2 (struct file *file,const char * buf,
     size_t count, loff_t *ppos)
 #else
 static int writeproc_CDD2(struct file *file,const char *buf,
@@ -80,14 +91,15 @@ static int writeproc_CDD2(struct file *file,const char *buf,
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static const struct file_operations proc_fops = {
  // .owner = THIS_MODULE,
- .read  = read_hello,
- .write = write_hello,
+ .read  = readproc_CDD2,
+ .write = writeproc_CDD2,
 };
 #endif
 
 int CDDproc_init(void)
 {
 	CDDproc.CDD_procvalue=vmalloc(4096);
+  strcpy(CDDproc.CDD_procvalue, "Team Member #2");
 
   // Create the necessary proc entries
   proc_topdir = proc_mkdir(myCDD,0);

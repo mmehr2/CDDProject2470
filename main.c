@@ -53,6 +53,8 @@ static unsigned int CDDparm = CDDMAJOR;
 dev_t   firstdevno;
 
 static struct CDDdev_struct myCDD;
+// access the private CDD block (for /proc debugging)
+struct CDDdev_struct* get_CDDdev(void) { return &myCDD; }
 
 static struct file_operations CDD_fops =
 {

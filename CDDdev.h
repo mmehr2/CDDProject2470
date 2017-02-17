@@ -11,4 +11,6 @@ struct CDDdev_struct {
         int							append;
 };
 
+extern struct CDDdev_struct* get_CDDdev(void);
+
 #endif

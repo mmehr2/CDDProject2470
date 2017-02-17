@@ -16,15 +16,31 @@ run: CDD2 CDD2app
 	# @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
 	# @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
 	# @ [ -c /dev/CDD2 ] && { cat < /dev/CDD2; };
+	# Test file O_TRUNC mode
 	echo "Hello World" > /dev/CDD2;
+	cat < /proc/CDD/myCDD2;
 	cat < /dev/CDD2;
-	echo "Hello World" > /dev/CDD2;
+	# Test file O_APPEND mode
+	echo -n "Testing" > /dev/CDD2;
+	echo ", 1, 2, 3 ..." >> /dev/CDD2;
+	cat < /proc/CDD/myCDD2;
 	cat < /dev/CDD2;
+	# Test buffer overrun
+	-yes | dd bs=1 count=5000 of=/dev/CDD2
+	cat < /proc/CDD/myCDD2;
+	cat < /dev/CDD2 > /dev/null;
+	# test empty buffer
+	echo -n "" > /dev/CDD2
+	cat < /proc/CDD/myCDD2;
+	cat < /dev/CDD2;
+	# run test app
 	./CDD2app;
+	# Test writable proc entry
 	cat < /proc/CDD/myCDD2;
-	echo "1234" > /proc/CDD/myCDD2;
+	echo "My Word!" > /proc/CDD/myCDD2;
 	cat < /proc/CDD/myCDD2;
 	cat < /proc/CDD/myCDD2;
+	# show devfs and procfs entries created
 	ls -l /proc/CDD/myCDD2 /dev/CDD2
 
 load: CDD2.o
