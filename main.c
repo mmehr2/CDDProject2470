@@ -32,6 +32,7 @@
 #include <linux/moduleparam.h>
 #endif
 
+MODULE_AUTHOR("Michael Mehr");
 MODULE_LICENSE("GPL");   /*  Kernel isn't tainted .. but doesn't
 			     it doesn't matter for SUSE anyways :-( */
 
@@ -83,12 +84,12 @@ static int CDD_init(void)
 
   //  Step 1b of 2:  request/reserve Major Number from Kernel
   	i = register_chrdev_region(firstdevno,1,CDD);
-		if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD", i); return i;}
+		if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); return i;}
 	}
 	else {
 	//  Step 1c of 2:  Request a Major Number Dynamically.
  		i = alloc_chrdev_region(&firstdevno, CDDMINOR, CDDNUMDEVS, CDD);
-   	if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD", i); return i;}
+   	if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); return i;}
 		CDDmajor = MAJOR(firstdevno);
 		printk(KERN_ALERT "kernel assigned major#: %d to CDD\n", CDDmajor);
 	}
@@ -100,7 +101,7 @@ static int CDD_init(void)
  	thisCDD->cdev.owner = THIS_MODULE;
 	thisCDD->cdev.ops = &CDD_fops;
  	i = cdev_add(&thisCDD->cdev, firstdevno, CDDNUMDEVS);
- 	if (i) { printk(KERN_ALERT "Error (%d) adding CDD", i); return i; }
+ 	if (i) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); return i; }
 
 	CDDproc_init();
 

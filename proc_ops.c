@@ -13,6 +13,8 @@
 #include "proc_ops.h"
 #include "CDDdev.h"
 
+#include "proc_seq_ops.h" // for the /proc/myps sequencer
+
 #define CDD		"myCDD2" // proc entry
 #define myCDD  		"CDD" // proc outer directory
 
@@ -116,11 +118,16 @@ int CDDproc_init(void)
   proc_entry->owner = THIS_MODULE;
 #endif
 
+  // add the /proc/myps sequencer
+  CDDproc_seq_init();
 	return 0;
 }
 
 void CDDproc_exit(void)
 {
+  // remove the /proc/myps sequencer
+  CDDproc_seq_exit();
+
 	vfree(CDDproc.CDD_procvalue);
 
 	if (proc_entry) remove_proc_entry (CDD, proc_topdir);

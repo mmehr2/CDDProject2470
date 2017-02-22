@@ -5,12 +5,14 @@ CDDparm := $(CDDparm)
 CDDparm := 35
 
 obj-m := CDD2.o
-CDD2-objs := main.o basic_ops.o proc_ops.o
+CDD2-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o
 
 all: 	clean run
 	@make -s clean
 
-run: CDD2 CDD2app
+run: CDD2 CDD2app tests
+
+tests: CDD2 CDD2app
 	# @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
 	# @ [ -c /dev/CDD2 ] && { cat < /dev/CDD2; };
 	# @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
@@ -40,8 +42,10 @@ run: CDD2 CDD2app
 	echo "My Word!" > /proc/CDD/myCDD2;
 	cat < /proc/CDD/myCDD2;
 	cat < /proc/CDD/myCDD2;
+	# Test myps (sequence file ops entry)
+	cat /proc/myps
 	# show devfs and procfs entries created
-	ls -l /proc/CDD/myCDD2 /dev/CDD2
+	ls -l /proc/CDD/myCDD2 /dev/CDD2 /proc/myps
 
 load: CDD2.o
 	-su -c "{ insmod ./CDD2.ko CDDparm=$(CDDparm);} || \
