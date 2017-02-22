@@ -77,7 +77,7 @@ Then it calls SHOW again, the PID seems to be 1 (random data?) which is valie, a
 No time to figure all this out. I'll ask Raghav on Friday. For now, let it go.
 
 */
-#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
+//#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
 #include "proc_seq_ops.h"
 
 #define PROC_ENTRY		"myps" // proc entry name
