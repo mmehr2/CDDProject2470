@@ -23,6 +23,7 @@
 #include <linux/mm.h>
 #include <asm/uaccess.h>
 #include <linux/vmalloc.h>
+#include <linux/slab.h> // for kmalloc/kfree
 
 #include "basic_ops.h"
 #include "CDDdev.h"
@@ -73,8 +74,17 @@ static int CDD_init(void)
 	int i;
 	struct CDDdev_struct *thisCDD=&myCDD;
 
-	thisCDD->CDD_storage=vmalloc(STORAGE_LEN);
-	thisCDD->alloc_len=STORAGE_LEN;
+	// use read/write semaphore to separate read and write access to this
+	thisCDD->CDD_sem=(struct rw_semaphore *)
+     kmalloc(sizeof(struct rw_semaphore),GFP_KERNEL);
+	init_rwsem(thisCDD->CDD_sem);
+
+	// acquire write access for allocation and cdev setup
+
+	if (thisCDD->CDD_storage == NULL) {
+		thisCDD->CDD_storage=vmalloc(STORAGE_LEN);
+		thisCDD->alloc_len=STORAGE_LEN;
+	}
 
 	CDDmajor = CDDparm;
 
@@ -84,12 +94,12 @@ static int CDD_init(void)
 
   //  Step 1b of 2:  request/reserve Major Number from Kernel
   	i = register_chrdev_region(firstdevno,1,CDD);
-		if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); return i;}
+		if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); goto Error;}
 	}
 	else {
 	//  Step 1c of 2:  Request a Major Number Dynamically.
  		i = alloc_chrdev_region(&firstdevno, CDDMINOR, CDDNUMDEVS, CDD);
-   	if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); return i;}
+   	if (i < 0) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); goto Error;}
 		CDDmajor = MAJOR(firstdevno);
 		printk(KERN_ALERT "kernel assigned major#: %d to CDD\n", CDDmajor);
 	}
@@ -101,17 +111,34 @@ static int CDD_init(void)
  	thisCDD->cdev.owner = THIS_MODULE;
 	thisCDD->cdev.ops = &CDD_fops;
  	i = cdev_add(&thisCDD->cdev, firstdevno, CDDNUMDEVS);
- 	if (i) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); return i; }
+ 	if (i) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); goto Error; }
 
 	CDDproc_init();
 
  	return 0;
+Error:
+	// all errors will come here to release common resources
+	// free any allocated memory
+	if (thisCDD->CDD_storage) {
+		vfree(thisCDD->CDD_storage);
+		thisCDD->CDD_storage = NULL;
+	}
 
+	// free the lock last
+	if (thisCDD->CDD_sem) {
+		kfree(thisCDD->CDD_sem);
+		thisCDD->CDD_sem = NULL;
+	}
+
+	// i will be set with any error code
+	return i;
 }
 
 static void CDD_exit(void)
 {
  	struct CDDdev_struct *thisCDD=&myCDD;
+
+	// ACQUIRE THE WRITE LOCK? OR JUST KILL IT ALL?
 
 	vfree(thisCDD->CDD_storage);
 
@@ -122,6 +149,12 @@ static void CDD_exit(void)
 
  	//  Step 2b of 2:  Release request/reserve of Major Number from Kernel
  	unregister_chrdev_region(firstdevno, CDDNUMDEVS);
+
+		// free the lock last
+		if (thisCDD->CDD_sem) {
+			kfree(thisCDD->CDD_sem);
+			thisCDD->CDD_sem = NULL;
+		}
 
 	if (CDDmajor != CDDMAJOR)
 		printk(KERN_ALERT "kernel unassigned major#: %d from CDD\n", CDDmajor);

@@ -12,6 +12,8 @@ all: 	clean run
 
 run: CDD2 CDD2app tests
 
+compile: CDD2.o CDD2app
+
 tests: CDD2 CDD2app
 	# @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
 	# @ [ -c /dev/CDD2 ] && { cat < /dev/CDD2; };
