@@ -77,7 +77,7 @@ Then it calls SHOW again, the PID seems to be 1 (random data?) which is valie, a
 No time to figure all this out. I'll ask Raghav on Friday. For now, let it go.
 
 */
-#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
+
 #include "proc_seq_ops.h"
 
 #define PROC_ENTRY		"myps" // proc entry name
@@ -87,79 +87,6 @@ typedef struct PSTaskSequenceIterator {
   struct list_head * pos;
   struct list_head * head;
 } seqiter_t;
-
-// global for testing iteration
-/*
-DISCUSSION:
-The sequence of operations is a bit odd.
-Empty lists cause START + STOP
-Otherwise we get:
- START, SHOW NEXT STOP SHOW(EOL) START(?) STOP
-So we need to protect all functions against invalid list access.
-Also, STOP and START are sent when a page of output is full (4096 bytes)
-
-This state machine is designed to detect and deal with these odd cases.
-Perhaps I will hit on a better way of doing things with some more study.
-*/
-static struct CDDseqproc_struct {
-  int iterating; // state sequencer (0==IDLE)
-  int seen_start; // count how many starts
-  int seen_stop; // count how many stops
-  int seen_next;
-  int seen_show;
-  int length; // number of chars output so far ()
-  int empty_list;
-  int long_list;
-} CDDseqproc; // = {0};
-
-static void more_iters(int len) {
-  int result = CDDseqproc.length + len; // relative
-  if (len < 0)
-    result = (len+1); // absolute
-  CDDseqproc.empty_list = (result == 0) ? 1 : 0;
-  CDDseqproc.long_list = (result >= 4096) ? 1 : 0;
-  CDDseqproc.length = result;
-}
-
-static void start_iters(void) {
-  CDDseqproc.iterating=0, CDDseqproc.seen_start=0, CDDseqproc.seen_show=0
-  , CDDseqproc.seen_next=0, CDDseqproc.seen_stop=0;
-  CDDseqproc.empty_list=1, CDDseqproc.long_list=0, CDDseqproc.length=0;
-  more_iters(-1);
-}
-
-static int set_state(int new) {
-  int old = CDDseqproc.iterating;
-  CDDseqproc.iterating = new;
-  return old;
-}
-
-static inline int get_state(void) { return CDDseqproc.iterating; }
-
-// static int new_state(int override_prev) {
-//   int state = CDDseqproc.iterating;
-//   if (override_prev != -1)
-//     {state = override_prev;}
-//   switch (state) {
-//     default: state = state + 1; break;
-//   }
-//   return state;
-// }
-
-static void next_iter_start(void) { ++CDDseqproc.seen_start; }
-static void next_iter_stop(void) { ++CDDseqproc.seen_stop; }
-static void next_iter_next(void) { ++CDDseqproc.seen_next; }
-static void next_iter_show(void) { ++CDDseqproc.seen_show; }
-
-static void print_iters(const char * msg) {
-  printk(KERN_ALERT "%s => IT%d: Seen %d starts, %d shows, %d nexts, %d stops. LEN=%d%s%s\n"
-    , msg, CDDseqproc.iterating, CDDseqproc.seen_start, CDDseqproc.seen_show
-    , CDDseqproc.seen_next, CDDseqproc.seen_stop
-    , CDDseqproc.length
-    , (CDDseqproc.empty_list ? "-EMPTY" : "")
-    , (CDDseqproc.long_list ? "-LONG" : "")
-  );
-}
 
 /////////////
 // Incorporate seq_file code from standard reference (used in ch.4 ex.4)
@@ -178,31 +105,41 @@ static void print_iters(const char * msg) {
  // MODS: On first entry (offset==0), we will initialize our iterator to point to the first child task
  // subsequent calls to start() might happen if list is long enough (>4096b page)
  // See comments on article here:https://lwn.net/Articles/22355/
+ //#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
+ #ifdef DEBUG_PARENT
+ #define DB2 // uncomment this line to test using carefully crafted parent that has >1 child
+ // NOTE: this uses pstree -p | grep bash to find the tree of tasks
+ /*
+ pstree -p | grep bash
+            |              |               |               |-gnome-terminal-(2074)-+-bash(2080)---sudo(2173)---su(2195)---bash(2196)+
+            |              |               |               |                       |-bash(2135)---sudo(2148)---su(2152)---bash(2153)+
+
+ */
+#endif
+
 static void *ct_seq_start(struct seq_file *s, loff_t *pos)
 {
 	seqiter_t *spos = kmalloc(sizeof(seqiter_t), GFP_KERNEL);
 	if (! spos)
 		return NULL;
-    set_state(0);
   // convert pos offset to actual iterator struct
   // for us, only initialize if *pos==0, else just continue
   if (*pos==0) {
     struct list_head *p = &current->children;
 #ifdef DEBUG_PARENT // special testing just to make sure code works - use parent who always has a child (us)
     struct task_struct *q = current->parent;
+  #ifdef DB2
     if (q) {p = &q->children; q=q->parent;}
     if (q) {p = &q->children; q=q->parent;}
     if (q) {p = &q->children; q=q->parent;}
     if (q) {p = &q->children; q=q->parent;}
+  #endif
     if (q) p = &q->children;
 #endif
-    start_iters();
     if (list_empty(p)) {
-      next_iter_start();   print_iters("MyPS SEQ: START(E)/kmalloc");
       printk(KERN_ALERT "Myps SEQ: no children to iterate in task %s (pid %d).\n", current->comm, (int) current->pid);
       return NULL;
     }
-    next_iter_start();   print_iters("MyPS SEQ: START/kmalloc");
     spos->head = p;
     spos->pos = p->next;
     // spos->task = NULL; // don't dereference this until we know there is a child
@@ -211,11 +148,11 @@ static void *ct_seq_start(struct seq_file *s, loff_t *pos)
     // see article here for a simple diagram: http://www.tldp.org/LDP/lkmpg/2.6/html/x861.html
     // TEST: see if this is still valid for kernel 4.9+
     // ALSO, obviously this won't handle multipage STOP/START sequences...but first things first
-    next_iter_start();   print_iters("MyPS SEQ: START(X)/kmalloc");
     printk(KERN_ALERT "Myps SEQ: final START call in task %s (pid %d).\n", current->comm, (int) current->pid);
     return NULL;
   }
 	//*spos = *pos;
+  printk(KERN_ALERT "Myps SEQ: first START call in task %s (pid %d).\n", current->comm, (int) current->pid);
 	return spos;
 }
 
@@ -223,14 +160,11 @@ static void *ct_seq_next(struct seq_file *s, void *v, loff_t *pos)
 {
 	seqiter_t *spos = (seqiter_t *) v;
 	*pos += 1; // next offset
-  set_state(1);
-  next_iter_next();   print_iters("MyPS SEQ: NEXT");
   // advance the iterator
   // once we have initialized the list, we can get this from the next field directly
   //412         for (pos = (head)->next; pos != (head); pos = pos->next)
   spos->pos = spos->pos->next;
   if (spos->pos == spos->head) {
-    set_state(2); // detected end of list here
     return NULL;
   }
 	return spos;
@@ -238,18 +172,8 @@ static void *ct_seq_next(struct seq_file *s, void *v, loff_t *pos)
 
 static void ct_seq_stop(struct seq_file *s, void *v)
 {
-  // according to the article above, this can be called multiple times, including up to twice when done
-  // EMPTY LIST: start stop
-  // ONE PAGE OR LESS: start(pos=0) [ show(pos) next(pos) ]+ stop start(pos==N) stop
-  // LONGER THAN 4kb PAGE:
-  //  start(pos=0) [ show(pos) next(pos) ]+ [ start(pos in middle) stop ]+(**) stop start(pos==N) stop
-  //  (**) Actually, I'm unclear when the start/stop in the middle happen rel.to show/next
-  //if (get_state() == 0) {
-    // if previous op was START, we're actually terminating
-    kfree (v);
-    printk(KERN_ALERT "MyPS SEQ: Freed up iterator memory (pid=%d).", (int)current->pid);
-  //}
-  next_iter_stop();   print_iters("MyPS SEQ: STOP");
+  kfree (v);
+  printk(KERN_ALERT "MyPS SEQ: STOP freed up iterator memory (pid=%d).\n", (int)current->pid);
 }
 
 /*
@@ -259,22 +183,9 @@ static int ct_seq_show(struct seq_file *s, void *v)
 {
 	seqiter_t *spos = (seqiter_t *) v;
 	// seq_printf(s, "%Ld\n", *spos);
-//  if (get_state() != 2) {
-    // DO NOT SHOW RECORD IF INVALID - at end of list
-//    // NOTE: NEXT will not allow spos to be updated if at end of list (returns NULL), so we must use ITS internal test
-    struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
-    // seems to get here in spite of protections
-    int tpid = task->pid;
-    int oops = (tpid < 0 || tpid > 50000); // semi-BOGUS test!
-    if (oops) {
-      printk(KERN_ALERT "Myps SEQ: child whoops: IT%d (pid %d).\n", get_state(), tpid);
-    } else {
-      printk(KERN_ALERT "Myps SEQ: child iterated: task %s (pid %d).\n", task->comm, (int) task->pid);
-      seq_printf(s, "Task %s (pid %d), child of %s (pid %d).\n", task->comm, (int) task->pid, task->parent->comm, (int) task->parent->pid);
-//      set_state(1); // only prevent kfree on STOP if still iterating list
-    }
-//  }
-  next_iter_show();   print_iters("MyPS SEQ: SHOW");
+  struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
+  printk(KERN_ALERT "Myps SEQ: child shown: task %s (pid %d).\n", task->comm, (int) task->pid);
+  seq_printf(s, "Task %s (pid %d), child of %s (pid %d).\n", task->comm, (int) task->pid, task->parent->comm, (int) task->parent->pid);
 	return 0;
 }
 
