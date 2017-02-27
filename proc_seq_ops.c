@@ -77,7 +77,7 @@ Then it calls SHOW again, the PID seems to be 1 (random data?) which is valie, a
 No time to figure all this out. I'll ask Raghav on Friday. For now, let it go.
 
 */
-//#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
+#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
 #include "proc_seq_ops.h"
 
 #define PROC_ENTRY		"myps" // proc entry name
@@ -186,22 +186,34 @@ static void *ct_seq_start(struct seq_file *s, loff_t *pos)
     set_state(0);
   // convert pos offset to actual iterator struct
   // for us, only initialize if *pos==0, else just continue
-  if (pos && *pos==0) {
+  if (*pos==0) {
     struct list_head *p = &current->children;
 #ifdef DEBUG_PARENT // special testing just to make sure code works - use parent who always has a child (us)
     struct task_struct *q = current->parent;
+    if (q) {p = &q->children; q=q->parent;}
+    if (q) {p = &q->children; q=q->parent;}
+    if (q) {p = &q->children; q=q->parent;}
+    if (q) {p = &q->children; q=q->parent;}
     if (q) p = &q->children;
 #endif
     start_iters();
     if (list_empty(p)) {
-      next_iter_start();   print_iters("MyPS SEQ: START(E)");
+      next_iter_start();   print_iters("MyPS SEQ: START(E)/kmalloc");
       printk(KERN_ALERT "Myps SEQ: no children to iterate in task %s (pid %d).\n", current->comm, (int) current->pid);
       return NULL;
     }
-    next_iter_start();   print_iters("MyPS SEQ: START");
+    next_iter_start();   print_iters("MyPS SEQ: START/kmalloc");
     spos->head = p;
     spos->pos = p->next;
     // spos->task = NULL; // don't dereference this until we know there is a child
+  } else {
+    // this is the START called after the list ends; must return NULL here to terminate sequencing
+    // see article here for a simple diagram: http://www.tldp.org/LDP/lkmpg/2.6/html/x861.html
+    // TEST: see if this is still valid for kernel 4.9+
+    // ALSO, obviously this won't handle multipage STOP/START sequences...but first things first
+    next_iter_start();   print_iters("MyPS SEQ: START(X)/kmalloc");
+    printk(KERN_ALERT "Myps SEQ: final START call in task %s (pid %d).\n", current->comm, (int) current->pid);
+    return NULL;
   }
 	//*spos = *pos;
 	return spos;
@@ -232,11 +244,11 @@ static void ct_seq_stop(struct seq_file *s, void *v)
   // LONGER THAN 4kb PAGE:
   //  start(pos=0) [ show(pos) next(pos) ]+ [ start(pos in middle) stop ]+(**) stop start(pos==N) stop
   //  (**) Actually, I'm unclear when the start/stop in the middle happen rel.to show/next
-  if (get_state() == 0) {
+  //if (get_state() == 0) {
     // if previous op was START, we're actually terminating
     kfree (v);
     printk(KERN_ALERT "MyPS SEQ: Freed up iterator memory (pid=%d).", (int)current->pid);
-  }
+  //}
   next_iter_stop();   print_iters("MyPS SEQ: STOP");
 }
 
@@ -247,9 +259,9 @@ static int ct_seq_show(struct seq_file *s, void *v)
 {
 	seqiter_t *spos = (seqiter_t *) v;
 	// seq_printf(s, "%Ld\n", *spos);
-  if (get_state() != 2) {
+//  if (get_state() != 2) {
     // DO NOT SHOW RECORD IF INVALID - at end of list
-    // NOTE: NEXT will not allow spos to be updated if at end of list (returns NULL), so we must use ITS internal test
+//    // NOTE: NEXT will not allow spos to be updated if at end of list (returns NULL), so we must use ITS internal test
     struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
     // seems to get here in spite of protections
     int tpid = task->pid;
@@ -259,9 +271,9 @@ static int ct_seq_show(struct seq_file *s, void *v)
     } else {
       printk(KERN_ALERT "Myps SEQ: child iterated: task %s (pid %d).\n", task->comm, (int) task->pid);
       seq_printf(s, "Task %s (pid %d), child of %s (pid %d).\n", task->comm, (int) task->pid, task->parent->comm, (int) task->parent->pid);
-      set_state(1); // only prevent kfree on STOP if still iterating list
+//      set_state(1); // only prevent kfree on STOP if still iterating list
     }
-  }
+//  }
   next_iter_show();   print_iters("MyPS SEQ: SHOW");
 	return 0;
 }
