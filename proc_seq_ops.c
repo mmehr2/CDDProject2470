@@ -86,6 +86,7 @@ typedef struct PSTaskSequenceIterator {
   //struct task_struct * task; // actually local to show() method
   struct list_head * pos;
   struct list_head * head;
+  loff_t pos_max;
 } seqiter_t;
 
 /////////////
@@ -107,6 +108,7 @@ typedef struct PSTaskSequenceIterator {
  // See comments on article here:https://lwn.net/Articles/22355/
  //#define DEBUG_PARENT // uncomment this line to test using current->parent instead of current
  #ifdef DEBUG_PARENT
+ //#define BIG_ENTRY // uncomment this to try code to simulate seq_printf() of >4096 bytes (causes extra stops and starts on page bounds)
  #define DB2 // uncomment this line to test using carefully crafted parent that has >1 child
  // NOTE: this uses pstree -p | grep bash to find the tree of tasks
  /*
@@ -140,6 +142,13 @@ static void *ct_seq_start(struct seq_file *s, loff_t *pos)
       printk(KERN_ALERT "Myps SEQ: no children to iterate in task %s (pid %d).\n", current->comm, (int) current->pid);
       return NULL;
     }
+    spos->pos_max = *pos;
+    { // declaration block
+    struct list_head *list;
+    list_for_each(list, p) {
+      ++spos->pos_max; // count children in advance
+    }
+  } // end declaration block
     spos->head = p;
     spos->pos = p->next;
     // spos->task = NULL; // don't dereference this until we know there is a child
@@ -148,8 +157,21 @@ static void *ct_seq_start(struct seq_file *s, loff_t *pos)
     // see article here for a simple diagram: http://www.tldp.org/LDP/lkmpg/2.6/html/x861.html
     // TEST: see if this is still valid for kernel 4.9+
     // ALSO, obviously this won't handle multipage STOP/START sequences...but first things first
-    printk(KERN_ALERT "Myps SEQ: final START call in task %s (pid %d).\n", current->comm, (int) current->pid);
-    return NULL;
+    // We would have to be able to tell JUST FROM *pos whether we are at the end of the list or not.
+    // This would only work if we knew the number of items in the list, which is not possible in the general case.
+    // For a task list, the number of children can be found I would think.
+    seqiter_t *sspos = s->private;
+    if (sspos && *pos != sspos->pos_max) {
+      // this is the intermediate case for restart in middle of big file output
+      // we want to return the old spos, which is still kept in the private field of struct seq_file
+      // free the new spos first
+      kfree(spos);
+      spos = sspos;
+      printk(KERN_ALERT "Myps SEQ: middle re-START/free call in task %s (pid %d).\n", current->comm, (int) current->pid);
+    } else {
+      printk(KERN_ALERT "Myps SEQ: final START call in task %s (pid %d).\n", current->comm, (int) current->pid);
+      return NULL;
+    }
   }
 	//*spos = *pos;
   printk(KERN_ALERT "Myps SEQ: first START call in task %s (pid %d).\n", current->comm, (int) current->pid);
@@ -159,14 +181,15 @@ static void *ct_seq_start(struct seq_file *s, loff_t *pos)
 static void *ct_seq_next(struct seq_file *s, void *v, loff_t *pos)
 {
 	seqiter_t *spos = (seqiter_t *) v;
-	*pos += 1; // next offset
   // advance the iterator
   // once we have initialized the list, we can get this from the next field directly
   //412         for (pos = (head)->next; pos != (head); pos = pos->next)
   spos->pos = spos->pos->next;
   if (spos->pos == spos->head) {
+    printk(KERN_ALERT "Myps SEQ: final NEXT call in task %s (pid %d).\n", current->comm, (int) current->pid);
     return NULL;
   }
+  printk(KERN_ALERT "Myps SEQ: NEXT call in task %s (pid %d).\n", current->comm, (int) current->pid);
 	return spos;
 }
 
@@ -184,8 +207,24 @@ static int ct_seq_show(struct seq_file *s, void *v)
 	seqiter_t *spos = (seqiter_t *) v;
 	// seq_printf(s, "%Ld\n", *spos);
   struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
+
   printk(KERN_ALERT "Myps SEQ: child shown: task %s (pid %d).\n", task->comm, (int) task->pid);
   seq_printf(s, "Task %s (pid %d), child of %s (pid %d).\n", task->comm, (int) task->pid, task->parent->comm, (int) task->parent->pid);
+
+#ifdef BIG_ENTRY
+{ // declaration block
+  int i, len;
+  // create paging sequence
+  len = 4000; // how big an entry we want to simulate
+  for (i=0; i<len; ++i) {
+    seq_putc(s, ('0' + (i % 10)));
+    if (0 == ((i+1) % 40)) seq_putc(s, '\n');
+    if (0 == ((i+1) % 400)) seq_putc(s, '\n');
+  }
+  seq_putc(s, '\n'); // final flush
+} // end declaration block
+#endif
+
 	return 0;
 }
 
