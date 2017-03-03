@@ -9,6 +9,10 @@
 #include <linux/sched.h>                // for struct_task
 #include <linux/list.h>  // for list macros
 
+#include <linux/seq_file.h>
+#include <linux/slab.h> // for kmalloc/kfree
+#include <asm/uaccess.h> // for user space transfers
+
 // DISCUSSION: To iterate the children list, we want the following
 // From article here: http://www.informit.com/articles/article.aspx?p=368650:
 //
@@ -92,9 +96,6 @@ typedef struct PSTaskSequenceIterator {
 /////////////
 // Incorporate seq_file code from standard reference (used in ch.4 ex.4)
 /////////////
-#include <linux/seq_file.h>
-#include <linux/slab.h> // for kmalloc/kfree
-
 // MODULE_AUTHOR("Jonathan Corbet");
 // MODULE_LICENSE("Dual BSD/GPL");
 
@@ -249,6 +250,68 @@ static int ct_open(struct inode *inode, struct file *file)
 	return seq_open(file, &ct_seq_ops);
 };
 
+// #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
+// static int write_hello (struct file *file,const char * buf,
+//     size_t count, loff_t *ppos)
+// #else
+// static int writeproc_CDD2(struct file *file,const char *buf,
+//                 unsigned long count, void *data)
+// #endif
+// {
+// 	int length=count;
+// 	struct CDDproc_struct *usrsp=&CDDproc;
+//
+// 	length = (length<CDD_PROCLEN)? length:CDD_PROCLEN;
+//
+// 	if (copy_from_user(usrsp->CDD_procvalue, buf, length))
+// 		return -EFAULT;
+//
+// 	usrsp->CDD_procvalue[length-1]=0;
+// 	usrsp->CDD_procflag=1;
+//
+// 	return(length);
+// }
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
+static ssize_t ct_write (struct file *file, const char *buf,
+  size_t count, loff_t *ppos)
+{
+  ssize_t retval  = 0;
+#else
+static int ct_write(struct file *file,const char *buf,
+  unsigned long count, void *data)
+  {
+    int retval = 0;
+#endif
+  long testid = -1;
+  int err;
+  size_t len = max(count+1, (size_t)10);
+  char* buf2 = kmalloc(len, GFP_KERNEL);
+  if (buf2 == NULL)
+    return -ENOMEM;
+  strcpy(buf2,"TEST!");
+
+  strncpy_from_user(buf2, buf, count);
+  buf2[count] = 0;
+  // can we do atoi()?, no but we have kstrtoXXX() family
+  err = kstrtol(buf2, 0, &testid);
+  if (err == -ERANGE) {
+    printk(KERN_ALERT "Myps WRITE-ERANGE: test PID overflow %s.\n", buf2);
+    retval = err;
+    goto Done;
+  } else if (err == -EINVAL) {
+    printk(KERN_ALERT "Myps WRITE-EINVAL: test PID invalid number %s.\n", buf2);
+    retval = err;
+    goto Done;
+  }
+  printk(KERN_ALERT "Myps WRITE: test PID set to %s(%ld).\n", buf2, testid);
+  retval = count;
+//   // actually acquire a semaphore and set the proper variable here
+Done:
+  kfree(buf2);
+  return retval;
+};
+
 /*
  * The file operations structure contains our open function along with
  * set of the canned seq_ ops.
@@ -256,6 +319,7 @@ static int ct_open(struct inode *inode, struct file *file)
 static struct file_operations ct_file_ops = {
 	.owner   = THIS_MODULE,
 	.open    = ct_open,
+  .write   = ct_write, // added hwk.5.2
 	.read    = seq_read,
 	.llseek  = seq_lseek,
 	.release = seq_release
@@ -273,6 +337,7 @@ int CDDproc_seq_init(void)
   proc_entry->read_proc = seq_read;
   proc_entry->llseek_proc = seq_lseek;
   proc_entry->release_proc = seq_release;
+  proc_entry->write_proc = ct_write; // added hwk.5.2
 #endif
 
 #if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,29)
