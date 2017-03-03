@@ -12,6 +12,7 @@ struct CDDdev_struct {
         int							append;
 
         struct rw_semaphore* CDD_sem;
+        unsigned int    active_opens; // open() counter
 };
 
 extern struct CDDdev_struct* get_CDDdev(void);

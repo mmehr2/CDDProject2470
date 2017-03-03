@@ -19,6 +19,9 @@ int CDD_open (struct inode *inode, struct file *file)
       if (0 == down_write_trylock(thisCDD->CDD_sem))
         return -ERESTARTSYS;
 
+      // count the open called
+      ++thisCDD->active_opens;
+
       thisCDD->append = 0;
 
 	    if ( file->f_flags & O_TRUNC )  {
@@ -45,9 +48,9 @@ int CDD_open (struct inode *inode, struct file *file)
 
 int CDD_release (struct inode *inode, struct file *file)
 {
- 	struct CDDdev_struct *thisCDD=file->private_data;
+// 	struct CDDdev_struct *thisCDD=file->private_data;
 
-	if( thisCDD->counter <= 0 ) return 0; // -> for compiler warning msg.
+	//if( thisCDD->counter <= 0 ) return 0; // -> for compiler warning msg.
 	// MOD_DEC_USE_COUNT;
 	return 0;
 }

@@ -78,6 +78,7 @@ static int CDD_init(void)
 	thisCDD->CDD_sem=(struct rw_semaphore *)
      kmalloc(sizeof(struct rw_semaphore),GFP_KERNEL);
 	init_rwsem(thisCDD->CDD_sem);
+	thisCDD->active_opens = 0; // init open counter
 
 	// acquire write access for allocation and cdev setup
 

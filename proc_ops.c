@@ -37,15 +37,23 @@ static int eof[1];
 
 static ssize_t readproc_CDD2(struct file *file, char *buf,
 	size_t len, loff_t *ppos)
+  {
+    ssize_t retval = 0;
 #else
 static int readproc_CDD2(char *buf, char **start,
   off_t offset, int len, int *eof, void *unused)
+  {
+    int retval = 0;
 #endif
-{
+
   struct CDDproc_struct *usrsp=&CDDproc;
   struct CDDdev_struct *thisCDD=get_CDDdev();
 
-  if (*eof!=0) { *eof=0; return 0; }
+  // lock the CDD info for reading
+  if (0 == down_read_trylock(thisCDD->CDD_sem))
+    return -ERESTARTSYS;
+
+  if (*eof!=0) { *eof=0; retval= 0; goto Done; }
   else {
 
     snprintf(buf,len,
@@ -54,17 +62,23 @@ static int readproc_CDD2(char *buf, char **start,
        "Team Members: %s, %s\n"
        "Buffer Length - Allocated: %u\n"
        "Buffer Length - Used: %u\n"
+       "# Opens: %d\n"
       , ((usrsp->CDD_procflag!=0)? "Written": "Readable")
       , 42
       , "Mike Mehr", usrsp->CDD_procvalue
       , thisCDD->alloc_len
       , thisCDD->counter
+      , thisCDD->active_opens
     );
     usrsp->CDD_procflag=0;
 	}
 
   *eof = 1;
-	return (strlen(buf));
+	retval= (strlen(buf));
+
+Done:
+  up_read(thisCDD->CDD_sem);
+  return retval;
 }
 
 
