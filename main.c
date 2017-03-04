@@ -107,14 +107,13 @@ static int CDD_init(void)
 
 	//  Step 2a of 2:  initialize thisCDD->cdev struct
  	cdev_init(&thisCDD->cdev, &CDD_fops);
+	CDDproc_init(); // must be done before the device goes active w the kernel
 
  	//  Step 2b of 2:  register device with kernel
  	thisCDD->cdev.owner = THIS_MODULE;
 	thisCDD->cdev.ops = &CDD_fops;
  	i = cdev_add(&thisCDD->cdev, firstdevno, CDDNUMDEVS);
  	if (i) { printk(KERN_ALERT "Error (%d) adding CDD\n", i); goto Error; }
-
-	CDDproc_init();
 
  	return 0;
 Error:
@@ -138,18 +137,18 @@ Error:
 static void CDD_exit(void)
 {
  	struct CDDdev_struct *thisCDD=&myCDD;
-
-	// ACQUIRE THE WRITE LOCK? OR JUST KILL IT ALL?
-
-	vfree(thisCDD->CDD_storage);
-
-	CDDproc_exit();
-
  	//  Step 1 of 2:  unregister device with kernel
  	cdev_del(&thisCDD->cdev);
 
  	//  Step 2b of 2:  Release request/reserve of Major Number from Kernel
  	unregister_chrdev_region(firstdevno, CDDNUMDEVS);
+
+		// ACQUIRE THE WRITE LOCK? OR JUST KILL IT ALL?
+
+		vfree(thisCDD->CDD_storage);
+
+		CDDproc_exit();
+
 
 		// free the lock last
 		if (thisCDD->CDD_sem) {

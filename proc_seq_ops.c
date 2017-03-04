@@ -93,6 +93,13 @@ typedef struct PSTaskSequenceIterator {
   loff_t pos_max;
 } seqiter_t;
 
+typedef struct  PSProcRef {
+  pid_t taskid; // PID of task o report on, or 0 for current task
+  struct semaphore sem; // lock for this struct
+} myps_t;
+
+static myps_t myps_data;
+
 /////////////
 // Incorporate seq_file code from standard reference (used in ch.4 ex.4)
 /////////////
@@ -354,6 +361,8 @@ int CDDproc_seq_init(void)
   proc_entry->owner = THIS_MODULE;
 #endif
 
+  init_MUTEX(&myps_data.sem);
+  
 	return 0;
 }
 
