@@ -285,6 +285,7 @@ static int ct_write(struct file *file,const char *buf,
 #endif
   long testid = -1;
   int err;
+  struct task_struct* ftask;
   size_t len = max(count+1, (size_t)10);
   char* buf2 = kmalloc(len, GFP_KERNEL);
   if (buf2 == NULL)
@@ -305,8 +306,17 @@ static int ct_write(struct file *file,const char *buf,
     goto Done;
   }
   printk(KERN_ALERT "Myps WRITE: test PID set to %s(%ld).\n", buf2, testid);
+  // test if this is a valid pid by fuinding the task associated
+  ftask = pid_task(find_vpid(testid), PIDTYPE_PID);
+  if (ftask == NULL) {
+    printk(KERN_ALERT "Myps WRITE: task with PID=%ld not found.\n", testid);
+    retval = -EINVAL;
+    // actually should probably revert to current task info
+    goto Done;
+  }
+  printk(KERN_ALERT "Myps WRITE: found task named %s(pid=%d).\n", ftask->comm, ftask->pid);
+  // actually acquire a semaphore and set the proper variable here
   retval = count;
-//   // actually acquire a semaphore and set the proper variable here
 Done:
   kfree(buf2);
   return retval;
