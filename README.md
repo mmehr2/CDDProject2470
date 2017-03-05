@@ -142,7 +142,9 @@ What to turn-in: module C program source and Makefile, Sample Output.
 | Minor #3 |.. /dev/CDD/CDD128 |.. implements a 128-byte buffer |
 | Minor #4 |.. /dev/CDD/CDD256 |.. implements a 256-byte buffer |
 
-    Create /proc/CDD/CDD16 .. /proc/CDD/CDD256 entries .. similar to
+
+
+Create /proc/CDD/CDD16 .. /proc/CDD/CDD256 entries .. similar to
 Chapter #4 Question# 1.d,1.e.
 
   b) ioctl()
