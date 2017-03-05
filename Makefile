@@ -14,7 +14,7 @@ all: 	clean run
 
 run: CDD2 apps tests
 
-apps:  $(APPS)
+apps:  $(APPS) testApp_ch1
 
 compile: CDD2.o apps
 
@@ -69,6 +69,18 @@ CDD2.o:
 ###  $(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
 ###
 # Targets for various test apps go here
+## NOTE: The Outputs directory will contain test output products for project checkin.
+CH01_OUTFILE := ./Outputs/Chapter01.txt
+
+testApp_ch1:
+	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 01"   > $(CH01_OUTFILE)
+	@echo ""  >> $(CH01_OUTFILE)
+	@echo "1.a: Output of 'uname -a':" >> $(CH01_OUTFILE)
+	-su -c "uname -a" >> $(CH01_OUTFILE)
+	@echo ""  >> $(CH01_OUTFILE)
+	@echo "1.b: Output of 'cat /etc/*-release':" >> $(CH01_OUTFILE)
+	-su -c "cat /etc/*-release" >> $(CH01_OUTFILE)
+
 testApp_ch3: testApp_ch3.c
 	-gcc -o testApp_ch3 testApp_ch3.c;
 
