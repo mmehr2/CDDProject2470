@@ -4,6 +4,7 @@ make[1]: Entering directory '/usr/src/linux-4.9.3'
   CC [M]  /root/hwk/Chapter_99/Examples/1/main.o
   CC [M]  /root/hwk/Chapter_99/Examples/1/basic_ops.o
   CC [M]  /root/hwk/Chapter_99/Examples/1/proc_ops.o
+  CC [M]  /root/hwk/Chapter_99/Examples/1/proc_seq_ops.o
   LD [M]  /root/hwk/Chapter_99/Examples/1/CDD2.o
   Building modules, stage 2.
   MODPOST 1 modules
@@ -13,7 +14,10 @@ make[1]: Leaving directory '/usr/src/linux-4.9.3'
 su -c "{ insmod ./CDD2.ko CDDparm=35;} || \
 	{ echo CDDparm is not set;} ";
 su -c "mknod -m 666 /dev/CDD2 c  35  0;"
-gcc -o CDD2app CDD2app.c;
+gcc -o testApp_ch3 testApp_ch3.c;
+gcc -pthread -o testApp_ch4 testApp_ch4.c;
+su -c "uname -a" >> ./Outputs/Chapter01.txt
+su -c "cat /etc/*-release" >> ./Outputs/Chapter01.txt
 # @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
 # @ [ -c /dev/CDD2 ] && { cat < /dev/CDD2; };
 # @ [ -c /dev/CDD2 ] && { echo "Hello World" > /dev/CDD2;};
@@ -27,6 +31,7 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 12
+# Opens: 1
 cat < /dev/CDD2;
 Hello World
 # Test file O_APPEND mode
@@ -38,17 +43,19 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 21
+# Opens: 4
 cat < /dev/CDD2;
 Testing, 1, 2, 3 ...
 # Test buffer overrun
 yes | dd bs=1 count=5000 of=/dev/CDD2
-Makefile:14: recipe for target 'run' failed
+Makefile:22: recipe for target 'tests' failed
 cat < /proc/CDD/myCDD2;
 Mode: Readable
 Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 4096
+# Opens: 6
 cat < /dev/CDD2 > /dev/null;
 # test empty buffer
 echo -n "" > /dev/CDD2
@@ -58,9 +65,10 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 0
+# Opens: 8
 cat < /dev/CDD2;
 # run test app
-./CDD2app;
+./testApp_ch3;
 Eureka!Hello World 13049872138472130984721398749832174.
 a!
 # Test writable proc entry
@@ -70,6 +78,7 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 55
+# Opens: 12
 echo "My Word!" > /proc/CDD/myCDD2;
 cat < /proc/CDD/myCDD2;
 Mode: Written
@@ -77,13 +86,18 @@ Group Number: 42
 Team Members: Mike Mehr, My Word!
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 55
+# Opens: 12
 cat < /proc/CDD/myCDD2;
 Mode: Readable
 Group Number: 42
 Team Members: Mike Mehr, My Word!
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 55
+# Opens: 12
+# Test myps (sequence file ops entry)
+# cat /proc/myps
 # show devfs and procfs entries created
-ls -l /proc/CDD/myCDD2 /dev/CDD2
-crw-rw-rw- 1 root root 35, 0 Feb 17 15:21 /dev/CDD2
--rwxrwxrwx 1 root root     0 Feb 17 15:21 /proc/CDD/myCDD2
+ls -l /proc/CDD/myCDD2 /dev/CDD2 /proc/myps
+crw-rw-rw- 1 root root 35, 0 Mar  5 02:04 /dev/CDD2
+-rwxrwxrwx 1 root root     0 Mar  5 02:04 /proc/CDD/myCDD2
+-rwxrwxrwx 1 root root     0 Mar  5 02:04 /proc/myps
