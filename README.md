@@ -135,11 +135,13 @@ What to turn-in: module C program source and Makefile, Sample Output.
   a) Multiple Minor#’s.
     For this assignment question,
 
+    |   |   |
+    | --- | --- |
     | Minor #1 |.. /dev/CDD/CDD16 |.. implements a 16-byte buffer |
     | Minor #2 |.. /dev/CDD/CDD64 |.. implements a 64-byte buffer |
     | Minor #3 |.. /dev/CDD/CDD128 |.. implements a 128-byte buffer |
     | Minor #4 |.. /dev/CDD/CDD256 |.. implements a 256-byte buffer |
-    
+
     Create /proc/CDD/CDD16 .. /proc/CDD/CDD256 entries .. similar to
 Chapter #4 Question# 1.d,1.e.
 
