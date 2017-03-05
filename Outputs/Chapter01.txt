@@ -1,5 +1,8 @@
+HOMEWORK TEST OUTPUT FOR CHAPTER 01
+
 1.a: Output of 'uname -a':
 Linux mike-VirtualBox 4.9.3-2470-126-042mlm #1 SMP Fri Jan 27 00:13:21 PST 2017 x86_64 x86_64 x86_64 GNU/Linux
+
 1.b: Output of 'cat /etc/*-release':
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
