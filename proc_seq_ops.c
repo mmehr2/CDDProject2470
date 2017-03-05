@@ -12,6 +12,7 @@
 #include <linux/seq_file.h>
 #include <linux/slab.h> // for kmalloc/kfree
 #include <asm/uaccess.h> // for user space transfers
+#include <linux/mutex.h>
 
 // DISCUSSION: To iterate the children list, we want the following
 // From article here: http://www.informit.com/articles/article.aspx?p=368650:
@@ -91,11 +92,14 @@ typedef struct PSTaskSequenceIterator {
   struct list_head * pos;
   struct list_head * head;
   loff_t pos_max;
+  struct pid* ptpid; // for getting at the task_struct we are iterating
 } seqiter_t;
 
 typedef struct  PSProcRef {
-  pid_t taskid; // PID of task o report on, or 0 for current task
-  struct semaphore sem; // lock for this struct
+  pid_t testid; // PID of task o report on, or 0 for current task
+  // See discussion in <linux/pid.h> for why this is preferred to pid_t or task_struct*
+  // DECISION: use the numeric pid_t anyway - unlikely to wrap PID counter
+  struct mutex mtx; // lock for this struct
 } myps_t;
 
 static myps_t myps_data;
@@ -130,33 +134,49 @@ static myps_t myps_data;
 static void *ct_seq_start(struct seq_file *s, loff_t *pos)
 {
 	seqiter_t *spos = kmalloc(sizeof(seqiter_t), GFP_KERNEL);
+  myps_t* usrsp = &myps_data; // currently only one global structure
+  struct task_struct *test_task;
 	if (! spos)
 		return NULL;
   // convert pos offset to actual iterator struct
   // for us, only initialize if *pos==0, else just continue
   if (*pos==0) {
-    struct list_head *p = &current->children;
+    struct list_head *p;
+    spos->ptpid = find_vpid(current->pid);
+    test_task = current;
+    if (mutex_trylock(&usrsp->mtx)) {
+      // Hwk 5.2 - if someone has written a PID to use, use it (once only)
+      if (usrsp->testid != 0) {
+        spos->ptpid = find_vpid(usrsp->testid);
+        test_task = pid_task(spos->ptpid, PIDTYPE_PID);
+        usrsp->testid = 0;
+      } else {
+        // contention? just use current? no we should retry somehow TBD NOTE: learn how!
+      }
+      mutex_unlock(&usrsp->mtx);
+    }
+    p = &test_task->children;
 #ifdef DEBUG_PARENT // special testing just to make sure code works - use parent who always has a child (us)
-    struct task_struct *q = current->parent;
+    test_task = current->parent;
   #ifdef DB2
-    if (q) {p = &q->children; q=q->parent;}
-    if (q) {p = &q->children; q=q->parent;}
-    if (q) {p = &q->children; q=q->parent;}
-    if (q) {p = &q->children; q=q->parent;}
+    if (test_task) {p = &test_task->children; test_task=test_task->parent;}
+    if (test_task) {p = &test_task->children; test_task=test_task->parent;}
+    if (test_task) {p = &test_task->children; test_task=test_task->parent;}
+    if (test_task) {p = &test_task->children; test_task=test_task->parent;}
   #endif
-    if (q) p = &q->children;
+    if (test_task) p = &test_task->children;
 #endif
     if (list_empty(p)) {
-      printk(KERN_ALERT "Myps SEQ: no children to iterate in task %s (pid %d).\n", current->comm, (int) current->pid);
+      printk(KERN_ALERT "Myps SEQ: no children to iterate in task %s (pid %d).\n", test_task->comm, (int) test_task->pid);
       return NULL;
     }
     spos->pos_max = *pos;
-    { // declaration block
+   { // declaration block
     struct list_head *list;
     list_for_each(list, p) {
       ++spos->pos_max; // count children in advance
     }
-  } // end declaration block
+   } // end declaration block
     spos->head = p;
     spos->pos = p->next;
     // spos->task = NULL; // don't dereference this until we know there is a child
@@ -169,42 +189,57 @@ static void *ct_seq_start(struct seq_file *s, loff_t *pos)
     // This would only work if we knew the number of items in the list, which is not possible in the general case.
     // For a task list, the number of children can be found I would think.
     seqiter_t *sspos = s->private;
-    if (sspos && *pos != sspos->pos_max) {
+    if (sspos == NULL) {
+      printk(KERN_ALERT "Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=%d.\n", (int)*pos);
+      return NULL;
+    } else if (*pos != sspos->pos_max) {
       // this is the intermediate case for restart in middle of big file output
       // we want to return the old spos, which is still kept in the private field of struct seq_file
       // free the new spos first
       kfree(spos);
       spos = sspos;
-      printk(KERN_ALERT "Myps SEQ: middle re-START/free call in task %s (pid %d).\n", current->comm, (int) current->pid);
+      test_task = pid_task(spos->ptpid, PIDTYPE_PID);
+      printk(KERN_ALERT "Myps SEQ: middle re-START/free call in task %s (pid %d).\n", test_task->comm, (int) test_task->pid);
     } else {
-      printk(KERN_ALERT "Myps SEQ: final START call in task %s (pid %d).\n", current->comm, (int) current->pid);
+      // this is where the iterator is pointing to the end of the data (actually at N, or one off the end)
+      test_task = pid_task(sspos->ptpid, PIDTYPE_PID);
+      printk(KERN_ALERT "Myps SEQ: final START call in task %s (pid %d).\n", test_task->comm, (int) test_task->pid);
       return NULL;
     }
   }
 	//*spos = *pos;
-  printk(KERN_ALERT "Myps SEQ: first START call in task %s (pid %d).\n", current->comm, (int) current->pid);
+  printk(KERN_ALERT "Myps SEQ: first START call in task %s (pid %d) with %d children.\n"
+    , test_task->comm, (int) test_task->pid, (int) spos->pos_max);
 	return spos;
 }
 
 static void *ct_seq_next(struct seq_file *s, void *v, loff_t *pos)
 {
 	seqiter_t *spos = (seqiter_t *) v;
+  struct task_struct * test_task = pid_task(spos->ptpid, PIDTYPE_PID);
   // advance the iterator
   // once we have initialized the list, we can get this from the next field directly
   //412         for (pos = (head)->next; pos != (head); pos = pos->next)
   spos->pos = spos->pos->next;
   if (spos->pos == spos->head) {
-    printk(KERN_ALERT "Myps SEQ: final NEXT call in task %s (pid %d).\n", current->comm, (int) current->pid);
+    printk(KERN_ALERT "Myps SEQ: final NEXT call in task %s (pid %d).\n", test_task->comm, (int) test_task->pid);
     return NULL;
   }
-  printk(KERN_ALERT "Myps SEQ: NEXT call in task %s (pid %d).\n", current->comm, (int) current->pid);
+  printk(KERN_ALERT "Myps SEQ: NEXT call in task %s (pid %d).\n", test_task->comm, (int) test_task->pid);
 	return spos;
 }
 
 static void ct_seq_stop(struct seq_file *s, void *v)
 {
+  seqiter_t *spos = (seqiter_t *) v;
+  struct task_struct * test_task;
+  if (v == NULL) {
+    printk(KERN_ALERT "MyPS SEQ: STOP NULL iterator.\n"); // (pid=%d).\n", (int)test_task->pid);
+    return;
+  }
+  test_task = pid_task(spos->ptpid, PIDTYPE_PID);
   kfree (v);
-  printk(KERN_ALERT "MyPS SEQ: STOP freed up iterator memory (pid=%d).\n", (int)current->pid);
+  printk(KERN_ALERT "MyPS SEQ: STOP freed up iterator memory (pid=%d).\n", (int)test_task->pid);
 }
 
 /*
@@ -213,25 +248,12 @@ static void ct_seq_stop(struct seq_file *s, void *v)
 static int ct_seq_show(struct seq_file *s, void *v)
 {
 	seqiter_t *spos = (seqiter_t *) v;
+  //struct task_struct * test_task = pid_task(spos->ptpid, PIDTYPE_PID);
 	// seq_printf(s, "%Ld\n", *spos);
   struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
 
   printk(KERN_ALERT "Myps SEQ: child shown: task %s (pid %d).\n", task->comm, (int) task->pid);
   seq_printf(s, "Task %s (pid %d), child of %s (pid %d).\n", task->comm, (int) task->pid, task->parent->comm, (int) task->parent->pid);
-
-#ifdef BIG_ENTRY
-{ // declaration block
-  int i, len;
-  // create paging sequence
-  len = 4000; // how big an entry we want to simulate
-  for (i=0; i<len; ++i) {
-    seq_putc(s, ('0' + (i % 10)));
-    if (0 == ((i+1) % 40)) seq_putc(s, '\n');
-    if (0 == ((i+1) % 400)) seq_putc(s, '\n');
-  }
-  seq_putc(s, '\n'); // final flush
-} // end declaration block
-#endif
 
 	return 0;
 }
@@ -257,47 +279,34 @@ static int ct_open(struct inode *inode, struct file *file)
 	return seq_open(file, &ct_seq_ops);
 };
 
-// #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
-// static int write_hello (struct file *file,const char * buf,
-//     size_t count, loff_t *ppos)
-// #else
-// static int writeproc_CDD2(struct file *file,const char *buf,
-//                 unsigned long count, void *data)
-// #endif
-// {
-// 	int length=count;
-// 	struct CDDproc_struct *usrsp=&CDDproc;
-//
-// 	length = (length<CDD_PROCLEN)? length:CDD_PROCLEN;
-//
-// 	if (copy_from_user(usrsp->CDD_procvalue, buf, length))
-// 		return -EFAULT;
-//
-// 	usrsp->CDD_procvalue[length-1]=0;
-// 	usrsp->CDD_procflag=1;
-//
-// 	return(length);
-// }
+/*
+ * Hwk. Ch.5.2
+ * ct_write()
+ * Accepts a number, representing an active task PID.
+ *  If the task is found, the number is stored, and the next call to open the
+ *  file will use this PID's task for analysis instead of the current task.
+ */
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static ssize_t ct_write (struct file *file, const char *buf,
   size_t count, loff_t *ppos)
 {
   ssize_t retval  = 0;
-#else
-static int ct_write(struct file *file,const char *buf,
-  unsigned long count, void *data)
-  {
-    int retval = 0;
-#endif
   long testid = -1;
   int err;
   struct task_struct* ftask;
   size_t len = max(count+1, (size_t)10);
   char* buf2 = kmalloc(len, GFP_KERNEL);
+  myps_t* usrsp = &myps_data; // currently only one global structure
+
   if (buf2 == NULL)
     return -ENOMEM;
   strcpy(buf2,"TEST!");
+
+// enter critical section - read from user space, write to data struct
+  if (0 == mutex_trylock(&usrsp->mtx)) {
+    retval = -ERESTARTSYS;
+    goto Done;
+  }
 
   strncpy_from_user(buf2, buf, count);
   buf2[count] = 0;
@@ -306,11 +315,11 @@ static int ct_write(struct file *file,const char *buf,
   if (err == -ERANGE) {
     printk(KERN_ALERT "Myps WRITE-ERANGE: test PID overflow %s.\n", buf2);
     retval = err;
-    goto Done;
+    goto DoneSem;
   } else if (err == -EINVAL) {
     printk(KERN_ALERT "Myps WRITE-EINVAL: test PID invalid number %s.\n", buf2);
     retval = err;
-    goto Done;
+    goto DoneSem;
   }
   printk(KERN_ALERT "Myps WRITE: test PID set to %s(%ld).\n", buf2, testid);
   // test if this is a valid pid by fuinding the task associated
@@ -319,11 +328,17 @@ static int ct_write(struct file *file,const char *buf,
     printk(KERN_ALERT "Myps WRITE: task with PID=%ld not found.\n", testid);
     retval = -EINVAL;
     // actually should probably revert to current task info
-    goto Done;
+    goto DoneSem;
   }
+
+  // actually acquire a mutex and set the proper variable here
   printk(KERN_ALERT "Myps WRITE: found task named %s(pid=%d).\n", ftask->comm, ftask->pid);
-  // actually acquire a semaphore and set the proper variable here
+  usrsp->testid = ftask->pid;
   retval = count;
+
+DoneSem:
+  // exit critical section before exiting
+  mutex_unlock(&usrsp->mtx);
 Done:
   kfree(buf2);
   return retval;
@@ -361,8 +376,9 @@ int CDDproc_seq_init(void)
   proc_entry->owner = THIS_MODULE;
 #endif
 
-  init_MUTEX(&myps_data.sem);
-  
+  mutex_init(&myps_data.mtx); // hwk5.2
+  myps_data.testid = 0; // use current by default
+
 	return 0;
 }
 
