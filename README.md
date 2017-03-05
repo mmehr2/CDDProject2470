@@ -133,11 +133,11 @@ What to turn-in: module C program source and Makefile, Sample Output.
 1. Enhance your char device driver to implement
 
   a. Multiple Minor#’s.
-    For this assignment question,
-     Minor #1 .. /dev/CDD/CDD16 .. implements a 16-byte buffer
-     Minor #2 .. /dev/CDD/CDD64 .. implements a 64-byte buffer
-     Minor #3 .. /dev/CDD/CDD128 .. implements a 128-byte buffer
-     Minor #4 .. /dev/CDD/CDD256 .. implements a 256-byte buffer
+    For this assignment question,<br/>
+     Minor #1 .. /dev/CDD/CDD16 .. implements a 16-byte buffer<br/>
+     Minor #2 .. /dev/CDD/CDD64 .. implements a 64-byte buffer<br/>
+     Minor #3 .. /dev/CDD/CDD128 .. implements a 128-byte buffer<br/>
+     Minor #4 .. /dev/CDD/CDD256 .. implements a 256-byte buffer<br/>
 
      Create /proc/CDD/CDD16 .. /proc/CDD/CDD256 entries .. similar to
 Chapter #4 Question# 1.d,1.e.
@@ -145,13 +145,13 @@ Chapter #4 Question# 1.d,1.e.
   b. ioctl()
     For this assignment question .. on each Minor# CDD ..
 
-    CMD1 .. print of number of open().
-      Use a spinlock to protect the open() counter variable.
-    CMD2 .. print “Buffer Length – Allocated” .. similar to Ch#4 Question# 1.d. ..
-    CMD3 .. print “Buffer Length – Used” .. similar to Ch#4 Question# 1.e.
+    CMD1 .. print of number of open().<br/>
+      Use a spinlock to protect the open() counter variable.<br/>
+    CMD2 .. print “Buffer Length – Allocated” .. similar to Ch#4 Question# 1.d. ..<br/>
+    CMD3 .. print “Buffer Length – Used” .. similar to Ch#4 Question# 1.e.<br/>
 
   c. llseek() functionality.
-    For this assignment question .. on each Minor# CDD ..
+    For this assignment question .. on each Minor# CDD ..<br/>
     You do need to handle zero or negative offsets in llseek() , and plan for handling
 SEEK_* flags e.g. SEEK_CUR, SEEK_END
 
