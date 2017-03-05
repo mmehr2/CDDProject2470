@@ -132,7 +132,7 @@ What to turn-in: module C program source and Makefile, Sample Output.
 # Group Homework .. Chapter 6
 1. Enhance your char device driver to implement
 
-  a) Multiple Minor#’s.
+  a. Multiple Minor#’s.
     For this assignment question,
 
 |  C1 | C2 | C3 |
@@ -147,25 +147,31 @@ What to turn-in: module C program source and Makefile, Sample Output.
 Create /proc/CDD/CDD16 .. /proc/CDD/CDD256 entries .. similar to
 Chapter #4 Question# 1.d,1.e.
 
-  b) ioctl()
+  b. ioctl()
     For this assignment question .. on each Minor# CDD ..
+
     CMD1 .. print of number of open().
       Use a spinlock to protect the open() counter variable.
+
     CMD2 .. print “Buffer Length – Allocated” .. similar to Ch#4 Question# 1.d. ..
+
     CMD3 .. print “Buffer Length – Used” .. similar to Ch#4 Question# 1.e.
 
-  c) llseek() functionality.
+  c. llseek() functionality.
     For this assignment question .. on each Minor# CDD ..
+
     You do need to handle zero or negative offsets in llseek() , and plan for handling
 SEEK_* flags e.g. SEEK_CUR, SEEK_END
 
     Test it out using an similar to the app you’ve written earlier in Chapter# 3.
 
-  d) Implement a blocking open() .. using a mutex
+  d. Implement a blocking open() .. using a mutex
 
-  e) Implement support for poll() or select() functionality into your driver
+  e. Implement support for poll() or select() functionality into your driver
 
-  f) Extra-Credit:
+  f. Extra-Credit:
+
     Implement pipe() .. using ioctl() , blocking reads and blocking writes.
+
 or, implement your own system call mypipe(), that follows the makepipe or makefifo
 semantics, and takes a filename (viz /dev/CDD ) as an argument.
