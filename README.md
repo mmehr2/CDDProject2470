@@ -10,24 +10,63 @@ These can be considered the specs of a multi-capable "Frankenstein" character de
 I will try to mark the source with references such as 4.2.a for Chapter 4, part 2, step a.
 In the case there are not such designations, I'll wing it.
 
+# Lab Assignment Questions .. Chapter 1
+1. What version of the kernel that you are currently running?
+(Hint: Output of ‘uname –a’; and, ‘cat /etc/\*-release’)
+
+# Lab Assignment Questions .. Chapter 2
+(Refer to Examples in Appendix E)
+For #1, #2 and #3, turn in the output of the lines as displayed in /var/log/messages. If
+you do not see any messages pertaining to this question in /var/log/messages, then let
+me know. (We will explore further on the topic of console messages in Chapter 4).
+
+1. Modules
+
+  - Develop a module that takes an integer value as a parameter, when it is loaded using
+insmod.
+
+  - In the lab assignment for Chapter #1, you had used the output of ‘uname –r’, however,
+for this lab assignment .. display your kernel version both in the string form, as well as
+the internal notation using the macro’s UTS_RELEASE, LINUX_VERSION_CODE
+and KERNEL_VERSION.
+
+  - Load and unload the module, using insmod and rmmod, and modprobe. (Hint: for
+modprobe, where do you put the modules?)
+
+2. Stack of Modules
+
+  - Develop a pair of modules. One of the pair uses a function defined in the other to print
+a “Welcome” message.
+
+  - Load and unload the modules, using insmod and rmmod, and modprobe. (Hint: for
+modprobe, where do you put the modules?)
+
+  - Show the output of lsmod when the module is loaded ..
+
+3. Stack of Modules with Input parameters
+
+  - Use the above Stack of Modules to print a text message passed in ..
+
+  - You can turn in one assignment combining #2 and #3.
+
 # Group Homework .. Chapter 3
 1. Write a simple char device driver
 
-  * Major Number should be passed in, as a parameter.
+  - Major Number should be passed in, as a parameter.
     If the passed-in parameter value is 0, then you should dynamically request a Major
 number.
 
-  * It should support open(), release(), read(), write() for each device – i.e. minor#.
+  - It should support open(), release(), read(), write() for each device – i.e. minor#.
     The device methods should be in a separate file.
 
-  * It should correctly support device open flags (.. say) O_APPEND, O_WRONLY,
+  - It should correctly support device open flags (.. say) O_APPEND, O_WRONLY,
 O_TRUNC, O_RDONLY .. ;
 
-  * You’d need to support a minimum of two flags .. say O_APPEND and O_TRUNC.
+  - You’d need to support a minimum of two flags .. say O_APPEND and O_TRUNC.
 
-  * Add a char device into /dev with the mknod command.
-  
-  * Write a program to read/write from this device, using UNIX System Calls ..
+  - Add a char device into /dev with the mknod command.
+
+  - Write a program to read/write from this device, using UNIX System Calls ..
 open(), read(), write() and close().
 
 2. What to turn-in: working program source and, sample output.
