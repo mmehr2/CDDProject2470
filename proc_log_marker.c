@@ -8,28 +8,14 @@
 #include <linux/proc_fs.h>
 #include <linux/vmalloc.h>
 
-#include <linux/sched.h>                // for current->pid
-
-#include "proc_ops.h"
-#include "CDDdev.h"
-
-#include "proc_seq_ops.h" // for the /proc/myps sequencer
-#include "proc_log_marker.h" // for the /proc/CDD/marker utility
-
-#define CDD		"myCDD2" // proc entry
+#define CDD		"marker" // proc entry
 #define myCDD  		"CDD" // proc outer directory
 
-#define CDD_PROCLEN     32
+#define CDD_PROCLEN     256
 
-
-static struct proc_dir_entry *proc_topdir;
+#include "proc_ops.h" // for get_CDD_dir_entry()
+//static struct proc_dir_entry *proc_topdir;
 static struct proc_dir_entry *proc_entry;
-
-// to allow others to latch onto the /proc/CDD subtree
-// NOTE: this should be better protected tho!
-struct proc_dir_entry * get_CDD_dir_entry(void) {
-  return proc_topdir;
-}
 
 struct CDDproc_struct {
         char CDD_procname[CDD_PROCLEN + 1];
@@ -54,28 +40,13 @@ static int readproc_CDD2(char *buf, char **start,
 #endif
 
   struct CDDproc_struct *usrsp=&CDDproc;
-  struct CDDdev_struct *thisCDD=get_CDDdev();
-
-  // lock the CDD info for reading
-  if (0 == down_read_trylock(thisCDD->CDD_sem))
-    return -ERESTARTSYS;
 
   if (*eof!=0) { *eof=0; retval= 0; goto Done; }
   else {
 
     snprintf(buf,len,
-       "Mode: %s\n"
-       "Group Number: %d\n"
-       "Team Members: %s, %s\n"
-       "Buffer Length - Allocated: %u\n"
-       "Buffer Length - Used: %u\n"
-       "# Opens: %d\n"
-      , ((usrsp->CDD_procflag!=0)? "Written": "Readable")
-      , 42
-      , "Mike Mehr", usrsp->CDD_procvalue
-      , thisCDD->alloc_len
-      , thisCDD->counter
-      , thisCDD->active_opens
+       "%s"
+      , usrsp->CDD_procvalue
     );
     usrsp->CDD_procflag=0;
 	}
@@ -84,7 +55,6 @@ static int readproc_CDD2(char *buf, char **start,
 	retval= (strlen(buf));
 
 Done:
-  up_read(thisCDD->CDD_sem);
   return retval;
 }
 
@@ -108,6 +78,9 @@ static int writeproc_CDD2(struct file *file,const char *buf,
 	usrsp->CDD_procvalue[length-1]=0;
 	usrsp->CDD_procflag=1;
 
+  // perform marker functions
+  printk(KERN_ALERT "%s\n", usrsp->CDD_procvalue);
+
 	return(length);
 }
 
@@ -119,18 +92,19 @@ static const struct file_operations proc_fops = {
 };
 #endif
 
-int CDDproc_init(void)
+int CDDproc_log_marker_init(void)
 {
-	CDDproc.CDD_procvalue=vmalloc(4096);
-  strcpy(CDDproc.CDD_procvalue, "Team Member #2");
+	CDDproc.CDD_procvalue=vmalloc(CDD_PROCLEN);
+  strcpy(CDDproc.CDD_procvalue, "~~~ UNIQUE KERNEL MARKER ~~~");
 
   // Create the necessary proc entries
-  proc_topdir = proc_mkdir(myCDD,0);
+  // NOTE: It is assumed that /proc/CDD is already created by another part of this driver
+  //proc_topdir = get_CDD_dir_entry();
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
-  proc_entry = proc_create(CDD, 0777, proc_topdir, &proc_fops);
+  proc_entry = proc_create(CDD, 0777, get_CDD_dir_entry(), &proc_fops);
 #else
-  proc_entry = create_proc_entry(CDD,0,proc_topdir);
+  proc_entry = create_proc_entry(CDD,0,get_CDD_dir_entry());
   proc_entry->read_proc = readproc_CDD2;
   proc_entry->write_proc = writeproc_CDD2;
 #endif
@@ -139,24 +113,14 @@ int CDDproc_init(void)
   proc_entry->owner = THIS_MODULE;
 #endif
 
-  // add the /proc/myps sequencer
-  CDDproc_seq_init();
-  // add the logfile marker utility
-  CDDproc_log_marker_init();
-
 	return 0;
 }
 
-void CDDproc_exit(void)
+void CDDproc_log_marker_exit(void)
 {
-  // add the logfile marker utility
-  CDDproc_log_marker_exit();
-  // remove the /proc/myps sequencer
-  CDDproc_seq_exit();
 
 	vfree(CDDproc.CDD_procvalue);
 
-	if (proc_entry) remove_proc_entry (CDD, proc_topdir);
- 	if (proc_topdir) remove_proc_entry (myCDD, 0);
+	if (proc_entry) remove_proc_entry (CDD, get_CDD_dir_entry());
 
 }

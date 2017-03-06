@@ -5,12 +5,13 @@ CDDparm := $(CDDparm)
 CDDparm := 35
 
 obj-m := CDD2.o
-CDD2-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o
+CDD2-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o proc_log_marker.o
 
 APPS := testApp_ch3 testApp_ch4
 
 # NOTE: Ubuntu versions of /var/log/messages
 KERN-LOG := /var/log/kern.log
+KERN-MARKER := "UNIQUE KERNEL MARKER"
 
 all: 	clean run
 	@make -s clean
@@ -41,6 +42,8 @@ CDD2.o:
 ###  $(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
 ###
 # Targets for various test apps go here
+## See here for how to do clever line grabs from files like the kernel log:
+# http://unix.stackexchange.com/questions/56429/how-to-print-all-lines-after-a-match-up-to-the-end-of-the-file
 ## NOTE: The Outputs directory will contain test output products for project checkin.
 CH01_OUTFILE := ./Outputs/Chapter01.txt
 
@@ -89,6 +92,9 @@ testApp_ch4: testApp_ch4.c
 test4: CDD2 testApp_ch4
 	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 04"   > $(CH04_OUTFILE)
 	@echo ""  >> $(CH04_OUTFILE)
+	@echo "# UTIL - mark kernel log for later retrieval..."  >> $(CH04_OUTFILE)
+	echo $(KERN-MARKER) > /proc/CDD/marker
+	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: Test file O_TRUNC mode report"  >> $(CH04_OUTFILE)
 	echo "Hello World" > /dev/CDD2
 	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
@@ -121,18 +127,25 @@ test4: CDD2 testApp_ch4
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4: run test app with a few threads"  >> $(CH04_OUTFILE)
 	./testApp_ch4 5  >> $(CH04_OUTFILE)
+	@echo ""  >> $(CH04_OUTFILE)
+	@echo "# Grab the recent output of kernel message log too"  >> $(CH04_OUTFILE)
+	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B5000 -m1 | tac  >> $(CH04_OUTFILE)
 
 CH05_OUTFILE := ./Outputs/Chapter05.txt
 
 test5: CDD2
 	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 05"   > $(CH05_OUTFILE)
 	@echo ""  >> $(CH05_OUTFILE)
+	@echo "# UTIL - mark kernel log for later retrieval..."  >> $(CH05_OUTFILE)
+	echo $(KERN-MARKER) > /proc/CDD/marker
+	#echo "*** KERNEL MARKER ***" > /proc/CDD/marker
+	@echo ""  >> $(CH05_OUTFILE)
 	@echo "# Ch.5.2 Test /proc/myps on pid provided by writing to /proc/myps"  >> $(CH05_OUTFILE)
 	echo 1 > /proc/myps
 	cat /proc/myps  >> $(CH05_OUTFILE)
 	@echo ""  >> $(CH05_OUTFILE)
 	@echo "# Grab the recent output of kernel message log too"  >> $(CH05_OUTFILE)
-	tac $(KERN-LOG) | grep "Myps WRITE: test" -B5000 -m1 | tac  >> $(CH05_OUTFILE)
+	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B5000 -m1 | tac  >> $(CH05_OUTFILE)
 
 unload:
 	-su -c "rmmod CDD2; rm -fr /dev/CDD2;"
