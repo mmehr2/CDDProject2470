@@ -31,75 +31,72 @@ Task VBoxClient (pid 1602), child of systemd (pid 1).
 Task VBoxClient (pid 1607), child of systemd (pid 1).
 Task udisksd (pid 2186), child of systemd (pid 1).
 Task fwupd (pid 2189), child of systemd (pid 1).
-Task cups-browsed (pid 2721), child of systemd (pid 1).
-Task aptd (pid 12865), child of systemd (pid 1).
+Task cups-browsed (pid 29536), child of systemd (pid 1).
 
 # Grab the recent output of kernel message log too
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.524028] UNIQUE KERNEL MARKER
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537059] Myps WRITE: test PID set to 1
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537059] (1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537063] Myps WRITE: found task named systemd(pid=1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537899] Myps SEQ: first START call in task systemd (pid 1) with 30 children.
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537901] Myps SEQ: child shown: task systemd-journal (pid 215).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537902] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537903] Myps SEQ: child shown: task systemd-udevd (pid 233).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537904] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537905] Myps SEQ: child shown: task ModemManager (pid 582).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537907] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537908] Myps SEQ: child shown: task accounts-daemon (pid 585).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537909] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537910] Myps SEQ: child shown: task acpid (pid 594).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537911] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537912] Myps SEQ: child shown: task rsyslogd (pid 597).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537913] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537914] Myps SEQ: child shown: task whoopsie (pid 599).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537915] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537916] Myps SEQ: child shown: task systemd-logind (pid 602).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537917] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537918] Myps SEQ: child shown: task dbus-daemon (pid 604).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537919] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537920] Myps SEQ: child shown: task NetworkManager (pid 657).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537922] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537923] Myps SEQ: child shown: task avahi-daemon (pid 659).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537924] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537925] Myps SEQ: child shown: task cron (pid 666).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537926] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537927] Myps SEQ: child shown: task snapd (pid 681).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537928] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537929] Myps SEQ: child shown: task polkitd (pid 706).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537930] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537931] Myps SEQ: child shown: task lightdm (pid 735).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537932] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537933] Myps SEQ: child shown: task agetty (pid 759).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537935] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537935] Myps SEQ: child shown: task VBoxService (pid 893).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537937] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537938] Myps SEQ: child shown: task rtkit-daemon (pid 1396).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537939] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537940] Myps SEQ: child shown: task upowerd (pid 1411).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537941] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537942] Myps SEQ: child shown: task colord (pid 1424).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537943] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537944] Myps SEQ: child shown: task systemd (pid 1536).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537945] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537946] Myps SEQ: child shown: task gnome-keyring-d (pid 1569).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537947] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537948] Myps SEQ: child shown: task VBoxClient (pid 1585).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537950] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537950] Myps SEQ: child shown: task VBoxClient (pid 1595).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537952] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537953] Myps SEQ: child shown: task VBoxClient (pid 1602).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537954] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537955] Myps SEQ: child shown: task VBoxClient (pid 1607).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537956] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537957] Myps SEQ: child shown: task udisksd (pid 2186).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537958] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537959] Myps SEQ: child shown: task fwupd (pid 2189).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537960] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537961] Myps SEQ: child shown: task cups-browsed (pid 2721).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537963] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537963] Myps SEQ: child shown: task aptd (pid 12865).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537965] Myps SEQ: final NEXT call in task systemd (pid 1).
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537965] MyPS SEQ: STOP NULL iterator.
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537976] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
-Mar  5 07:05:04 mike-VirtualBox kernel: [22315.537977] MyPS SEQ: STOP NULL iterator.
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.554385] UNIQUE-KERNEL-MARKER
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.556441] Myps WRITE: test PID set to 1
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.556441] (1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.556444] Myps WRITE: found task named systemd(pid=1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557612] Myps SEQ: first START call in task systemd (pid 1) with 29 children.
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557614] Myps SEQ: child shown: task systemd-journal (pid 215).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557615] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557616] Myps SEQ: child shown: task systemd-udevd (pid 233).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557618] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557619] Myps SEQ: child shown: task ModemManager (pid 582).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557620] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557621] Myps SEQ: child shown: task accounts-daemon (pid 585).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557622] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557623] Myps SEQ: child shown: task acpid (pid 594).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557624] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557625] Myps SEQ: child shown: task rsyslogd (pid 597).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557626] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557627] Myps SEQ: child shown: task whoopsie (pid 599).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557628] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557629] Myps SEQ: child shown: task systemd-logind (pid 602).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557630] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557631] Myps SEQ: child shown: task dbus-daemon (pid 604).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557632] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557633] Myps SEQ: child shown: task NetworkManager (pid 657).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557634] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557635] Myps SEQ: child shown: task avahi-daemon (pid 659).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557636] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557637] Myps SEQ: child shown: task cron (pid 666).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557638] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557639] Myps SEQ: child shown: task snapd (pid 681).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557640] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557641] Myps SEQ: child shown: task polkitd (pid 706).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557643] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557643] Myps SEQ: child shown: task lightdm (pid 735).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557645] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557645] Myps SEQ: child shown: task agetty (pid 759).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557647] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557648] Myps SEQ: child shown: task VBoxService (pid 893).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557649] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557650] Myps SEQ: child shown: task rtkit-daemon (pid 1396).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557651] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557652] Myps SEQ: child shown: task upowerd (pid 1411).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557653] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557654] Myps SEQ: child shown: task colord (pid 1424).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557655] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557656] Myps SEQ: child shown: task systemd (pid 1536).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557657] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557658] Myps SEQ: child shown: task gnome-keyring-d (pid 1569).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557659] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557660] Myps SEQ: child shown: task VBoxClient (pid 1585).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557661] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557662] Myps SEQ: child shown: task VBoxClient (pid 1595).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557664] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557664] Myps SEQ: child shown: task VBoxClient (pid 1602).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557666] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557666] Myps SEQ: child shown: task VBoxClient (pid 1607).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557668] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557668] Myps SEQ: child shown: task udisksd (pid 2186).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557670] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557671] Myps SEQ: child shown: task fwupd (pid 2189).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557672] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557673] Myps SEQ: child shown: task cups-browsed (pid 29536).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557674] Myps SEQ: final NEXT call in task systemd (pid 1).
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557674] MyPS SEQ: STOP NULL iterator.
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557682] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557683] MyPS SEQ: STOP NULL iterator.

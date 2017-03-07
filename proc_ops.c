@@ -24,11 +24,38 @@
 
 static struct proc_dir_entry *proc_topdir;
 static struct proc_dir_entry *proc_entry;
+/*
+FILE SERVICES
 
-// to allow others to latch onto the /proc/CDD subtree
-// NOTE: this should be better protected tho!
-struct proc_dir_entry * get_CDD_dir_entry(void) {
-  return proc_topdir;
+These two functions allow other parts of the driver to allocate entries in the /proc/CDD subtree
+*/
+// create_CDD_procdir_entry() - to allow others to attach to the /proc/CDD subtree
+// will return NULL and do nothing if proc_topdir has not been initialized yet
+struct proc_dir_entry *
+create_CDD_procdir_entry(const char* name, int permissions, const struct file_operations* fops)
+{
+  struct proc_dir_entry* proc_entry = NULL;
+  if (proc_topdir == NULL)
+    return NULL;
+
+  #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
+    proc_entry = proc_create(name, permissions, proc_topdir, fops);
+  #else
+    proc_entry = create_proc_entry(name,0,proc_topdir);
+    proc_entry->read_proc = fops->read_proc;
+    proc_entry->write_proc = fops->writeproc;
+  #endif
+
+  #if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,29)
+    proc_entry->owner = THIS_MODULE;
+  #endif
+    return proc_entry;
+}
+
+// This will allow removal of the immediate subdirectory by name
+void remove_CDD_procdir_entry(const char* name)
+{
+  return remove_proc_entry (name, proc_topdir);
 }
 
 struct CDDproc_struct {
@@ -126,18 +153,7 @@ int CDDproc_init(void)
 
   // Create the necessary proc entries
   proc_topdir = proc_mkdir(myCDD,0);
-
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
-  proc_entry = proc_create(CDD, 0777, proc_topdir, &proc_fops);
-#else
-  proc_entry = create_proc_entry(CDD,0,proc_topdir);
-  proc_entry->read_proc = readproc_CDD2;
-  proc_entry->write_proc = writeproc_CDD2;
-#endif
-
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,29)
-  proc_entry->owner = THIS_MODULE;
-#endif
+  proc_entry = create_CDD_procdir_entry(CDD, 0777, &proc_fops);
 
   // add the /proc/myps sequencer
   CDDproc_seq_init();
@@ -156,7 +172,9 @@ void CDDproc_exit(void)
 
 	vfree(CDDproc.CDD_procvalue);
 
-	if (proc_entry) remove_proc_entry (CDD, proc_topdir);
+  // remove subdirectories and subtrees
+	if (proc_entry) remove_CDD_procdir_entry(CDD);
+  // remove master directory entry
  	if (proc_topdir) remove_proc_entry (myCDD, 0);
 
 }
