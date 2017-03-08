@@ -101,10 +101,6 @@ that is used to hold content accessed by read() or write().
   a. Use the seq_file example to create a /proc/myps entry that will print one line of
 output per process in the task_struct. Print(decode) the task flags.
 
-## Note:
-In /proc/kallsyms, a lowercase character designates the symbol as local (or non-exported). An
-uppercase character should designate the symbol as global (or external).
-
 # Group Homework .. Chapter 5
 1. Using semaphores & Spinlocks
 
@@ -194,4 +190,3 @@ across some #HZ)
   - Show the statistics from /proc/slabinfo
 
   - What to turn-in: C program source and Makefile, Sample Output.
-  
