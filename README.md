@@ -122,10 +122,10 @@ Chapter #4.
   a. Enable for writes and accept a PID
 
   b. If PID is found, print process state & process priorities for that specific process
-Test using userspace application that resets its scheduler priority – for dynamic & RT..
+  Test using userspace application that resets its scheduler priority – for dynamic & RT..
 
   c. Also, for same PID, print the fd’s that are open in a specific process.
-Test using userspace application that opens multiple/various files.
+  Test using userspace application that opens multiple/various files.
 
 What to turn-in: module C program source and Makefile, Sample Output.
 
@@ -167,3 +167,31 @@ SEEK_* flags e.g. SEEK_CUR, SEEK_END
 
 or, implement your own system call mypipe(), that follows the makepipe or makefifo
 semantics, and takes a filename (viz /dev/CDD ) as an argument.
+
+# Homework .. Chapter 7
+1. For Homework,
+ Compute the CPU speed (and display in the /proc/CDD entry)
+
+(Hint: the Timestamp counter is incremented at every CPU tick, and measure #clock ticks
+across some #HZ)
+- What to turn-in: module C program source and Makefile, Sample Output.
+
+# Homework .. Chapter 8
+1. In your char driver, allocate memory dynamically to an internal buffer in each of your
+/dev/CDD/CDD* devices. Display the size of the allocated memory.
+
+  - Implement the allocation of memory as part of the open method.
+  What is the benefit?
+
+  - Make sure to free the memory upon module exit.
+
+  - What to turn-in: C program source and Makefile, Sample Output.
+
+2. Extra-Credit:
+
+  - Allocate Cache using kmem_cache_alloc().
+
+  - Show the statistics from /proc/slabinfo
+
+  - What to turn-in: C program source and Makefile, Sample Output.
+  
