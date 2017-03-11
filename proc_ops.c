@@ -24,11 +24,13 @@
 
 static struct proc_dir_entry *proc_topdir;
 static struct proc_dir_entry *proc_entry;
-/*
-FILE SERVICES
 
-These two functions allow other parts of the driver to allocate entries in the /proc/CDD subtree
+/*
+ * PROC CDD FILE SERVICES
+ *
+ * These functions allow other parts of the driver to allocate entries in the /proc/CDD subtree
 */
+
 // create_CDD_procdir_entry() - to allow others to attach to the /proc/CDD subtree
 // will return NULL and do nothing if proc_topdir has not been initialized yet
 struct proc_dir_entry *
@@ -58,6 +60,9 @@ void remove_CDD_procdir_entry(const char* name)
   return remove_proc_entry (name, proc_topdir);
 }
 
+/*
+ * BASIC PROC/CDD DATA
+*/
 struct CDDproc_struct {
         char CDD_procname[CDD_PROCLEN + 1];
         char *CDD_procvalue;
@@ -66,6 +71,9 @@ struct CDDproc_struct {
 
 static struct CDDproc_struct CDDproc;
 
+/*
+ * BASIC PROC/CDD OPERATIONS
+*/
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static int eof[1];
 
