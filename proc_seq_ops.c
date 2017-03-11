@@ -55,34 +55,6 @@
 // // }
 //
 
-/*
-DOCUMENTING CURRENT OUTPUT
-This does NOT work like either article talks about, OR something else is wrong.
-Here is the current output of this code, which causes a crash (Seg Fault):
-
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231345] MyPS SEQ: START => IT0: Seen 1 starts, 0 shows, 0 nexts, 0 stops. LEN=0-EMPTY
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231347] Myps SEQ: child iterated: task cat (pid 18636).
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231349] MyPS SEQ: SHOW => IT1: Seen 1 starts, 1 shows, 0 nexts, 0 stops. LEN=0-EMPTY
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231351] MyPS SEQ: NEXT => IT1: Seen 1 starts, 1 shows, 1 nexts, 0 stops. LEN=0-EMPTY
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231352] MyPS SEQ: STOP => IT2: Seen 1 starts, 1 shows, 1 nexts, 1 stops. LEN=0-EMPTY
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231404] Myps SEQ: child whoops: IT0 (pid 1769366884).
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231406] MyPS SEQ: SHOW => IT0: Seen 1 starts, 2 shows, 1 nexts, 1 stops. LEN=0-EMPTY
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231407] MyPS SEQ: NEXT => IT1: Seen 1 starts, 2 shows, 2 nexts, 1 stops. LEN=0-EMPTY
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231408] Myps SEQ: child iterated: task  (pid 1).
-Feb 22 12:26:44 mike-VirtualBox kernel: [  548.231423] general protection fault: 0000 [#1] SMP
-
-It should have one valid child, since we are using the DEBUG_PARENT code.
-It calls SHOW for the valid child.
-It calls NEXT, which results NULL at state 2.
-It STOP without freeing RAM, since state is 2.
-Then it calls SHOW with an invalid PID, and by then the state is 0 again (huh?)
-It calls NEXT at state 1, which should not happen since NEXT already returned NULL. What does it return here?
-Then it calls SHOW again, the PID seems to be 1 (random data?) which is valie, and CRASHOLA!
-
-No time to figure all this out. I'll ask Raghav on Friday. For now, let it go.
-
-*/
-
 #include "proc_seq_ops.h"
 
 #define PROC_ENTRY		"myps" // proc entry name
@@ -112,8 +84,7 @@ static myps_t myps_data;
 
 
 /*
- * The sequence iterator functions.  We simply use the count of the
- * next line as our internal position.
+ * The sequence iterator functions.
  */
  // MODS: On first entry (offset==0), we will initialize our iterator to point to the first child task
  // subsequent calls to start() might happen if list is long enough (>4096b page)
@@ -245,6 +216,33 @@ static void ct_seq_stop(struct seq_file *s, void *v)
 /*
  * The show function.
  */
+ // I use a dynamic dictionary structure to represent the (possibly sparse) list of property name/value pairs
+typedef long prop_table_index_t;
+typedef struct prop_table_map_st {
+  prop_table_index_t property;
+  const char* name;
+} prop_table_mapval_t;
+
+static const char* lookup_name_helper(const prop_table_mapval_t table[], prop_table_index_t index) {
+  const prop_table_mapval_t* pv = table;
+  while (pv->name != NULL) {
+    if (pv->property == index)
+      return pv->name;
+    ++pv;
+  }
+  return "__UNKNOWN__";
+}
+
+static prop_table_mapval_t task_state_names[] = {
+  {TASK_RUNNING, "TASK_RUNNING"},
+  {TASK_INTERRUPTIBLE, "TASK_INTERRUPTIBLE"},
+  {TASK_UNINTERRUPTIBLE, "TASK_UNINTERRUPTIBLE"},
+  {__TASK_TRACED, "__TASK_TRACED"},
+  {__TASK_STOPPED, "__TASK_STOPPED"},
+  {0, NULL}, // must always be last entry in a map to terminate lookup
+};
+
+
 static int ct_seq_show(struct seq_file *s, void *v)
 {
 	seqiter_t *spos = (seqiter_t *) v;
@@ -253,7 +251,12 @@ static int ct_seq_show(struct seq_file *s, void *v)
   struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
 
   printk(KERN_ALERT "Myps SEQ: child shown: task %s (pid %d).\n", task->comm, (int) task->pid);
-  seq_printf(s, "Task %s (pid %d), child of %s (pid %d).\n", task->comm, (int) task->pid, task->parent->comm, (int) task->parent->pid);
+  seq_printf(s, "Task %s (pid %d), child of %s (pid %d). State=%ld(%s), priority=%%d.\n"
+    , task->comm, (int) task->pid
+    , task->parent->comm, (int) task->parent->pid
+    , task->state, lookup_name_helper(task_state_names, task->state)
+    //, (int) task->priority
+  );
 
 	return 0;
 }
