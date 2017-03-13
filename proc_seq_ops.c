@@ -253,11 +253,11 @@ static int ct_seq_show(struct seq_file *s, void *v)
   int open_files = ((task->files)? atomic_read(&task->files->count) : 0);
 
   printk(KERN_ALERT "Myps SEQ: child shown: task %s (pid %d).\n", task->comm, (int) task->pid);
-  seq_printf(s, "Task %s (pid %d), child of %s (pid %d). State=%ld(%s), priority=%%d. %d open files.\n"
+  seq_printf(s, "Task %s (pid %d), child of %s (pid %d). State=%ld(%s), priority=%d(RT=%d). %d open files.\n"
     , task->comm, (int) task->pid
     , task->parent->comm, (int) task->parent->pid
     , task->state, lookup_name_helper(task_state_names, task->state)
-    //, (int) task->priority
+    , task->prio, (int) task->rt_priority
     , open_files
   );
 
