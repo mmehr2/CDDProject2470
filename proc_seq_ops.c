@@ -13,6 +13,7 @@
 #include <linux/slab.h> // for kmalloc/kfree
 #include <asm/uaccess.h> // for user space transfers
 #include <linux/mutex.h>
+#include <linux/fdtable.h> // for struct files_struct
 
 // DISCUSSION: To iterate the children list, we want the following
 // From article here: http://www.informit.com/articles/article.aspx?p=368650:
@@ -249,13 +250,15 @@ static int ct_seq_show(struct seq_file *s, void *v)
   //struct task_struct * test_task = pid_task(spos->ptpid, PIDTYPE_PID);
 	// seq_printf(s, "%Ld\n", *spos);
   struct task_struct* task = list_entry(spos->pos, struct task_struct, sibling);
+  int open_files = ((task->files)? atomic_read(&task->files->count) : 0);
 
   printk(KERN_ALERT "Myps SEQ: child shown: task %s (pid %d).\n", task->comm, (int) task->pid);
-  seq_printf(s, "Task %s (pid %d), child of %s (pid %d). State=%ld(%s), priority=%%d.\n"
+  seq_printf(s, "Task %s (pid %d), child of %s (pid %d). State=%ld(%s), priority=%%d. %d open files.\n"
     , task->comm, (int) task->pid
     , task->parent->comm, (int) task->parent->pid
     , task->state, lookup_name_helper(task_state_names, task->state)
     //, (int) task->priority
+    , open_files
   );
 
 	return 0;
