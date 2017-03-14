@@ -7,7 +7,7 @@ CDDparm := 35
 obj-m := CDD2.o
 CDD2-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o proc_log_marker.o
 
-APPS := testApp_ch3 testApp_ch4
+APPS := testApp_ch3 testApp_ch4 testApp_ch5
 
 # NOTE: Ubuntu versions of /var/log/messages
 KERN-LOG := /var/log/kern.log
@@ -133,7 +133,10 @@ test4: CDD2 testApp_ch4
 
 CH05_OUTFILE := ./Outputs/Chapter05.txt
 
-test5: CDD2
+testApp_ch5: testApp_ch5.c
+	-gcc -o testApp_ch5 testApp_ch5.c;
+
+test5: CDD2 testApp_ch5
 	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 05"   > $(CH05_OUTFILE)
 	@echo ""  >> $(CH05_OUTFILE)
 	@echo "# UTIL - mark kernel log for later retrieval..."  >> $(CH05_OUTFILE)
@@ -143,6 +146,10 @@ test5: CDD2
 	@echo "# Ch.5.2 Test /proc/myps on pid provided by writing to /proc/myps"  >> $(CH05_OUTFILE)
 	echo 1 > /proc/myps
 	cat /proc/myps  >> $(CH05_OUTFILE)
+	@echo ""  >> $(CH05_OUTFILE)
+	@echo "# Ch.5.2b: run test app with process prio changes"  >> $(CH05_OUTFILE)
+	@echo "NOTE: Since fork() copies open files, the redirected output is duplicated each time."  >> $(CH05_OUTFILE)
+	./testApp_ch5 30  >> $(CH05_OUTFILE)
 	@echo ""  >> $(CH05_OUTFILE)
 	@echo "# Grab the recent output of kernel message log too"  >> $(CH05_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B5000 -m1 | tac  >> $(CH05_OUTFILE)

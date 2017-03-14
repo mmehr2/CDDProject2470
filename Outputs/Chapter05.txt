@@ -3,100 +3,822 @@ HOMEWORK TEST OUTPUT FOR CHAPTER 05
 # UTIL - mark kernel log for later retrieval...
 
 # Ch.5.2 Test /proc/myps on pid provided by writing to /proc/myps
-Task systemd-journal (pid 215), child of systemd (pid 1).
-Task systemd-udevd (pid 233), child of systemd (pid 1).
-Task ModemManager (pid 582), child of systemd (pid 1).
-Task accounts-daemon (pid 585), child of systemd (pid 1).
-Task acpid (pid 594), child of systemd (pid 1).
-Task rsyslogd (pid 597), child of systemd (pid 1).
-Task whoopsie (pid 599), child of systemd (pid 1).
-Task systemd-logind (pid 602), child of systemd (pid 1).
-Task dbus-daemon (pid 604), child of systemd (pid 1).
-Task NetworkManager (pid 657), child of systemd (pid 1).
-Task avahi-daemon (pid 659), child of systemd (pid 1).
-Task cron (pid 666), child of systemd (pid 1).
-Task snapd (pid 681), child of systemd (pid 1).
-Task polkitd (pid 706), child of systemd (pid 1).
-Task lightdm (pid 735), child of systemd (pid 1).
-Task agetty (pid 759), child of systemd (pid 1).
-Task VBoxService (pid 893), child of systemd (pid 1).
-Task rtkit-daemon (pid 1396), child of systemd (pid 1).
-Task upowerd (pid 1411), child of systemd (pid 1).
-Task colord (pid 1424), child of systemd (pid 1).
-Task systemd (pid 1536), child of systemd (pid 1).
-Task gnome-keyring-d (pid 1569), child of systemd (pid 1).
-Task VBoxClient (pid 1585), child of systemd (pid 1).
-Task VBoxClient (pid 1595), child of systemd (pid 1).
-Task VBoxClient (pid 1602), child of systemd (pid 1).
-Task VBoxClient (pid 1607), child of systemd (pid 1).
-Task udisksd (pid 2186), child of systemd (pid 1).
-Task fwupd (pid 2189), child of systemd (pid 1).
-Task cups-browsed (pid 29536), child of systemd (pid 1).
+Task systemd-journal (pid 215), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task systemd-udevd (pid 237), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task dbus-daemon (pid 592), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task accounts-daemon (pid 595), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task cron (pid 597), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task ModemManager (pid 599), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task systemd-logind (pid 606), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task rsyslogd (pid 608), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
+Task NetworkManager (pid 613), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task acpid (pid 621), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task whoopsie (pid 622), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task avahi-daemon (pid 624), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task snapd (pid 625), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 7 open files.
+Task lightdm (pid 710), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task polkitd (pid 725), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task agetty (pid 821), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task VBoxService (pid 847), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 8 open files.
+Task rtkit-daemon (pid 1134), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=121(RT=0). 3 open files.
+Task upowerd (pid 1152), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task colord (pid 1163), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task systemd (pid 1193), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task gnome-keyring-d (pid 1276), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
+Task VBoxClient (pid 1295), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task VBoxClient (pid 1305), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task VBoxClient (pid 1310), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task VBoxClient (pid 1315), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task udisksd (pid 1872), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 5 open files.
+Task fwupd (pid 1910), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 7 open files.
+Task cups-browsed (pid 21667), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+
+# Ch.5.2b: run test app with process prio changes
+NOTE: Since fork() copies open files, the redirected output is duplicated each time.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Parent spawned process(24) pid=31817 successfully, prio set from 0 to 72 (RR).
+Parent spawned process(25) pid=31818 successfully, prio set from 0 to 75.
+Parent spawned process(26) pid=31819 successfully, prio set from 0 to 78 (RR).
+Parent spawned process(27) pid=31820 successfully, prio set from 0 to 81.
+Parent spawned process(28) pid=31821 successfully, prio set from 0 to 84 (RR).
+Parent spawned process(29) pid=31822 successfully, prio set from 0 to 87.
+Successfully created 30/30 child threads
+Output from reading /proc/myps:
+Task testApp_ch5 (pid 31793), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=0(RT=99). 1 open files.
+Task testApp_ch5 (pid 31794), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=123(RT=0). 1 open files.
+Task testApp_ch5 (pid 31795), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=93(RT=6). 1 open files.
+Task testApp_ch5 (pid 31796), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=129(RT=0). 1 open files.
+Task testApp_ch5 (pid 31797), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=87(RT=12). 1 open files.
+Task testApp_ch5 (pid 31798), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=135(RT=0). 1 open files.
+Task testApp_ch5 (pid 31799), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=81(RT=18). 1 open files.
+Task testApp_ch5 (pid 31800), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31801), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=75(RT=24). 1 open files.
+Task testApp_ch5 (pid 31802), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31803), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=69(RT=30). 1 open files.
+Task testApp_ch5 (pid 31804), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31805), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=63(RT=36). 1 open files.
+Task teMy TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Thread 0 (pid=31793, ppid=31792) alive.
+Thread 0 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Thread 8 (pid=31801, ppid=31792) alive.
+Thread 8 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Thread 6 (pid=31799, ppid=31792) alive.
+Thread 6 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Thread 4 (pid=31797, ppid=31792) alive.
+Thread 4 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Thread 2 (pid=31795, ppid=31792) alive.
+Thread 2 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Thread 1 (pid=31794, ppid=31792) alive.
+Thread 1 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Thread 3 (pid=31796, ppid=31792) alive.
+Thread 3 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Thread 5 (pid=31798, ppid=31792) alive.
+Thread 5 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Thread 7 (pid=31800, ppid=31792) alive.
+Thread 7 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Thread 9 (pid=31802, ppid=31792) alive.
+Thread 9 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Thread 16 (pid=31809, ppid=31792) alive.
+Thread 16 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Thread 14 (pid=31807, ppid=31792) alive.
+Thread 14 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Thread 12 (pid=31805, ppid=31792) alive.
+Thread 12 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Thread 10 (pid=31803, ppid=31792) alive.
+Thread 10 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Parent spawned process(24) pid=31817 successfully, prio set from 0 to 72 (RR).
+Parent spawned process(25) pid=31818 successfully, prio set from 0 to 75.
+Parent spawned process(26) pid=31819 successfully, prio set from 0 to 78 (RR).
+Parent spawned process(27) pid=31820 successfully, prio set from 0 to 81.
+Thread 28 (pid=31821, ppid=31792) alive.
+Thread 28 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Parent spawned process(24) pid=31817 successfully, prio set from 0 to 72 (RR).
+Parent spawned process(25) pid=31818 successfully, prio set from 0 to 75.
+Thread 26 (pid=31819, ppid=31792) alive.
+Thread 26 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Thread 24 (pid=31817, ppid=31792) alive.
+Thread 24 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Thread 22 (pid=31815, ppid=31792) alive.
+Thread 22 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Thread 20 (pid=31813, ppid=31792) alive.
+Thread 20 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Thread 18 (pid=31811, ppid=31792) alive.
+Thread 18 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Thread 11 (pid=31804, ppid=31792) alive.
+Thread 11 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Thread 13 (pid=31806, ppid=31792) alive.
+Thread 13 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Thread 15 (pid=31808, ppid=31792) alive.
+Thread 15 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Thread 17 (pid=31810, ppid=31792) alive.
+Thread 17 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Thread 19 (pid=31812, ppid=31792) alive.
+Thread 19 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Thread 21 (pid=31814, ppid=31792) alive.
+Thread 21 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Thread 23 (pid=31816, ppid=31792) alive.
+Thread 23 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Parent spawned process(24) pid=31817 successfully, prio set from 0 to 72 (RR).
+Thread 25 (pid=31818, ppid=31792) alive.
+Thread 25 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Parent spawned process(24) pid=31817 successfully, prio set from 0 to 72 (RR).
+Parent spawned process(25) pid=31818 successfully, prio set from 0 to 75.
+Parent spawned process(26) pid=31819 successfully, prio set from 0 to 78 (RR).
+Thread 27 (pid=31820, ppid=31792) alive.
+Thread 27 dying.
+My TESTPID is 31792 (mine=31792,mypar=31791)
+Spawning 30 child threads
+Parent spawned process(0) pid=31793 successfully, prio set from 0 to 99 (FIFO).
+Parent spawned process(1) pid=31794 successfully, prio set from 0 to 3.
+Parent spawned process(2) pid=31795 successfully, prio set from 0 to 6 (FIFO).
+Parent spawned process(3) pid=31796 successfully, prio set from 0 to 9.
+Parent spawned process(4) pid=31797 successfully, prio set from 0 to 12 (FIFO).
+Parent spawned process(5) pid=31798 successfully, prio set from 0 to 15.
+Parent spawned process(6) pid=31799 successfully, prio set from 0 to 18 (FIFO).
+Parent spawned process(7) pid=31800 successfully, prio set from 0 to 21.
+Parent spawned process(8) pid=31801 successfully, prio set from 0 to 24 (FIFO).
+Parent spawned process(9) pid=31802 successfully, prio set from 0 to 27.
+Parent spawned process(10) pid=31803 successfully, prio set from 0 to 30 (FIFO).
+Parent spawned process(11) pid=31804 successfully, prio set from 0 to 33.
+Parent spawned process(12) pid=31805 successfully, prio set from 0 to 36 (FIFO).
+Parent spawned process(13) pid=31806 successfully, prio set from 0 to 39.
+Parent spawned process(14) pid=31807 successfully, prio set from 0 to 42 (RR).
+Parent spawned process(15) pid=31808 successfully, prio set from 0 to 45.
+Parent spawned process(16) pid=31809 successfully, prio set from 0 to 48 (RR).
+Parent spawned process(17) pid=31810 successfully, prio set from 0 to 51.
+Parent spawned process(18) pid=31811 successfully, prio set from 0 to 54 (RR).
+Parent spawned process(19) pid=31812 successfully, prio set from 0 to 57.
+Parent spawned process(20) pid=31813 successfully, prio set from 0 to 60 (RR).
+Parent spawned process(21) pid=31814 successfully, prio set from 0 to 63.
+Parent spawned process(22) pid=31815 successfully, prio set from 0 to 66 (RR).
+Parent spawned process(23) pid=31816 successfully, prio set from 0 to 69.
+Parent spawned process(24) pid=31817 successfully, prio set from 0 to 72 (RR).
+Parent spawned process(25) pid=31818 successfully, prio set from 0 to 75.
+Parent spawned process(26) pid=31819 successfully, prio set from 0 to 78 (RR).
+Parent spawned process(27) pid=31820 successfully, prio set from 0 to 81.
+Parent spawned process(28) pid=31821 successfully, prio set from 0 to 84 (RR).
+Thread 29 (pid=31822, ppid=31792) alive.
+Thread 29 dying.
+stApp_ch5 (pid 31806), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31807), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=57(RT=42). 1 open files.
+Task testApp_ch5 (pid 31808), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31809), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=51(RT=48). 1 open files.
+Task testApp_ch5 (pid 31810), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31811), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=45(RT=54). 1 open files.
+Task testApp_ch5 (pid 31812), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31813), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=39(RT=60). 1 open files.
+Task testApp_ch5 (pid 31814), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31815), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=33(RT=66). 1 open files.
+Task testApp_ch5 (pid 31816), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31817), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=27(RT=72). 1 open files.
+Task testApp_ch5 (pid 31818), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31819), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=21(RT=78). 1 open files.
+Task testApp_ch5 (pid 31820), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 31821), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=15(RT=84). 1 open files.
+Task testApp_ch5 (pid 31822), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task sh (pid 31825), child of testApp_ch5 (pid 31792). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Shut down thread pid=31793
+Shut down thread pid=31795
+Shut down thread pid=31797
+Shut down thread pid=31799
+Shut down thread pid=31801
+Shut down thread pid=31794
+Shut down thread pid=31796
+Shut down thread pid=31798
+Shut down thread pid=31800
+Shut down thread pid=31802
+Shut down thread pid=31803
+Shut down thread pid=31805
+Shut down thread pid=31807
+Shut down thread pid=31809
+Shut down thread pid=31804
+Shut down thread pid=31806
+Shut down thread pid=31808
+Shut down thread pid=31811
+Shut down thread pid=31813
+Shut down thread pid=31815
+Shut down thread pid=31817
+Shut down thread pid=31819
+Shut down thread pid=31821
+Shut down thread pid=31810
+Shut down thread pid=31812
+Shut down thread pid=31814
+Shut down thread pid=31816
+Shut down thread pid=31818
+Shut down thread pid=31820
+Shut down thread pid=31822
 
 # Grab the recent output of kernel message log too
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.554385] UNIQUE-KERNEL-MARKER
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.556441] Myps WRITE: test PID set to 1
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.556441] (1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.556444] Myps WRITE: found task named systemd(pid=1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557612] Myps SEQ: first START call in task systemd (pid 1) with 29 children.
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557614] Myps SEQ: child shown: task systemd-journal (pid 215).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557615] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557616] Myps SEQ: child shown: task systemd-udevd (pid 233).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557618] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557619] Myps SEQ: child shown: task ModemManager (pid 582).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557620] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557621] Myps SEQ: child shown: task accounts-daemon (pid 585).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557622] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557623] Myps SEQ: child shown: task acpid (pid 594).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557624] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557625] Myps SEQ: child shown: task rsyslogd (pid 597).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557626] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557627] Myps SEQ: child shown: task whoopsie (pid 599).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557628] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557629] Myps SEQ: child shown: task systemd-logind (pid 602).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557630] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557631] Myps SEQ: child shown: task dbus-daemon (pid 604).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557632] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557633] Myps SEQ: child shown: task NetworkManager (pid 657).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557634] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557635] Myps SEQ: child shown: task avahi-daemon (pid 659).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557636] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557637] Myps SEQ: child shown: task cron (pid 666).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557638] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557639] Myps SEQ: child shown: task snapd (pid 681).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557640] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557641] Myps SEQ: child shown: task polkitd (pid 706).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557643] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557643] Myps SEQ: child shown: task lightdm (pid 735).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557645] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557645] Myps SEQ: child shown: task agetty (pid 759).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557647] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557648] Myps SEQ: child shown: task VBoxService (pid 893).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557649] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557650] Myps SEQ: child shown: task rtkit-daemon (pid 1396).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557651] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557652] Myps SEQ: child shown: task upowerd (pid 1411).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557653] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557654] Myps SEQ: child shown: task colord (pid 1424).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557655] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557656] Myps SEQ: child shown: task systemd (pid 1536).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557657] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557658] Myps SEQ: child shown: task gnome-keyring-d (pid 1569).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557659] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557660] Myps SEQ: child shown: task VBoxClient (pid 1585).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557661] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557662] Myps SEQ: child shown: task VBoxClient (pid 1595).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557664] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557664] Myps SEQ: child shown: task VBoxClient (pid 1602).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557666] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557666] Myps SEQ: child shown: task VBoxClient (pid 1607).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557668] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557668] Myps SEQ: child shown: task udisksd (pid 2186).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557670] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557671] Myps SEQ: child shown: task fwupd (pid 2189).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557672] Myps SEQ: NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557673] Myps SEQ: child shown: task cups-browsed (pid 29536).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557674] Myps SEQ: final NEXT call in task systemd (pid 1).
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557674] MyPS SEQ: STOP NULL iterator.
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557682] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
-Mar  7 15:54:42 mike-VirtualBox kernel: [226899.557683] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.077071] UNIQUE-KERNEL-MARKER
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.122335] Myps WRITE: test PID set to 1
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.122335] (1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.122339] Myps WRITE: found task named systemd(pid=1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148712] Myps SEQ: first START call in task systemd (pid 1) with 29 children.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148716] Myps SEQ: child shown: task systemd-journal (pid 215).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148719] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148720] Myps SEQ: child shown: task systemd-udevd (pid 237).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148721] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148722] Myps SEQ: child shown: task dbus-daemon (pid 592).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148724] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148725] Myps SEQ: child shown: task accounts-daemon (pid 595).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148727] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148728] Myps SEQ: child shown: task cron (pid 597).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148729] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148730] Myps SEQ: child shown: task ModemManager (pid 599).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148732] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148733] Myps SEQ: child shown: task systemd-logind (pid 606).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148735] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148736] Myps SEQ: child shown: task rsyslogd (pid 608).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148738] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148739] Myps SEQ: child shown: task NetworkManager (pid 613).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148741] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148742] Myps SEQ: child shown: task acpid (pid 621).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148743] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148744] Myps SEQ: child shown: task whoopsie (pid 622).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148746] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148747] Myps SEQ: child shown: task avahi-daemon (pid 624).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148749] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148750] Myps SEQ: child shown: task snapd (pid 625).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148751] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148752] Myps SEQ: child shown: task lightdm (pid 710).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148754] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148755] Myps SEQ: child shown: task polkitd (pid 725).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148757] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148758] Myps SEQ: child shown: task agetty (pid 821).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148759] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148760] Myps SEQ: child shown: task VBoxService (pid 847).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148762] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148763] Myps SEQ: child shown: task rtkit-daemon (pid 1134).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148765] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148766] Myps SEQ: child shown: task upowerd (pid 1152).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148768] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148769] Myps SEQ: child shown: task colord (pid 1163).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148770] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148771] Myps SEQ: child shown: task systemd (pid 1193).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148773] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148774] Myps SEQ: child shown: task gnome-keyring-d (pid 1276).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148776] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148777] Myps SEQ: child shown: task VBoxClient (pid 1295).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148778] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148779] Myps SEQ: child shown: task VBoxClient (pid 1305).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148781] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148782] Myps SEQ: child shown: task VBoxClient (pid 1310).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148784] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148784] Myps SEQ: child shown: task VBoxClient (pid 1315).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148786] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148787] Myps SEQ: child shown: task udisksd (pid 1872).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148789] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148790] Myps SEQ: child shown: task fwupd (pid 1910).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148792] Myps SEQ: NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148793] Myps SEQ: child shown: task cups-browsed (pid 21667).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148795] Myps SEQ: final NEXT call in task systemd (pid 1).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148795] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148812] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.148813] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.231462] Myps WRITE: test PID set to 31792
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.231462] (31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.231466] Myps WRITE: found task named testApp_ch5(pid=31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248624] Myps SEQ: first START call in task testApp_ch5 (pid 31792) with 31 children.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248628] Myps SEQ: child shown: task testApp_ch5 (pid 31793).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248631] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248632] Myps SEQ: child shown: task testApp_ch5 (pid 31794).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248636] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248637] Myps SEQ: child shown: task testApp_ch5 (pid 31795).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248639] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248640] Myps SEQ: child shown: task testApp_ch5 (pid 31796).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248642] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248643] Myps SEQ: child shown: task testApp_ch5 (pid 31797).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248645] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248646] Myps SEQ: child shown: task testApp_ch5 (pid 31798).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248647] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248648] Myps SEQ: child shown: task testApp_ch5 (pid 31799).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248650] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248651] Myps SEQ: child shown: task testApp_ch5 (pid 31800).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248652] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248653] Myps SEQ: child shown: task testApp_ch5 (pid 31801).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248655] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248656] Myps SEQ: child shown: task testApp_ch5 (pid 31802).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248658] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248659] Myps SEQ: child shown: task testApp_ch5 (pid 31803).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248661] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248662] Myps SEQ: child shown: task testApp_ch5 (pid 31804).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248663] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248665] Myps SEQ: child shown: task testApp_ch5 (pid 31805).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248666] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248667] Myps SEQ: child shown: task testApp_ch5 (pid 31806).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248669] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248670] Myps SEQ: child shown: task testApp_ch5 (pid 31807).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248672] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248673] Myps SEQ: child shown: task testApp_ch5 (pid 31808).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248674] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248675] Myps SEQ: child shown: task testApp_ch5 (pid 31809).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248677] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248678] Myps SEQ: child shown: task testApp_ch5 (pid 31810).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248679] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248680] Myps SEQ: child shown: task testApp_ch5 (pid 31811).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248682] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248683] Myps SEQ: child shown: task testApp_ch5 (pid 31812).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248685] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248686] Myps SEQ: child shown: task testApp_ch5 (pid 31813).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248687] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248688] Myps SEQ: child shown: task testApp_ch5 (pid 31814).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248690] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248691] Myps SEQ: child shown: task testApp_ch5 (pid 31815).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248693] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248693] Myps SEQ: child shown: task testApp_ch5 (pid 31816).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248695] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248696] Myps SEQ: child shown: task testApp_ch5 (pid 31817).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248698] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248699] Myps SEQ: child shown: task testApp_ch5 (pid 31818).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248700] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248701] Myps SEQ: child shown: task testApp_ch5 (pid 31819).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248703] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248704] Myps SEQ: child shown: task testApp_ch5 (pid 31820).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248706] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248707] Myps SEQ: child shown: task testApp_ch5 (pid 31821).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248708] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248709] Myps SEQ: child shown: task testApp_ch5 (pid 31822).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248711] Myps SEQ: NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248712] Myps SEQ: child shown: task sh (pid 31825).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248713] Myps SEQ: final NEXT call in task testApp_ch5 (pid 31792).
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.248714] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.249619] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Mar 13 23:20:10 mike-VirtualBox kernel: [365507.249620] MyPS SEQ: STOP NULL iterator.

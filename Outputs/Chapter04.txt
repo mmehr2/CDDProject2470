@@ -8,7 +8,7 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 12
-# Opens: 13
+# Opens: 1
 Hello World
 
 # Ch.4.1: Test file O_APPEND mode report
@@ -17,7 +17,7 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 21
-# Opens: 16
+# Opens: 4
 Testing, 1, 2, 3 ...
 
 # Ch.4.1: Test buffer overrun report
@@ -26,7 +26,7 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 4096
-# Opens: 18
+# Opens: 6
 
 # Ch.4.1: test empty buffer report
 Mode: Readable
@@ -34,7 +34,7 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 0
-# Opens: 20
+# Opens: 8
 
 # Ch.4.1: Test writable proc entry (changes name of 2nd team member)
 Mode: Readable
@@ -42,33 +42,33 @@ Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 0
-# Opens: 21
+# Opens: 9
 Mode: Written
 Group Number: 42
 Team Members: Mike Mehr, My Word!
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 0
-# Opens: 21
+# Opens: 9
 Mode: Readable
 Group Number: 42
 Team Members: Mike Mehr, My Word!
 Buffer Length - Allocated: 4096
 Buffer Length - Used: 0
-# Opens: 21
+# Opens: 9
 
 # Ch.4.2 Test /proc/myps on current task
 
 # Ch.4: run test app with a few threads
 Spawning 5 child threads
 Successfully created 5 child threads
-Thread 4 (pid=26433, ppid=26432) alive.
-Thread 3 (pid=26433, ppid=26432) alive.
-Thread 2 (pid=26433, ppid=26432) alive.
-Thread 1 (pid=26433, ppid=26432) alive.
-Thread 0 (pid=26433, ppid=26432) alive.
+Thread 4 (pid=30596, ppid=30595) alive.
+Thread 3 (pid=30596, ppid=30595) alive.
+Thread 2 (pid=30596, ppid=30595) alive.
+Thread 1 (pid=30596, ppid=30595) alive.
+Thread 0 (pid=30596, ppid=30595) alive.
 Output from reading /proc/myps:
-My TESTPID is 26433 (mine=26433,mypar=26432)
-Task sh (pid 26441), child of testApp_ch4 (pid 26433). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+My TESTPID is 30596 (mine=30596,mypar=30595)
+Task sh (pid 30604), child of testApp_ch4 (pid 30596). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
 Thread 4 dying.
 Thread 3 dying.
 Thread 2 dying.
@@ -76,23 +76,23 @@ Thread 1 dying.
 Thread 0 dying.
 
 # Grab the recent output of kernel message log too
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.562951] UNIQUE-KERNEL-MARKER
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.564576] file 'CDD2' opened O_TRUNC
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.570667] CDD_read: count=12
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.572123] file 'CDD2' opened O_TRUNC
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.572625] file 'CDD2' opened O_APPEND
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.576211] CDD_read: count=21
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.580464] file 'CDD2' opened O_TRUNC
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.600167] CDD_read: count=4096
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.602093] file 'CDD2' opened O_TRUNC
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.619051] Myps SEQ: no children to iterate in task cat (pid 26429).
-Mar 13 17:19:32 mike-VirtualBox kernel: [343868.619054] MyPS SEQ: STOP NULL iterator.
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.127410] Myps WRITE: test PID set to 26433
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.127410] (26433).
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.127415] Myps WRITE: found task named testApp_ch4(pid=26433).
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128724] Myps SEQ: first START call in task testApp_ch4 (pid 26433) with 1 children.
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128727] Myps SEQ: child shown: task sh (pid 26441).
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128730] Myps SEQ: final NEXT call in task testApp_ch4 (pid 26433).
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128732] MyPS SEQ: STOP NULL iterator.
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.129243] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
-Mar 13 17:19:32 mike-VirtualBox kernel: [343869.129330] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.442230] UNIQUE-KERNEL-MARKER
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.448745] file 'CDD2' opened O_TRUNC
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.458378] CDD_read: count=12
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.463680] file 'CDD2' opened O_TRUNC
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.464216] file 'CDD2' opened O_APPEND
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.466401] CDD_read: count=21
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.472258] file 'CDD2' opened O_TRUNC
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.496468] CDD_read: count=4096
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.500031] file 'CDD2' opened O_TRUNC
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.513693] Myps SEQ: no children to iterate in task cat (pid 30592).
+Mar 13 23:09:59 mike-VirtualBox kernel: [364896.513699] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.020172] Myps WRITE: test PID set to 30596
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.020172] (30596).
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.020176] Myps WRITE: found task named testApp_ch4(pid=30596).
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.021047] Myps SEQ: first START call in task testApp_ch4 (pid 30596) with 1 children.
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.021049] Myps SEQ: child shown: task sh (pid 30604).
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.021051] Myps SEQ: final NEXT call in task testApp_ch4 (pid 30596).
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.021052] MyPS SEQ: STOP NULL iterator.
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.021067] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Mar 13 23:10:00 mike-VirtualBox kernel: [364897.021068] MyPS SEQ: STOP NULL iterator.
