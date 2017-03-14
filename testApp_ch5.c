@@ -55,6 +55,75 @@ int run_op(const char* command) {
   return 0;
 }
 
+// FILE DESCRIPTOR TESTING
+// Create 20 FDs and allow subsets to be opened for the open FD test. Then remove them.
+#define MAX_TESTFILES (20)
+
+const char* getTestFilePath(int number) {
+  static char tname[80];
+  if (number < 0)
+    sprintf(tname, "./TESTFILE\\*");
+  else
+    sprintf(tname, "./TESTFILE%02d", number);
+  return tname;
+}
+
+void create_test_file_set(int total_files) {
+  int i;
+  static char command[80];
+  for (i=0; i<total_files; ++i) {
+    sprintf(command, "/usr/bin/touch %s", getTestFilePath(i));
+    run_op(command);
+  }
+}
+
+void delete_test_file_set(int total_files) {
+  int i;
+  static char command[80];
+  for (i=0; i<total_files; ++i) {
+    sprintf(command, "/usr/bin/unlink %s", getTestFilePath(i));
+    run_op(command);
+  }
+}
+
+
+int open_fds[MAX_TESTFILES * 100]; // room to make mistakes
+int num_open_fds = 0;
+
+void open_test_files(int num_files, int tpid) {
+  int i, pid=getpid();
+  const char* fname;
+  for (i=0; i<num_files; ++i) {
+    int fd = open((fname = getTestFilePath(i)), O_RDONLY);
+    if (fd > 0) {
+      open_fds[num_open_fds++] = fd;
+    } else {
+      fprintf(stderr, "ERR: Pid=%d Couldn't open test file %s - %s\n", pid, fname, strerror(errno));
+    }
+  }
+  fprintf(stdout, "Opened %d/%d test files for id=%d(by PID=%d)\n", num_open_fds, num_files, tpid, pid);
+}
+
+void close_all_testfiles(int tpid) {
+  int fc = num_open_fds, i=fc, err, pid=getpid();
+  while(fc--) {
+    err = close(open_fds[fc]);
+    if (err >= 0) {
+      --num_open_fds;
+    }
+  }
+  if (num_open_fds != 0) {
+    fprintf(stderr, "ERR: Couldn't close all test files for id=%d by pid=%d\n", tpid, pid);
+  } else {
+    fprintf(stdout, "Closed all %d test files for pid=%d\n", i, pid);
+  }
+  num_open_fds = 0; // reset for next time
+}
+
+int get_num_files_needed(int raw) {
+  return raw % MAX_TESTFILES;
+}
+
 typedef unsigned long param_t;
 typedef unsigned char uint8_t;
 
@@ -105,8 +174,11 @@ int main(int argc, char *argv[])
   pid = getpid();
   //pid = 2;
   printf("My TESTPID is %d (mine=%d,mypar=%d)\n", pid, getpid(), getppid());
+  create_test_file_set(MAX_TESTFILES);
 	fprintf(stdout, "Spawning %d child threads\n", num_threads);
   //pthread_mutex_lock(&running_mutex);
+  child_pid = pid;
+  open_test_files(1, pid);
 
   for (i=0; i<num_threads; ++i) {
     param_t tid = i;
@@ -115,7 +187,11 @@ int main(int argc, char *argv[])
     int psign = ((i % 2)? +1: -1); // regular >0, RT <0
     int ptype = (new_prio < 40 ? SCHED_FIFO : SCHED_RR); // only if RT used
     struct sched_param spm; // only if RT used
+    int num_files; // for 5.2c tests
     new_prio = (new_prio==0 ? sched_get_priority_max(ptype): new_prio);
+    num_files = get_num_files_needed(new_prio+1);
+    close_all_testfiles(child_pid); // close old fd set first
+    open_test_files(num_files, i);
     spm.sched_priority = new_prio;
     // once the files are all opened, we can fork() which will duplicate them
     child_pid = fork();
@@ -123,6 +199,7 @@ int main(int argc, char *argv[])
     if (child_pid == 0) {
       thread_function((void*)tid);
       // close open file handles for child
+      close_all_testfiles(tid);
       exit (EXIT_SUCCESS);
     } else if (child_pid < 0) {
         fprintf(stderr,"ERR:on fork(%d):%s\n",i,strerror(errno));
@@ -137,12 +214,15 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Unable to change RT priority of pid=%d from %d to %d\n", child_pid, old_prio, new_prio);
         new_prio = old_prio;
       }
-      fprintf(stdout,"Parent spawned process(%d) pid=%d successfully, prio set from %d to %d%s.\n"
+      fprintf(stdout,"Parent spawned process(%d) pid=%d successfully, prio set from %d to %d%s with %d extra files open.\n"
         ,i,child_pid, old_prio, new_prio, (psign<0? ((ptype==SCHED_RR)? " (RR)": " (FIFO)"): "")
+        , num_files
       );
     }
   }
   num_threads = i; // actual number of threads created
+  //close the final child's file descriptor set
+  close_all_testfiles(child_pid);
   //pthread_mutex_unlock(&running_mutex);
   fprintf(stdout, "Successfully created %d/%d child threads\n", num_threads, running_threads);
 
@@ -164,6 +244,7 @@ int main(int argc, char *argv[])
     fprintf(stdout, "Shut down thread pid=%d\n", wid);
   }
 
+  delete_test_file_set(MAX_TESTFILES);
 	return EXIT_SUCCESS;
 
 }

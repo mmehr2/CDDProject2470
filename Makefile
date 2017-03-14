@@ -147,7 +147,7 @@ test5: CDD2 testApp_ch5
 	echo 1 > /proc/myps
 	cat /proc/myps  >> $(CH05_OUTFILE)
 	@echo ""  >> $(CH05_OUTFILE)
-	@echo "# Ch.5.2b: run test app with process prio changes"  >> $(CH05_OUTFILE)
+	@echo "# Ch.5.2b,c: run test app with process prio and open file changes"  >> $(CH05_OUTFILE)
 	@echo "NOTE: Since fork() copies open files, the redirected output is duplicated each time."  >> $(CH05_OUTFILE)
 	./testApp_ch5 30  >> $(CH05_OUTFILE)
 	@echo ""  >> $(CH05_OUTFILE)
