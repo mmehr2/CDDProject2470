@@ -70,7 +70,7 @@ void *thread_function(void *arg)
   pthread_mutex_unlock(&running_mutex);
 
   param_t id = (param_t)arg;
-  fprintf(stdout, "Thread %lu alive.\n", id);
+  fprintf(stdout, "Thread %lu (pid=%d, ppid=%d) alive.\n", id, getpid(), getppid());
 		sleep(3);
     fprintf(stdout, "Thread %lu dying.\n", id);
 
@@ -80,8 +80,8 @@ void *thread_function(void *arg)
 
 int main(int argc, char *argv[])
 {
-	int			i, j, len, total, status, num_threads=0, fd;
-
+	int			i, j, len, total, status, num_threads=0, fd, pid;
+  char testbuf[129];
 	pthread_t	threads[100];
 
 	//Check options
@@ -121,33 +121,12 @@ int main(int argc, char *argv[])
 
   // reinvent cat /proc/myps
   fprintf(stdout, "Output from reading /proc/myps:\n");
-  // open device
-	if((fd = open("/proc/myps", O_RDONLY)) == -1)
-	{
-		fprintf(stderr,"ERR:on open(myps):%s\n",strerror(errno));
-	} else {
-    // read loop: device to stdout directly
-    char buffer[READ_LENGTH+1];
-    total = 0;
-    for(j=0;;j++)
-  	{
-  		if ((len = read(fd, buffer, READ_LENGTH)) == -1)
-  		{
-  			fprintf(stdout,"ERR:on read(myps):%s\n",strerror(errno));
-        break;
-  		}
-  		else if (len > 0)
-  		{
-        total += len;
-        buffer[total] = 0; // nul-terminate the string
-  			fprintf(stdout, "%d - read \"%s\"  len=%d\n", j, buffer, len);
-  		} else {
-        break; // EOF
-      }
-	   }
-
-    close(fd);
-  }
+  pid = getpid();
+  //pid = 2;
+  printf("My TESTPID is %d (mine=%d,mypar=%d)\n", pid, getpid(), getppid());
+  sprintf(testbuf, "/bin/echo %d > /proc/myps", pid);
+  run_op(testbuf);
+  run_op("/bin/cat /proc/myps");
 
   // shut down the threads
   pthread_exit(NULL);

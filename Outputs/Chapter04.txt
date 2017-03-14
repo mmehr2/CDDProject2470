@@ -61,12 +61,14 @@ Buffer Length - Used: 0
 # Ch.4: run test app with a few threads
 Spawning 5 child threads
 Successfully created 5 child threads
-Thread 4 alive.
-Thread 3 alive.
-Thread 2 alive.
-Thread 1 alive.
-Thread 0 alive.
+Thread 4 (pid=26433, ppid=26432) alive.
+Thread 3 (pid=26433, ppid=26432) alive.
+Thread 2 (pid=26433, ppid=26432) alive.
+Thread 1 (pid=26433, ppid=26432) alive.
+Thread 0 (pid=26433, ppid=26432) alive.
 Output from reading /proc/myps:
+My TESTPID is 26433 (mine=26433,mypar=26432)
+Task sh (pid 26441), child of testApp_ch4 (pid 26433). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
 Thread 4 dying.
 Thread 3 dying.
 Thread 2 dying.
@@ -74,16 +76,23 @@ Thread 1 dying.
 Thread 0 dying.
 
 # Grab the recent output of kernel message log too
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.486003] UNIQUE-KERNEL-MARKER
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.487618] file 'CDD2' opened O_TRUNC
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.490030] CDD_read: count=12
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.497648] file 'CDD2' opened O_TRUNC
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.498190] file 'CDD2' opened O_APPEND
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.500134] CDD_read: count=21
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.502542] file 'CDD2' opened O_TRUNC
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.522800] CDD_read: count=4096
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.525654] file 'CDD2' opened O_TRUNC
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.540119] Myps SEQ: no children to iterate in task cat (pid 482).
-Mar  7 15:54:39 mike-VirtualBox kernel: [226896.540121] MyPS SEQ: STOP NULL iterator.
-Mar  7 15:54:39 mike-VirtualBox kernel: [226897.048211] Myps SEQ: no children to iterate in task testApp_ch4 (pid 486).
-Mar  7 15:54:39 mike-VirtualBox kernel: [226897.048215] MyPS SEQ: STOP NULL iterator.
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.562951] UNIQUE-KERNEL-MARKER
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.564576] file 'CDD2' opened O_TRUNC
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.570667] CDD_read: count=12
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.572123] file 'CDD2' opened O_TRUNC
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.572625] file 'CDD2' opened O_APPEND
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.576211] CDD_read: count=21
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.580464] file 'CDD2' opened O_TRUNC
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.600167] CDD_read: count=4096
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.602093] file 'CDD2' opened O_TRUNC
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.619051] Myps SEQ: no children to iterate in task cat (pid 26429).
+Mar 13 17:19:32 mike-VirtualBox kernel: [343868.619054] MyPS SEQ: STOP NULL iterator.
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.127410] Myps WRITE: test PID set to 26433
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.127410] (26433).
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.127415] Myps WRITE: found task named testApp_ch4(pid=26433).
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128724] Myps SEQ: first START call in task testApp_ch4 (pid 26433) with 1 children.
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128727] Myps SEQ: child shown: task sh (pid 26441).
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128730] Myps SEQ: final NEXT call in task testApp_ch4 (pid 26433).
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.128732] MyPS SEQ: STOP NULL iterator.
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.129243] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Mar 13 17:19:32 mike-VirtualBox kernel: [343869.129330] MyPS SEQ: STOP NULL iterator.
