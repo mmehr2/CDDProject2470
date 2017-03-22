@@ -1,41 +1,60 @@
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
+# this is for modprobe use
+LDD := /lib/modules/$(shell uname -r)/kernel/drivers/ldd/
 
 CDDparm := $(CDDparm)
 CDDparm := 35
 
-obj-m := CDD2.o
-CDD2-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o proc_log_marker.o
+# Modules:
+CH2_1 := ch21
+DRIVER := CDD2
+
+# NOTE: The kernel module targets (Next 3 lines) MUST be separated by lblank lines.
+obj-m := $(DRIVER).o $(CH2_1).o
+
+$(CH2_1)-objs := hello.o
+
+$(DRIVER)-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o proc_log_marker.o
 
 APPS := testApp_ch3 testApp_ch4 testApp_ch5
 
-# NOTE: Ubuntu versions of /var/log/messages
+# NOTE: Ubuntu versions require /var/log/kern.log, others use /var/log/messages
 KERN-LOG := /var/log/kern.log
 KERN-MARKER := "UNIQUE KERNEL MARKER"
 
 all: 	clean run
 	@make -s clean
 
-run: CDD2 apps tests
+run: $(DRIVER) apps tests
 
 apps:  $(APPS) testApp_ch1
 
-compile: CDD2.o apps
+compile: $(DRIVER).o apps
 
-tests: test3 test4 test5
-	# show devfs and procfs entries created
-	ls -l /proc/CDD/myCDD2 /dev/CDD2 /proc/myps
+tests: test2 test3 test4 test5
 
-load: CDD2.o
-	-su -c "{ insmod ./CDD2.ko CDDparm=$(CDDparm);} || \
+load: $(DRIVER).o
+	-su -c "{ insmod ./$(DRIVER).ko CDDparm=$(CDDparm);} || \
 		{ echo CDDparm is not set;} ";
 
-CDD2: load
+$(DRIVER): load
 	-su -c "mknod -m 666 /dev/CDD2 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 0;"
+	# show devfs and procfs entries created
+	ls -l /proc/CDD/* /dev/CDD* /proc/myps
 
 
-CDD2.o:
+$(CH2_1).o $(DRIVER).o:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
+
+unload:
+	-su -c "rmmod $(DRIVER); rm -fr /dev/$(DRIVER);"
+#	-su -c "rmmod $(CH2_1);"
+
+clean: unload
+	-@rm -fr *.o $(APPS) .tmp_versions .[mM]odule* [mM]o*
+	-@rm -fr $(DRIVER)*.o $(DRIVER)*.ko .$(DRIVER)*.* $(DRIVER)*.*.*
+	-@rm -fr $(CH2_1)*.o $(CH2_1)*.ko .$(CH2_1)*.* $(CH2_1)*.*.*
 
 ###
 ###  Alternatively, you may want to use the early 2.6 syntax of
@@ -54,7 +73,47 @@ testApp_ch1:
 	-su -c "uname -a" >> $(CH01_OUTFILE)
 	@echo ""  >> $(CH01_OUTFILE)
 	@echo "1.b: Output of 'cat /etc/*-release':" >> $(CH01_OUTFILE)
-	-su -c "cat /etc/*-release" >> $(CH01_OUTFILE)
+	-cat /etc/*-release >> $(CH01_OUTFILE)
+
+CH02_OUTFILE := ./Outputs/Chapter02.txt
+
+test2:
+	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 02"   > $(CH02_OUTFILE)
+	@echo ""  >> $(CH02_OUTFILE)
+	@echo "2.1: Output version info (single module via insmod):" >> $(CH02_OUTFILE)
+	@echo ".. load:"  >> $(CH02_OUTFILE)
+	su -c "insmod ./$(CH2_1).ko" >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "Hello," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	@echo ".. lsmod"  >> $(CH02_OUTFILE)
+	lsmod | egrep "$(CH2_1)" >> $(CH02_OUTFILE)
+	@echo ".. symbols:"  >> $(CH02_OUTFILE)
+	-cat /proc/kallsyms | egrep "$(CH2_1)"  >> $(CH02_OUTFILE)
+	@echo ".. symbols deps:"  >> $(CH02_OUTFILE)
+	-tail /lib/modules/`uname -r`/modules.dep | egrep "$(CH2_1)" >> $(CH02_OUTFILE)
+	@echo ".. unload:"  >> $(CH02_OUTFILE)
+	su -c "rmmod $(CH2_1)" >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "Goodbye," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	@echo ""  >> $(CH02_OUTFILE)
+	@echo "2.1: Output version info (single module via modprobe):" >> $(CH02_OUTFILE)
+	@echo ".. load:"  >> $(CH02_OUTFILE)
+	-su -c "mkdir -p $(LDD); cp $(CH2_1).ko $(LDD); depmod -A;"; >> $(CH02_OUTFILE)
+	su -c "modprobe $(CH2_1)"  >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "Hello," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	@echo ".. lsmod"  >> $(CH02_OUTFILE)
+	lsmod | egrep "$(CH2_1)" >> $(CH02_OUTFILE)
+	@echo ".. symbols:"  >> $(CH02_OUTFILE)
+	-cat /proc/kallsyms | egrep "$(CH2_1)"  >> $(CH02_OUTFILE)
+	@echo ".. symbols deps:"  >> $(CH02_OUTFILE)
+	-tail /lib/modules/`uname -r`/modules.dep | egrep "$(CH2_1)" >> $(CH02_OUTFILE)
+	@echo ".. unload:"  >> $(CH02_OUTFILE)
+	su -c "modprobe -r $(CH2_1)" >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "Goodbye," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	@echo ""  >> $(CH02_OUTFILE)
+	@echo "2.2+3: Output version info (2 stacked modules via insmod):" >> $(CH02_OUTFILE)
+	#	-su -c "insmod ./$(CH2_1).ko"  >> $(CH02_OUTFILE)
+	@echo ""  >> $(CH02_OUTFILE)
+	@echo "2.2+3: Output version info (2 stacked modules via modprobe):" >> $(CH02_OUTFILE)
+	#	-su -c "insmod ./$(CH2_1).ko"  >> $(CH02_OUTFILE)
 
 CH03_OUTFILE := ./Outputs/Chapter03.txt
 
@@ -153,9 +212,3 @@ test5: CDD2 testApp_ch5
 	@echo ""  >> $(CH05_OUTFILE)
 	@echo "# Grab the recent output of kernel message log too"  >> $(CH05_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B5000 -m1 | tac  >> $(CH05_OUTFILE)
-
-unload:
-	-su -c "rmmod CDD2; rm -fr /dev/CDD2;"
-
-clean: unload
-	-@rm -fr *.o CDD2*.o CDD2*.ko .CDD2*.* CDD2*.*.* $(APPS) .tmp_versions .[mM]odule* [mM]o*
