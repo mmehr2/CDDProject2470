@@ -1,0 +1,55 @@
+HOMEWORK TEST OUTPUT FOR CHAPTER 02
+
+2.1: Output version info (single module via insmod):
+.. load:
+Mar 22 16:51:12 mike-VirtualBox kernel: [438904.702584] (0) Hello, Michael
+Mar 22 16:51:12 mike-VirtualBox kernel: [438904.702587] (1) Hello, Michael
+Mar 22 16:51:12 mike-VirtualBox kernel: [438904.702588] (2) Hello, Michael
+Mar 22 16:51:12 mike-VirtualBox kernel: [438904.702589]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
+.. lsmod
+ch21                   16384  0
+.. symbols:
+ffffffffc0457000 t hello_init	[ch21]
+ffffffffc0459000 d howmany	[ch21]
+ffffffffc0459008 d whom	[ch21]
+ffffffffc0457070 t hello_exit	[ch21]
+ffffffffc04580d8 r __param_howmany	[ch21]
+ffffffffc0458028 r __param_str_howmany	[ch21]
+ffffffffc0458100 r __param_whom	[ch21]
+ffffffffc0458030 r __param_str_whom	[ch21]
+ffffffffc0459040 d __this_module	[ch21]
+ffffffffc0457070 t cleanup_module	[ch21]
+ffffffffc0457000 t init_module	[ch21]
+.. symbols deps:
+kernel/drivers/ldd/ch21.ko:
+.. unload:
+Mar 22 16:51:12 mike-VirtualBox kernel: [438904.885537] Goodbye, cruel Michael
+
+2.1: Output version info (single module via modprobe):
+.. load:
+Mar 22 16:51:13 mike-VirtualBox kernel: [438905.697509] (0) Hello, Michael
+Mar 22 16:51:13 mike-VirtualBox kernel: [438905.697512] (1) Hello, Michael
+Mar 22 16:51:13 mike-VirtualBox kernel: [438905.697513] (2) Hello, Michael
+Mar 22 16:51:13 mike-VirtualBox kernel: [438905.697514]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
+.. lsmod
+ch21                   16384  0
+.. symbols:
+ffffffffc045c000 t hello_init	[ch21]
+ffffffffc045e000 d howmany	[ch21]
+ffffffffc045e008 d whom	[ch21]
+ffffffffc045c070 t hello_exit	[ch21]
+ffffffffc045d0d8 r __param_howmany	[ch21]
+ffffffffc045d028 r __param_str_howmany	[ch21]
+ffffffffc045d100 r __param_whom	[ch21]
+ffffffffc045d030 r __param_str_whom	[ch21]
+ffffffffc045e040 d __this_module	[ch21]
+ffffffffc045c070 t cleanup_module	[ch21]
+ffffffffc045c000 t init_module	[ch21]
+.. symbols deps:
+kernel/drivers/ldd/ch21.ko:
+.. unload:
+Mar 22 16:51:13 mike-VirtualBox kernel: [438905.872594] Goodbye, cruel Michael
+
+2.2+3: Output version info (2 stacked modules via insmod):
+
+2.2+3: Output version info (2 stacked modules via modprobe):

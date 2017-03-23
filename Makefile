@@ -8,6 +8,7 @@ CDDparm := 35
 
 # Modules:
 CH2_1 := ch21
+CH2_2 := ch22
 DRIVER := CDD2
 
 # NOTE: The kernel module targets (Next 3 lines) MUST be separated by lblank lines.
@@ -30,7 +31,7 @@ run: $(DRIVER) apps tests
 
 apps:  $(APPS) testApp_ch1
 
-compile: $(DRIVER).o apps
+compile: $(DRIVER).o $(CH2_1).o apps
 
 tests: test2 test3 test4 test5
 
@@ -55,6 +56,7 @@ clean: unload
 	-@rm -fr *.o $(APPS) .tmp_versions .[mM]odule* [mM]o*
 	-@rm -fr $(DRIVER)*.o $(DRIVER)*.ko .$(DRIVER)*.* $(DRIVER)*.*.*
 	-@rm -fr $(CH2_1)*.o $(CH2_1)*.ko .$(CH2_1)*.* $(CH2_1)*.*.*
+	-@su -c "rm -f $(LDD)/*; [ -d $(LDD) ] && { rmdir $(LDD); };"
 
 ###
 ###  Alternatively, you may want to use the early 2.6 syntax of
@@ -77,13 +79,13 @@ testApp_ch1:
 
 CH02_OUTFILE := ./Outputs/Chapter02.txt
 
-test2:
+test2: compile
 	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 02"   > $(CH02_OUTFILE)
 	@echo ""  >> $(CH02_OUTFILE)
 	@echo "2.1: Output version info (single module via insmod):" >> $(CH02_OUTFILE)
 	@echo ".. load:"  >> $(CH02_OUTFILE)
-	su -c "insmod ./$(CH2_1).ko" >> $(CH02_OUTFILE)
-	tac $(KERN-LOG) | grep "Hello," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	su -c "insmod ./$(CH2_1).ko howmany=3 whom=Michael" >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "(0) Hello," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
 	@echo ".. lsmod"  >> $(CH02_OUTFILE)
 	lsmod | egrep "$(CH2_1)" >> $(CH02_OUTFILE)
 	@echo ".. symbols:"  >> $(CH02_OUTFILE)
@@ -97,8 +99,8 @@ test2:
 	@echo "2.1: Output version info (single module via modprobe):" >> $(CH02_OUTFILE)
 	@echo ".. load:"  >> $(CH02_OUTFILE)
 	-su -c "mkdir -p $(LDD); cp $(CH2_1).ko $(LDD); depmod -A;"; >> $(CH02_OUTFILE)
-	su -c "modprobe $(CH2_1)"  >> $(CH02_OUTFILE)
-	tac $(KERN-LOG) | grep "Hello," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	su -c "modprobe $(CH2_1) howmany=3 whom=Michael"  >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "(0) Hello," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
 	@echo ".. lsmod"  >> $(CH02_OUTFILE)
 	lsmod | egrep "$(CH2_1)" >> $(CH02_OUTFILE)
 	@echo ".. symbols:"  >> $(CH02_OUTFILE)
