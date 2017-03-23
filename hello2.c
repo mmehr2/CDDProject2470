@@ -1,12 +1,13 @@
 // #set tabstop=2 number nohlsearch
 // Example# 2.1 .. Simple "Hello World!" module example
 //
-// This version creates one module that calls the subroutines to do the printouts.
+// This version creates one of two modules that calls the other module to do the printouts.
 // Parameters are stored in this module.
 
 #include <linux/init.h>
 #include <linux/module.h>
 
+#define HELLO_DOUBLE_MODULE
 #include "hello_sub.h"
 
 MODULE_AUTHOR("Michael L. Mehr");
@@ -22,14 +23,14 @@ module_param(howmany, int, 0);
 
 static int hello_init(void){
 
-	hello_greeter(howmany, whom);
+	hmx_hello_greeter(howmany, whom);
 
 	return 0;
 }
 
 static void hello_exit(void){
 
-	goodbye_greeter(whom);
+	hmx_goodbye_greeter(whom);
 
 }
 

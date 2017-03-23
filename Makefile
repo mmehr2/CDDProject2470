@@ -8,13 +8,18 @@ CDDparm := 35
 
 # Modules:
 CH2_1 := ch21
-CH2_2 := ch22
+CH2_2 := ch22main
+CH2_2s := ch22sub
 DRIVER := CDD2
 
 # NOTE: The kernel module targets (Next 3 lines) MUST be separated by lblank lines.
-obj-m := $(DRIVER).o $(CH2_1).o
+obj-m := $(DRIVER).o $(CH2_1).o $(CH2_2).o $(CH2_2s).o
 
-$(CH2_1)-objs := hello.o
+$(CH2_1)-objs := hello.o hello_sub.o
+
+$(CH2_2)-objs := hello2.o
+
+$(CH2_2s)-objs := hello2_mod.o hello_sub.o
 
 $(DRIVER)-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o proc_log_marker.o
 
@@ -31,7 +36,7 @@ run: $(DRIVER) apps tests
 
 apps:  $(APPS) testApp_ch1
 
-compile: $(DRIVER).o $(CH2_1).o apps
+compile: $(DRIVER).o $(CH2_1).o $(CH2_2).o $(CH2_2s).o apps
 
 tests: test2 test3 test4 test5
 
@@ -45,7 +50,7 @@ $(DRIVER): load
 	ls -l /proc/CDD/* /dev/CDD* /proc/myps
 
 
-$(CH2_1).o $(DRIVER).o:
+$(CH2_1).o $(CH2_2).o $(CH2_2s).o $(DRIVER).o:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 unload:
@@ -53,9 +58,11 @@ unload:
 #	-su -c "rmmod $(CH2_1);"
 
 clean: unload
-	-@rm -fr *.o $(APPS) .tmp_versions .[mM]odule* [mM]o*
+	-@rm -fr *.o $(APPS) .tmp_versions .[mM]odule* [mM]o* .*.o.d
 	-@rm -fr $(DRIVER)*.o $(DRIVER)*.ko .$(DRIVER)*.* $(DRIVER)*.*.*
 	-@rm -fr $(CH2_1)*.o $(CH2_1)*.ko .$(CH2_1)*.* $(CH2_1)*.*.*
+	-@rm -fr $(CH2_2)*.o $(CH2_2)*.ko .$(CH2_2)*.* $(CH2_2)*.*.*
+	-@rm -fr $(CH2_2s)*.o $(CH2_2s)*.ko .$(CH2_2s)*.* $(CH2_2s)*.*.*
 	-@su -c "rm -f $(LDD)/*; [ -d $(LDD) ] && { rmdir $(LDD); };"
 
 ###
@@ -112,10 +119,37 @@ test2: compile
 	tac $(KERN-LOG) | grep "Goodbye," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
 	@echo ""  >> $(CH02_OUTFILE)
 	@echo "2.2+3: Output version info (2 stacked modules via insmod):" >> $(CH02_OUTFILE)
-	#	-su -c "insmod ./$(CH2_1).ko"  >> $(CH02_OUTFILE)
+	@echo ".. load (sub+main):"  >> $(CH02_OUTFILE)
+	su -c "insmod ./$(CH2_2s).ko" >> $(CH02_OUTFILE)
+	su -c "insmod ./$(CH2_2).ko howmany=3 whom=Michael" >> $(CH02_OUTFILE)
+	sleep 1
+	tac $(KERN-LOG) | grep "hello2" -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	@echo ".. lsmod"  >> $(CH02_OUTFILE)
+	lsmod | egrep "$(CH2_2)" >> $(CH02_OUTFILE)
+	@echo ".. symbols:"  >> $(CH02_OUTFILE)
+	-cat /proc/kallsyms | egrep "$(CH2_2)"  >> $(CH02_OUTFILE)
+	@echo ".. symbols deps:"  >> $(CH02_OUTFILE)
+	-tail /lib/modules/`uname -r`/modules.dep | egrep "$(CH2_2)" >> $(CH02_OUTFILE)
+	@echo ".. unload(main+sub):"  >> $(CH02_OUTFILE)
+	su -c "rmmod $(CH2_2)" >> $(CH02_OUTFILE)
+	su -c "rmmod $(CH2_2s)" >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "Goodbye," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
 	@echo ""  >> $(CH02_OUTFILE)
 	@echo "2.2+3: Output version info (2 stacked modules via modprobe):" >> $(CH02_OUTFILE)
-	#	-su -c "insmod ./$(CH2_1).ko"  >> $(CH02_OUTFILE)
+	@echo ".. load (sub+main):"  >> $(CH02_OUTFILE)
+	-su -c "mkdir -p $(LDD); cp $(CH2_2).ko  $(CH2_2s).ko $(LDD); depmod -A;"; >> $(CH02_OUTFILE)
+	su -c "modprobe $(CH2_2) howmany=3 whom=Michael"  >> $(CH02_OUTFILE)
+	sleep 1
+	tac $(KERN-LOG) | grep "hello2" -B5000 -m1 | tac  >> $(CH02_OUTFILE)
+	@echo ".. lsmod"  >> $(CH02_OUTFILE)
+	lsmod | egrep "$(CH2_2)" >> $(CH02_OUTFILE)
+	@echo ".. symbols:"  >> $(CH02_OUTFILE)
+	-cat /proc/kallsyms | egrep "$(CH2_2)"  >> $(CH02_OUTFILE)
+	@echo ".. symbols deps:"  >> $(CH02_OUTFILE)
+	-tail /lib/modules/`uname -r`/modules.dep | egrep "$(CH2_2)" >> $(CH02_OUTFILE)
+	@echo ".. unload(main+sub):"  >> $(CH02_OUTFILE)
+	su -c "modprobe -r $(CH2_2)" >> $(CH02_OUTFILE)
+	tac $(KERN-LOG) | grep "Goodbye," -B5000 -m1 | tac  >> $(CH02_OUTFILE)
 
 CH03_OUTFILE := ./Outputs/Chapter03.txt
 
