@@ -13,17 +13,17 @@
 #include "proc_ops.h"
 #include "CDDdev.h"
 
-#include "proc_seq_ops.h" // for the /proc/myps sequencer
 #include "proc_log_marker.h" // for the /proc/CDD/marker utility
 
-#define CDD		"myCDD2" // proc entry
+#define CDD		"myCDD2" // proc entry (for pre hwk.6 single minor larger-buffer device)
 #define myCDD  		"CDD" // proc outer directory
 
 #define CDD_PROCLEN     32
 
 
+static int topdir_refcount = 0;
 static struct proc_dir_entry *proc_topdir;
-static struct proc_dir_entry *proc_entry;
+//static struct proc_dir_entry *proc_entry;
 
 /*
  * PROC CDD FILE SERVICES
@@ -33,63 +33,91 @@ static struct proc_dir_entry *proc_entry;
 
 // create_CDD_procdir_entry() - to allow others to attach to the /proc/CDD subtree
 // will return NULL and do nothing if proc_topdir has not been initialized yet
+// NOTE: TBD - determine if we need to lock the recount or use atomic_t or both
 struct proc_dir_entry *
 create_CDD_procdir_entry(const char* name, int permissions, const struct file_operations* fops)
 {
-  struct proc_dir_entry* proc_entry = NULL;
-  if (proc_topdir == NULL)
-    return NULL;
+  struct proc_dir_entry* proc_entry;
+  int prevct=topdir_refcount;
 
-  #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
-    proc_entry = proc_create(name, permissions, proc_topdir, fops);
-  #else
-    proc_entry = create_proc_entry(name,0,proc_topdir);
-    proc_entry->read_proc = fops->read_proc;
-    proc_entry->write_proc = fops->writeproc;
-  #endif
+  if (topdir_refcount++ == 0) {
+    proc_topdir = proc_mkdir(myCDD,0);
+    printk(KERN_ALERT "Created procfs entry /proc/%s (refct=%d->%d)\n", myCDD, prevct++, topdir_refcount);
+  }
 
-  #if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,29)
-    proc_entry->owner = THIS_MODULE;
-  #endif
-    return proc_entry;
+  proc_entry = proc_create(name, permissions, proc_topdir, fops);
+  printk(KERN_ALERT "Created procfs entry /proc/%s/%s (refct=%d->%d)\n", myCDD, name, prevct, topdir_refcount);
+
+  return proc_entry;
 }
 
 // This will allow removal of the immediate subdirectory by name
 void remove_CDD_procdir_entry(const char* name)
 {
-  return remove_proc_entry (name, proc_topdir);
+  int prevct=topdir_refcount;
+  --topdir_refcount;
+
+  remove_proc_entry (name, proc_topdir);
+  printk(KERN_ALERT "Removed procfs entry /proc/%s/%s (refct=%d->%d)\n", myCDD, name, prevct--, topdir_refcount);
+
+  if (!topdir_refcount) {
+    remove_proc_entry(myCDD,0);
+    printk(KERN_ALERT "Removed procfs entry /proc/%s (refct=%d->%d)\n", myCDD, prevct, topdir_refcount);
+  }
 }
+
+// because of autocreate of CDD/marker, this isn't obviously when refcount==1
+int topdir_entry_count(void) { return !topdir_refcount ? 0 : topdir_refcount - 1; }
 
 /*
  * BASIC PROC/CDD DATA
 */
 struct CDDproc_struct {
-        char CDD_procname[CDD_PROCLEN + 1];
-        char *CDD_procvalue;
-        char CDD_procflag;
+    char CDD_procname[CDD_PROCLEN + 1];
+    char *CDD_procvalue;
+    char CDD_procflag;
+    int minor;
+    struct proc_dir_entry *proc_entry;
 };
 
-static struct CDDproc_struct CDDproc;
+static struct CDDproc_struct CDDprocs[CDDNUMDEVS];
+
+struct CDDproc_struct* get_CDDdproc(int minor) { minor -= CDDMINOR; return &CDDprocs[minor]; }
+
+struct CDDproc_struct* lookup_CDDdproc(const char* devname) {
+  int minor;
+  for(minor = CDDMINOR; minor<CDDLASTMINOR; ++minor) {
+    struct CDDproc_struct* ptr = get_CDDdproc(minor);
+    if (strcmp(devname, ptr->CDD_procname) == 0) {
+      return ptr;
+    }
+  }
+  return NULL; // not found
+}
 
 /*
  * BASIC PROC/CDD OPERATIONS
 */
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static int eof[1];
 
 static ssize_t readproc_CDD2(struct file *file, char *buf,
 	size_t len, loff_t *ppos)
   {
     ssize_t retval = 0;
-#else
-static int readproc_CDD2(char *buf, char **start,
-  off_t offset, int len, int *eof, void *unused)
-  {
-    int retval = 0;
-#endif
 
-  struct CDDproc_struct *usrsp=&CDDproc;
-  struct CDDdev_struct *thisCDD=get_CDDdev();
+  // 1: get the filename of the proc entry, such as 'CDDx' for /proc/CDD/CDDx
+  // 2: convert it to a struct CDDproc_struct
+  // 3: get the minor number
+  // 4: get its CDDdev_struct
+  const char* devfname = file->f_path.dentry->d_name.name;
+  struct CDDproc_struct *usrsp = lookup_CDDdproc(devfname);
+  int minor = usrsp? usrsp->minor: 0;
+  struct CDDdev_struct *thisCDD=get_CDDdev(minor);
+
+  if (!usrsp) {
+    printk(KERN_ALERT "/proc/CDDx READ: Invalid device name %s", devfname);
+    return -EINVAL;
+  }
 
   // lock the CDD info for reading
   if (0 == down_read_trylock(thisCDD->CDD_sem))
@@ -124,16 +152,17 @@ Done:
 }
 
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static ssize_t writeproc_CDD2 (struct file *file,const char * buf,
     size_t count, loff_t *ppos)
-#else
-static int writeproc_CDD2(struct file *file,const char *buf,
-                unsigned long count, void *data)
-#endif
 {
 	int length=count;
-	struct CDDproc_struct *usrsp=&CDDproc;
+  const char* devfname = file->f_path.dentry->d_name.name;
+  struct CDDproc_struct *usrsp = lookup_CDDdproc(devfname);
+
+  if (!usrsp) {
+    printk(KERN_ALERT "/proc/CDDx READ: Invalid device name %s", devfname);
+    return -EINVAL;
+  }
 
 	length = (length<CDD_PROCLEN)? length:CDD_PROCLEN;
 
@@ -146,43 +175,48 @@ static int writeproc_CDD2(struct file *file,const char *buf,
 	return(length);
 }
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0)
 static const struct file_operations proc_fops = {
  // .owner = THIS_MODULE,
  .read  = readproc_CDD2,
  .write = writeproc_CDD2,
 };
-#endif
 
-int CDDproc_init(void)
+int CDDproc_init(int minor_number)
 {
-	CDDproc.CDD_procvalue=vmalloc(4096);
-  strcpy(CDDproc.CDD_procvalue, "Team Member #2");
+  struct CDDproc_struct *usrsp=get_CDDdproc(minor_number);
+  strcpy(usrsp->CDD_procname, get_devname(minor_number));
+	usrsp->CDD_procvalue=vmalloc(4096);
+  strcpy(usrsp->CDD_procvalue, "Team Member #2");
 
   // Create the necessary proc entries
-  proc_topdir = proc_mkdir(myCDD,0);
-  proc_entry = create_CDD_procdir_entry(CDD, 0777, &proc_fops);
-
-  // add the /proc/myps sequencer
-  CDDproc_seq_init();
-  // add the logfile marker utility
-  CDDproc_log_marker_init();
+  if (topdir_entry_count() == 0){
+    // when needed, create topdir and also marker feature
+    // add the logfile marker utility /proc/CDD/marker
+    // NOTE: this will also create the /proc/CDD folder if needed, since it calls create_CDD_procdir_entry
+    CDDproc_log_marker_init();
+  }
+  usrsp->proc_entry = create_CDD_procdir_entry(usrsp->CDD_procname, 0777, &proc_fops);
 
 	return 0;
 }
 
-void CDDproc_exit(void)
+void CDDproc_exit(int minor_number)
 {
-  // add the logfile marker utility
-  CDDproc_log_marker_exit();
-  // remove the /proc/myps sequencer
-  CDDproc_seq_exit();
+  struct CDDproc_struct *usrsp=get_CDDdproc(minor_number);
 
-	vfree(CDDproc.CDD_procvalue);
+	vfree(usrsp->CDD_procvalue);
+  usrsp->CDD_procvalue = NULL;
+
+  if (topdir_entry_count() == 1) {
+    // we will be removing the last entry except for /proc/CDD/marker
+    // remove the logfile marker utility
+    CDDproc_log_marker_exit();
+  }
 
   // remove subdirectories and subtrees
-	if (proc_entry) remove_CDD_procdir_entry(CDD);
-  // remove master directory entry
- 	if (proc_topdir) remove_proc_entry (myCDD, 0);
+	if (usrsp->proc_entry) {
+    remove_CDD_procdir_entry(usrsp->CDD_procname);
+    usrsp->proc_entry = NULL;
+  }
 
 }

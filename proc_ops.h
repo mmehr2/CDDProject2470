@@ -2,8 +2,8 @@
 #define PROC_OPS_H
 
 //initialization and shutdown of /proc/CDD
-extern int CDDproc_init(void);
-extern void CDDproc_exit(void);
+extern int CDDproc_init(int minor_number);
+extern void CDDproc_exit(int minor_number);
 
 // directory services to create/remove entries in /proc/CDD
 struct proc_dir_entry; // fwd.ref.
