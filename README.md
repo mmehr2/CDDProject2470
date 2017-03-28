@@ -195,6 +195,7 @@ across some #HZ)
 ### Handling Sleep, Timers, Deferring Functions and Interrupts
 
 Enhance the char device driver to
+
   a)  Create /proc/CDD/CDDmouse entry .. that will track and print
 
 1. the current location of the mouse,
@@ -209,30 +210,11 @@ INIT_WORK:
 
 http://www.kernel.org/pub/linux/kernel/v2.6/
 
-# Group Homework .. Chapter 12
-## Add title
-
-
-# Group Homework .. Chapter 13
-## Add title
-
-
-# Group Homework .. Chapter 15
-## Add title
-
-
-# Group Homework .. Chapter 16
-## Add title
-
-
-# Group Homework .. Chapter 17
-## Add title
-
-
 # Group Homework .. Chapter 11 (Extra credit)
 ### Data Types in the Kernel
 
 Enhance the char device driver to
+
   a) Create a /proc/CDD/CDDsysteminfo entry .. that will print
 
 1. the CPU endianness
@@ -249,3 +231,39 @@ endianness of the CPU)
 datatypes, and
 
 4. whether char is signed or unsigned.
+
+# Group Homework .. Chapter 12
+## PCI Drivers
+
+Enhance the char device driver to
+
+  a) include an entry in the /proc/CDDpci interface that probes
+devices.
+
+  For each device found, read and print – similar to ‘lspci’ output
+
+1. Scan the PCI devices (in memory) and, gather information about them.
+
+2. For each device found, read and print the following:
+• PCI_VENDOR_ID
+• PCI_DEVICE_ID
+• PCI_INTERRUPT_LINE
+• PCI_LATENCY_TIMER
+• PCI_COMMAND
+
+What to turn-in: working program source and, sample output.
+
+# Group Homework .. Chapter 13
+## Add title
+
+
+# Group Homework .. Chapter 15
+## Add title
+
+
+# Group Homework .. Chapter 16
+## Add title
+
+
+# Group Homework .. Chapter 17
+## Add title
