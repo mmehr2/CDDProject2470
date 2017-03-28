@@ -190,3 +190,62 @@ across some #HZ)
   - Show the statistics from /proc/slabinfo
 
   - What to turn-in: C program source and Makefile, Sample Output.
+
+# Group Homework .. Chapter 10
+1. Handling Sleep, Timers, Deferring Functions and Interrupts
+
+Enhance the char device driver to
+  a)  Create /proc/CDD/CDDmouse entry .. that will track and print
+
+1. the current location of the mouse,
+
+2. the #times each mouse button – e.g. left mouse button, or the right mouse button
+was pressed .. and,
+
+3. printk() which button was pressed.
+
+Refer to ChangeLog for 2.6.20 and look for the string
+INIT_WORK:
+
+http://www.kernel.org/pub/linux/kernel/v2.6/
+
+# Group Homework .. Chapter 12
+1. Add title
+
+
+# Group Homework .. Chapter 13
+1. Add title
+
+
+# Group Homework .. Chapter 15
+1. Add title
+
+
+# Group Homework .. Chapter 16
+1. Add title
+
+
+# Group Homework .. Chapter 17
+1. Add title
+
+
+# Group Homework .. Chapter 11 (Extra credit)
+1. Data Types in the Kernel
+
+Enhance the char device driver to
+  a) Create a /proc/CDD/CDDsysteminfo entry .. that will print
+
+1. the CPU endianness
+
+  (Hint: You can use the cpu_to_be* or the cpu_to_le* calls to determine
+endianness of the CPU)
+
+2. the memory Page Size
+
+3. the size of
+  - u8, u16, u32, u64,
+  - s8, s16, s32, s64,
+  - int8_t, int16_t, int32_t, int64_t
+datatypes, and
+
+4. whether char is signed or unsigned.
