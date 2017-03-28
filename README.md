@@ -211,7 +211,7 @@ INIT_WORK:
 http://www.kernel.org/pub/linux/kernel/v2.6/
 
 # Group Homework .. Chapter 11 (Extra credit)
-### Data Types in the Kernel
+## Data Types in the Kernel
 
 Enhance the char device driver to
 
@@ -228,7 +228,8 @@ endianness of the CPU)
   - u8, u16, u32, u64,
   - s8, s16, s32, s64,
   - int8_t, int16_t, int32_t, int64_t
-datatypes, and
+
+  datatypes, and
 
 4. whether char is signed or unsigned.
 
@@ -245,25 +246,52 @@ devices.
 1. Scan the PCI devices (in memory) and, gather information about them.
 
 2. For each device found, read and print the following:
-• PCI_VENDOR_ID
-• PCI_DEVICE_ID
-• PCI_INTERRUPT_LINE
-• PCI_LATENCY_TIMER
-• PCI_COMMAND
+  - PCI_VENDOR_ID
+  - PCI_DEVICE_ID
+  - PCI_INTERRUPT_LINE
+  - PCI_LATENCY_TIMER
+  - PCI_COMMAND
 
 What to turn-in: working program source and, sample output.
 
 # Group Homework .. Chapter 13
-## Add title
+## USB Drivers
 
+Enhance your char CDD driver to
+
+  a) include an entry in the /proc/CDDusb interface that
+probes devices as a simple implementation of the ‘lsusb’ command.
+
+
+# Group Homework .. Chapter 14 (Extra credit)
+## The Linux Device Model
+Enhance your char driver
+
+  1. Create a sysfs entry for the CDD driver - to create a kobject and support for sysfs
+within the driver
+
+  See http://docs.blackfin.uclinux.org/doku.php?id=kernel_objects
 
 # Group Homework .. Chapter 15
-## Add title
+## Memory Mapping and DMA
 
+1. Enhance your char driver to implement mmap() functionality.
+
+  For this assignment question .. on any - - one Minor# CDD ..
+
+  Ensure that mmap() call arguments .. start, length, prot and flags are handled correctly.
+
+2. What to turn-in: working program source and, sample output.
 
 # Group Homework .. Chapter 16
-## Add title
+## Block Drivers
 
 
 # Group Homework .. Chapter 17
-## Add title
+## Network Drivers
+
+Create a /proc/CDDnet interface, to print
+
+1. the MAC address for the eth0 interface, and
+
+2. the #inpkts, #outpkts, #collisions for that interface
