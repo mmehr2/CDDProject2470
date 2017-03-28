@@ -192,7 +192,7 @@ across some #HZ)
   - What to turn-in: C program source and Makefile, Sample Output.
 
 # Group Homework .. Chapter 10
-1. Handling Sleep, Timers, Deferring Functions and Interrupts
+### Handling Sleep, Timers, Deferring Functions and Interrupts
 
 Enhance the char device driver to
   a)  Create /proc/CDD/CDDmouse entry .. that will track and print
@@ -210,27 +210,27 @@ INIT_WORK:
 http://www.kernel.org/pub/linux/kernel/v2.6/
 
 # Group Homework .. Chapter 12
-1. Add title
+## Add title
 
 
 # Group Homework .. Chapter 13
-1. Add title
+## Add title
 
 
 # Group Homework .. Chapter 15
-1. Add title
+## Add title
 
 
 # Group Homework .. Chapter 16
-1. Add title
+## Add title
 
 
 # Group Homework .. Chapter 17
-1. Add title
+## Add title
 
 
 # Group Homework .. Chapter 11 (Extra credit)
-1. Data Types in the Kernel
+### Data Types in the Kernel
 
 Enhance the char device driver to
   a) Create a /proc/CDD/CDDsysteminfo entry .. that will print
