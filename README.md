@@ -150,8 +150,7 @@ What to turn-in: module C program source and Makefile, Sample Output.
     For this assignment question .. on each Minor# CDD ..
 
     You do need to handle zero or negative offsets in llseek() , and plan for handling
-  SEEK_* flags e.g. SEEK_CUR, SEEK_END
-
+    SEEK_* flags e.g. SEEK_CUR, SEEK_END
     Test it out using an similar to the app you’ve written earlier in Chapter# 3.
 
   d. Implement a blocking open() .. using a mutex
