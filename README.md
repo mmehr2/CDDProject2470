@@ -142,12 +142,13 @@ What to turn-in: module C program source and Makefile, Sample Output.
     For this assignment question .. on each Minor# CDD ..
 
     CMD1 .. print of number of open().
-      Use a spinlock to protect the open() counter variable.<br/>
+      Use a spinlock to protect the open() counter variable.
     CMD2 .. print “Buffer Length – Allocated” .. similar to Ch#4 Question# 1.d. ..
     CMD3 .. print “Buffer Length – Used” .. similar to Ch#4 Question# 1.e.
 
   c. llseek() functionality.
     For this assignment question .. on each Minor# CDD ..
+
     You do need to handle zero or negative offsets in llseek() , and plan for handling
   SEEK_* flags e.g. SEEK_CUR, SEEK_END
 
