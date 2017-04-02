@@ -136,7 +136,7 @@ What to turn-in: module C program source and Makefile, Sample Output.
      Minor #4 .. /dev/CDD/CDD256 .. implements a 256-byte buffer<br/>
 
      Create /proc/CDD/CDD16 .. /proc/CDD/CDD256 entries .. similar to
-Chapter #4 Question# 1.d,1.e.
+  Chapter #4 Question# 1.d,1.e.
 
   b. ioctl()
     For this assignment question .. on each Minor# CDD ..
@@ -149,7 +149,7 @@ Chapter #4 Question# 1.d,1.e.
   c. llseek() functionality.
     For this assignment question .. on each Minor# CDD ..<br/>
     You do need to handle zero or negative offsets in llseek() , and plan for handling
-SEEK_* flags e.g. SEEK_CUR, SEEK_END
+  SEEK_* flags e.g. SEEK_CUR, SEEK_END
 
     Test it out using an similar to the app you’ve written earlier in Chapter# 3.
 
@@ -161,8 +161,8 @@ SEEK_* flags e.g. SEEK_CUR, SEEK_END
 
     Implement pipe() .. using ioctl() , blocking reads and blocking writes.
 
-or, implement your own system call mypipe(), that follows the makepipe or makefifo
-semantics, and takes a filename (viz /dev/CDD ) as an argument.
+  or, implement your own system call mypipe(), that follows the makepipe or makefifo
+  semantics, and takes a filename (viz /dev/CDD ) as an argument.
 
 # Homework .. Chapter 7
 1. For Homework,
