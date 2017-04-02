@@ -384,13 +384,13 @@ int CDDproc_seq_init(void)
 
   mutex_init(&myps_data.mtx); // hwk5.2
   myps_data.testid = 0; // use current by default
+  printk(KERN_ALERT "Added /proc/%s entry\n", PROC_ENTRY);
 
 	return 0;
 }
 
 void CDDproc_seq_exit(void)
 {
-
 	remove_proc_entry (PROC_ENTRY, NULL);
-
+  printk(KERN_ALERT "Removed /proc/%s entry\n", PROC_ENTRY);
 }

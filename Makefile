@@ -4,7 +4,7 @@ PWD := $(shell pwd)
 LDD := /lib/modules/$(shell uname -r)/kernel/drivers/ldd/
 
 CDDparm := $(CDDparm)
-CDDparm := 35
+CDDparm := 0
 
 # Modules:
 CH2_1 := ch21
@@ -41,20 +41,24 @@ compile: $(DRIVER).o $(CH2_1).o $(CH2_2).o $(CH2_2s).o apps
 tests: test2 test3 test4 test5
 
 load: $(DRIVER).o
-	-su -c "{ insmod ./$(DRIVER).ko CDDparm=$(CDDparm);} || \
+	su -c "{ insmod ./$(DRIVER).ko CDDparm=$(CDDparm);} || \
 		{ echo CDDparm is not set;} ";
 
 $(DRIVER): load
 	-su -c "mknod -m 666 /dev/CDD2 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 0;"
+	-su -c "mknod -m 666 /dev/CDD16 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 1;"
+	-su -c "mknod -m 666 /dev/CDD64 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 2;"
+	-su -c "mknod -m 666 /dev/CDD128 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 3;"
+	-su -c "mknod -m 666 /dev/CDD256 c $(shell grep CDD2 /proc/devices | sed 's/CDD2//') 4;"
 	# show devfs and procfs entries created
-	ls -l /proc/CDD/* /dev/CDD* /proc/myps
+	ls -l /dev/CDD* /proc/CDD/* /proc/myps
 
 
 $(CH2_1).o $(CH2_2).o $(CH2_2s).o $(DRIVER).o:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 unload:
-	-su -c "rmmod $(DRIVER); rm -fr /dev/$(DRIVER);"
+	-su -c "rm -fr /dev/CDD*; rmmod $(DRIVER);"
 #	-su -c "rmmod $(CH2_1);"
 
 clean: unload

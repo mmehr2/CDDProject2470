@@ -99,7 +99,7 @@ static int CDD_init(void)
  		firstdevno = MKDEV(CDDmajor, CDDMINOR);
 
   //  Step 1b of 2:  request/reserve Major Number from Kernel
-  	err = register_chrdev_region(firstdevno,1,CDD);
+  	err = register_chrdev_region(firstdevno,CDDNUMDEVS,CDD);
 		if (err < 0) { printk(KERN_ALERT "Error (%d) registerng CDD major #%d\n", err, CDDmajor); goto Init_error_exit;}
 	}
 	else {
@@ -149,7 +149,7 @@ static int CDD_init(void)
 		thisCDD->devno = MKDEV(CDDmajor,i);
 	 	err = cdev_add(&thisCDD->cdev, thisCDD->devno, 1);
 		if (!err) {
-			printk(KERN_ALERT "kernel Successfully added CDD%d(#%d)\n", get_devname_number(i), i);
+			printk(KERN_ALERT "kernel Successfully added CDD%d(#%d,n=%d)\n", get_devname_number(i), i, thisCDD->devno);
 			some_devices_ok = 1;
 			CDDproc_init(i); // OK to do this after the device goes active w the kernel
 		}
@@ -172,7 +172,7 @@ Partial_decommission_exit:
 		}
 
 		// otherwise, we had a failed call to add the driver
-		printk(KERN_ALERT "Decommissioned CDD%d(#%d)\n", get_devname_number(i), i);
+		printk(KERN_ALERT "Decommissioned CDD%d(#%d, n=%d)\n", get_devname_number(i), i, thisCDD->devno);
 		// free any allocated memory
 		if (thisCDD->CDD_storage) {
 			vfree(thisCDD->CDD_storage);
@@ -185,8 +185,18 @@ Partial_decommission_exit:
 			thisCDD->CDD_sem = NULL;
 		}
 	}
+	// after looping, if no devices are left, unregister the region of numbers
+	if (!some_devices_ok) {
+		//  Step 2b of 2:  Release request/reserve of Major Number from Kernel
+	 	unregister_chrdev_region(firstdevno, CDDNUMDEVS);
+
+		if (CDDmajor != CDDMAJOR)
+			printk(KERN_ALERT "kernel unassigned major#: %d from CDD\n", CDDmajor);
+	}
 Init_error_exit:
 	// err will be set with any error code
+	CDDproc_seq_exit(); // remove unrelated /proc/myps feature
+
 	return err;
 }
 
@@ -195,7 +205,7 @@ static void CDD_exit(void)
 	int i;
  	struct CDDdev_struct *thisCDD;
 
-	CDDproc_seq_exit(); // remove unrelated /proc/myps feature (???)
+	CDDproc_seq_exit(); // remove unrelated /proc/myps feature
 
 	for (i=CDDMINOR; i<CDDLASTMINOR; ++i) {
 		thisCDD = get_CDDdev(i);

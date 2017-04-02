@@ -40,6 +40,9 @@ int CDD_open (struct inode *inode, struct file *file)
     	}
 
         file->private_data=thisCDD;
+        
+        printk(KERN_ALERT "file '%s' opened with devno=%d\n",
+            file->f_path.dentry->d_name.name, thisCDD->devno);
 
         up_write(thisCDD->CDD_sem); // release write lock
 
