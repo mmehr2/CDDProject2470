@@ -128,14 +128,17 @@ static ssize_t readproc_CDD2(struct file *file, char *buf,
 
     snprintf(buf,len,
        "Mode: %s\n"
-       "Group Number: %d\n"
+       "%s(%d) Group Number: %d\n"
        "Team Members: %s, %s\n"
        "Buffer Length - Allocated: %u\n"
        "Buffer Length - Used: %u\n"
        "# Opens: %d\n"
       , ((usrsp->CDD_procflag!=0)? "Written": "Readable")
+      , devfname
+      , minor
       , 42
-      , "Mike Mehr", usrsp->CDD_procvalue
+      , "Mike Mehr"
+      , usrsp->CDD_procvalue
       , thisCDD->alloc_len
       , thisCDD->counter
       , thisCDD->active_opens
@@ -187,6 +190,7 @@ int CDDproc_init(int minor_number)
   strcpy(usrsp->CDD_procname, get_devname(minor_number));
 	usrsp->CDD_procvalue=vmalloc(4096);
   strcpy(usrsp->CDD_procvalue, "Team Member #2");
+  usrsp->minor = minor_number;
 
   // Create the necessary proc entries
   if (topdir_entry_count() == 0){
