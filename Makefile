@@ -23,7 +23,7 @@ $(CH2_2s)-objs := hello2_mod.o hello_sub.o
 
 $(DRIVER)-objs := main.o basic_ops.o proc_ops.o proc_seq_ops.o proc_log_marker.o
 
-APPS := testApp_ch3 testApp_ch4 testApp_ch5
+APPS := testApp_ch3 testApp_ch4 testApp_ch5 testApp_ch6
 
 # NOTE: Ubuntu versions require /var/log/kern.log, others use /var/log/messages
 KERN-LOG := /var/log/kern.log
@@ -38,7 +38,7 @@ apps:  $(APPS) testApp_ch1
 
 compile: $(DRIVER).o $(CH2_1).o $(CH2_2).o $(CH2_2s).o apps
 
-tests: test2 test3 test4 test5
+tests: test2 test3 test4 test5 test6
 
 load: $(DRIVER).o
 	su -c "{ insmod ./$(DRIVER).ko CDDparm=$(CDDparm);} || \
@@ -53,6 +53,15 @@ $(DRIVER): load
 	# show devfs and procfs entries created
 	ls -l /dev/CDD* /proc/CDD/* /proc/myps
 
+# Debug version of the above, to make /dev/ nodes for any major dvc (hwk.6+)
+altnodes:
+	-su -c "mknod -m 666 /dev/CDD2 c $(MAJOR) 0;"
+	-su -c "mknod -m 666 /dev/CDD16 c $(MAJOR) 1;"
+	-su -c "mknod -m 666 /dev/CDD64 c $(MAJOR) 2;"
+	-su -c "mknod -m 666 /dev/CDD128 c $(MAJOR) 3;"
+	-su -c "mknod -m 666 /dev/CDD256 c $(MAJOR) 4;"
+	# show devfs and procfs entries created
+	ls -l /dev/CDD* /proc/CDD/* /proc/myps
 
 $(CH2_1).o $(CH2_2).o $(CH2_2s).o $(DRIVER).o:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
@@ -252,3 +261,27 @@ test5: CDD2 testApp_ch5
 	@echo ""  >> $(CH05_OUTFILE)
 	@echo "# Grab the recent output of kernel message log too"  >> $(CH05_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B5000 -m1 | tac  >> $(CH05_OUTFILE)
+
+CH06_OUTFILE := ./Outputs/Chapter06.txt
+
+testApp_ch6: testApp_ch6.c
+	-gcc -o testApp_ch6 testApp_ch6.c;
+
+test6: testApp_ch6
+	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 06"   > $(CH06_OUTFILE)
+	@echo ""  >> $(CH06_OUTFILE)
+	@echo "# UTIL - mark kernel log for later retrieval..."  >> $(CH06_OUTFILE)
+	echo $(KERN-MARKER) > /proc/CDD/marker
+	#echo "*** KERNEL MARKER ***" > /proc/CDD/marker
+	@echo ""  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1 Test multi-minor read-write"  >> $(CH06_OUTFILE)
+	./testApp_ch6 30  >> $(CH06_OUTFILE)
+	@echo "Read /proc/CDD entries"  >> $(CH06_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH06_OUTFILE)
+	cat /proc/CDD/CDD16  >> $(CH06_OUTFILE)
+	cat /proc/CDD/CDD64  >> $(CH06_OUTFILE)
+	cat /proc/CDD/CDD128  >> $(CH06_OUTFILE)
+	cat /proc/CDD/CDD256  >> $(CH06_OUTFILE)
+	@echo ""  >> $(CH06_OUTFILE)
+	@echo "# Grab the recent output of kernel message log too"  >> $(CH06_OUTFILE)
+	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)

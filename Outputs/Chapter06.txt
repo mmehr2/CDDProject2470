@@ -1,0 +1,79 @@
+HOMEWORK TEST OUTPUT FOR CHAPTER 06
+
+# UTIL - mark kernel log for later retrieval...
+
+# Ch.6.1 Test multi-minor read-write
+RDBACK-short-1. write(7 chrs):Eureka!..OK.
+RDBACK-short-2. read()..OK.(0 chrs):.N=ö
+RDBACK-short-3. compare().. ERR(23):UNEQUAL
+RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-2. read()..OK.(0 chrs):.N=ö
+RDBACK-long-3. compare().. ERR(26):UNEQUAL
+RDBACK-short-1. write(7 chrs):Eureka!..OK.
+RDBACK-short-2. read()..OK.(7 chrs):Eureka!
+RDBACK-short-3. compare()..OK.
+RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174... ERR(-1):Bad address
+RDBACK-short-1. write(7 chrs):Eureka!..OK.
+RDBACK-short-2. read()..OK.(55 chrs):Hello World 13049872138472130984721398749832174.Eureka!
+RDBACK-short-3. compare().. ERR(-3):UNEQUAL
+RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174... ERR(-1):Bad address
+RDBACK-short-1. write(7 chrs):Eureka!..OK.
+RDBACK-short-2. read()..OK.(55 chrs):Hello World 13049872138472130984721398749832174.Eureka!
+RDBACK-short-3. compare().. ERR(-3):UNEQUAL
+RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-2. read()..OK.(0 chrs):Hello World 13049872138472130984721398749832174.Eureka!
+RDBACK-long-3. compare().. ERR(-69):UNEQUAL
+RDBACK-short-1. write(7 chrs):Eureka!..OK.
+RDBACK-short-2. read()..OK.(55 chrs):Hello World 13049872138472130984721398749832174.Eureka!
+RDBACK-short-3. compare().. ERR(-3):UNEQUAL
+RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-2. read()..OK.(0 chrs):Hello World 13049872138472130984721398749832174.Eureka!
+RDBACK-long-3. compare().. ERR(-69):UNEQUAL
+Read /proc/CDD entries
+Mode: Readable
+CDD2(0) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 4096
+Buffer Length - Used: 55
+# Opens: 1
+Mode: Readable
+CDD16(1) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 16
+Buffer Length - Used: 14
+# Opens: 3
+Mode: Readable
+CDD64(2) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 64
+Buffer Length - Used: 62
+# Opens: 2
+Mode: Readable
+CDD128(3) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 128
+Buffer Length - Used: 110
+# Opens: 3
+Mode: Readable
+CDD256(4) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 256
+Buffer Length - Used: 110
+# Opens: 2
+
+# Grab the recent output of kernel message log too
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.388170] UNIQUE-KERNEL-MARKER
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446341] file 'CDD2' opened O_APPEND
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446345] file 'CDD2' opened with devno=255852544
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446403] file 'CDD16' opened O_APPEND
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446404] file 'CDD16' opened with devno=255852545
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446407] CDD_read: count=7
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446417] file 'CDD64' opened O_APPEND
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446418] file 'CDD64' opened with devno=255852546
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446421] CDD_read: count=55
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446425] file 'CDD128' opened O_APPEND
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446426] file 'CDD128' opened with devno=255852547
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446428] CDD_read: count=55
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446432] file 'CDD256' opened O_APPEND
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446433] file 'CDD256' opened with devno=255852548
+Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446435] CDD_read: count=55
