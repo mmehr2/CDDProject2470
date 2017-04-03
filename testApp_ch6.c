@@ -64,7 +64,7 @@ int test_readback(int fd, const char* str, const char* tag, int offset, int when
 }
 
 static char* devnames[] = {
-	"CDD2", "CDD16", //"CDD64", "CDD128", "CDD256",
+	"CDD2", "CDD16", "CDD64", "CDD128", "CDD256",
 };
 int NUMDEVS = sizeof(devnames)/sizeof(devnames[0]);
 
