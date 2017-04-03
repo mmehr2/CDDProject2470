@@ -21,19 +21,19 @@ int seek_file(int fd, const char* tag, int offs, int whence) {
 	fprintf(stdout, "%s-X. seek(%d,%d)..", tag, offs, whence);
 	if ((len = lseek(fd, offs, whence)) < 0) {
 		fprintf(stdout," ERR(%d):%s\n", len, strerror(errno));
-		return(1);
+		return(-1);
 	} else {
 		fprintf(stdout, "OK.\n");
 	}
-	return 0;
+	return len;
 }
 
 int test_readback(int fd, const char* str, const char* tag, int offset, int whence) {
 	char str2[128];
 
-	int len, wlen = strlen(str)+1; // include the null
+	int newofs, len, wlen = strlen(str)+1; // include the null
 
-	if (seek_file(fd, tag, offset, whence))
+	if ((newofs = seek_file(fd, tag, offset, whence)) < 0)
 		return 1;
 
 	fprintf(stdout, "%s-1. write(%d chrs):%s..", tag, (int)wlen, str);
@@ -42,7 +42,8 @@ int test_readback(int fd, const char* str, const char* tag, int offset, int when
 		return(1);
 	} else { fprintf(stdout, "OK.\n"); }
 
-	if (seek_file(fd, tag, offset, whence))
+	// reset file pos to where we wrote the string
+	if (seek_file(fd, tag, newofs, SEEK_SET) < 0)
 		return 1;
 
 	fprintf(stdout, "%s-3. read()..", tag);
