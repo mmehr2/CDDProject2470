@@ -16,28 +16,34 @@
 #define MYSTR "Eureka!"
 #define MYSTR2 "Hello World 13049872138472130984721398749832174."
 
-int reset_file(int fd, const char* tag) {
+int seek_file(int fd, const char* tag, int offs, int whence) {
 	int len;
-	fprintf(stdout, "%s-X. seek(0,SET)..", tag);
-	if ((len = lseek(fd, 0, SEEK_SET)) < 0) {
+	fprintf(stdout, "%s-X. seek(%d,%d)..", tag, offs, whence);
+	if ((len = lseek(fd, offs, whence)) < 0) {
 		fprintf(stdout," ERR(%d):%s\n", len, strerror(errno));
 		return(1);
 	} else {
 		fprintf(stdout, "OK.\n");
 	}
+	return 0;
 }
 
-int test_readback(int fd, const char* str, const char* tag) {
+int test_readback(int fd, const char* str, const char* tag, int offset, int whence) {
 	char str2[128];
 
 	int len, wlen = strlen(str)+1; // include the null
+
+	if (seek_file(fd, tag, offset, whence))
+		return 1;
+
 	fprintf(stdout, "%s-1. write(%d chrs):%s..", tag, (int)wlen, str);
 	if ((len = write(fd, str, wlen)) < 0) {
 		fprintf(stdout," ERR(%d):%s\n", len, strerror(errno));
 		return(1);
 	} else { fprintf(stdout, "OK.\n"); }
 
-	reset_file(fd, tag);
+	if (seek_file(fd, tag, offset, whence))
+		return 1;
 
 	fprintf(stdout, "%s-3. read()..", tag);
 	if ((len = read(fd, str2, 128)) < 0) {
@@ -57,7 +63,7 @@ int test_readback(int fd, const char* str, const char* tag) {
 }
 
 static char* devnames[] = {
-	"CDD2", "CDD16", "CDD64", "CDD128", "CDD256",
+	"CDD2", "CDD16", //"CDD64", "CDD128", "CDD256",
 };
 int NUMDEVS = sizeof(devnames)/sizeof(devnames[0]);
 
@@ -69,24 +75,68 @@ const char* get_devname(const char* prefix, int index) {
 	return str;
 }
 
-int main() {
-	int fd, len, wlen, i=0;
+int main(int argc, char**argv) {
+	int fd, len, wlen, i=0, test=-1;
 	char str[128];
-	const char* devname;
+	const char* devname, * tag;
 
+	if (argc > 1) {
+		test = atoi(argv[1]);
+		fprintf(stdout, "Executing test command %d\n", test);
+		switch (test) {
+		case 0:
+			tag = "RDBACK";
+			break;
+		case 1:
+			tag = "SEEK";
+			break;
+		default:
+			// just open/close testing
+			tag = "OPEN";
+			break;
+		}
+} else {
+		fprintf(stdout,
+			"Usage: %s [testnum]\n"
+			"where testnum is as follows:\n"
+			"\t0\tRun readback test (write, seek, read, compare) on all CDD drivers.\n"
+			"\t1\tRun advanced seek test on all CDD drivers.\n"
+			"\tElse\tRun open/close test on all CDD drivers.\n"
+			, argv[0]);
+		exit(0);
+	}
 	i = 0;
 	while (i<NUMDEVS) {
 		devname = get_devname("/dev/", i);
-		fprintf(stdout, "#1-RDBACK. open(%s)..", devname);
+		fprintf(stdout, "#1-%s. open(%s)..", tag, devname);
 		if((fd = open(devname, O_RDWR | O_TRUNC)) == -1) {
 			fprintf(stdout,"ERR:%s\n", strerror(errno));
 		} else { fprintf(stdout, "OK.\n"); }
 
-		strcpy(str, MYSTR2);
-		test_readback(fd, str, "RDBACK-long");
-		reset_file(fd, "RDBACK");
-		strcpy(str, MYSTR);
-		test_readback(fd, str, "RDBACK-short");
+		switch (test) {
+		case 0:
+			strcpy(str, MYSTR2);
+			test_readback(fd, str, "RDBACK-long", 0, SEEK_SET);
+			strcpy(str, MYSTR);
+			test_readback(fd, str, "RDBACK-short", 0, SEEK_SET);
+			break;
+		case 1:
+			strcpy(str, MYSTR);
+			test_readback(fd, str, "SEEK-start-short", 0, SEEK_SET);
+			test_readback(fd, str, "SEEK-(END-50)-short", -50, SEEK_END);
+			test_readback(fd, str, "SEEK-(END-5)-short", -5, SEEK_END);
+			test_readback(fd, str, "SEEK-(END+5)-short", 5, SEEK_END);
+			test_readback(fd, str, "SEEK-(END+500)-short", 500, SEEK_END);
+			test_readback(fd, str, "SEEK-(START-5)-short", -5, SEEK_SET);
+			test_readback(fd, str, "SEEK-(START+5)-short", 5, SEEK_SET);
+			test_readback(fd, str, "SEEK-(START+50)-short", 50, SEEK_SET);
+			test_readback(fd, str, "SEEK-(CUR-5)-short", -5, SEEK_CUR);
+			test_readback(fd, str, "SEEK-(CUR+5)-short", 5, SEEK_CUR);
+			break;
+		default:
+		// just open/close testing
+			break;
+		}
 
 		close(fd);
 		++i;
