@@ -3,77 +3,136 @@ HOMEWORK TEST OUTPUT FOR CHAPTER 06
 # UTIL - mark kernel log for later retrieval...
 
 # Ch.6.1 Test multi-minor read-write
-RDBACK-short-1. write(7 chrs):Eureka!..OK.
-RDBACK-short-2. read()..OK.(0 chrs):.N=ö
-RDBACK-short-3. compare().. ERR(23):UNEQUAL
-RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174...OK.
-RDBACK-long-2. read()..OK.(0 chrs):.N=ö
-RDBACK-long-3. compare().. ERR(26):UNEQUAL
-RDBACK-short-1. write(7 chrs):Eureka!..OK.
-RDBACK-short-2. read()..OK.(7 chrs):Eureka!
-RDBACK-short-3. compare()..OK.
-RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174... ERR(-1):Bad address
-RDBACK-short-1. write(7 chrs):Eureka!..OK.
-RDBACK-short-2. read()..OK.(55 chrs):Hello World 13049872138472130984721398749832174.Eureka!
-RDBACK-short-3. compare().. ERR(-3):UNEQUAL
-RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174... ERR(-1):Bad address
-RDBACK-short-1. write(7 chrs):Eureka!..OK.
-RDBACK-short-2. read()..OK.(55 chrs):Hello World 13049872138472130984721398749832174.Eureka!
-RDBACK-short-3. compare().. ERR(-3):UNEQUAL
-RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174...OK.
-RDBACK-long-2. read()..OK.(0 chrs):Hello World 13049872138472130984721398749832174.Eureka!
-RDBACK-long-3. compare().. ERR(-69):UNEQUAL
-RDBACK-short-1. write(7 chrs):Eureka!..OK.
-RDBACK-short-2. read()..OK.(55 chrs):Hello World 13049872138472130984721398749832174.Eureka!
-RDBACK-short-3. compare().. ERR(-3):UNEQUAL
-RDBACK-long-1. write(48 chrs):Hello World 13049872138472130984721398749832174...OK.
-RDBACK-long-2. read()..OK.(0 chrs):Hello World 13049872138472130984721398749832174.Eureka!
-RDBACK-long-3. compare().. ERR(-69):UNEQUAL
+#1-RDBACK. open(/dev/CDD2)..OK.
+RDBACK-long-1. write(49 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-X. seek(0,SET)..OK.
+RDBACK-long-3. read()..OK.(49 chrs):Hello World 13049872138472130984721398749832174.
+RDBACK-long-4. compare()..OK.
+RDBACK-X. seek(0,SET)..OK.
+RDBACK-short-1. write(8 chrs):Eureka!..OK.
+RDBACK-short-X. seek(0,SET)..OK.
+RDBACK-short-3. read()..OK.(49 chrs):Eureka!
+RDBACK-short-4. compare()..OK.
+#1-RDBACK. open(/dev/CDD16)..OK.
+RDBACK-long-1. write(49 chrs):Hello World 13049872138472130984721398749832174... ERR(-1):Bad address
+RDBACK-X. seek(0,SET)..OK.
+RDBACK-short-1. write(8 chrs):Eureka!..OK.
+RDBACK-short-X. seek(0,SET)..OK.
+RDBACK-short-3. read()..OK.(8 chrs):Eureka!
+RDBACK-short-4. compare()..OK.
+#1-RDBACK. open(/dev/CDD64)..OK.
+RDBACK-long-1. write(49 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-X. seek(0,SET)..OK.
+RDBACK-long-3. read()..OK.(49 chrs):Hello World 13049872138472130984721398749832174.
+RDBACK-long-4. compare()..OK.
+RDBACK-X. seek(0,SET)..OK.
+RDBACK-short-1. write(8 chrs):Eureka!..OK.
+RDBACK-short-X. seek(0,SET)..OK.
+RDBACK-short-3. read()..OK.(49 chrs):Eureka!
+RDBACK-short-4. compare()..OK.
+#1-RDBACK. open(/dev/CDD128)..OK.
+RDBACK-long-1. write(49 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-X. seek(0,SET)..OK.
+RDBACK-long-3. read()..OK.(49 chrs):Hello World 13049872138472130984721398749832174.
+RDBACK-long-4. compare()..OK.
+RDBACK-X. seek(0,SET)..OK.
+RDBACK-short-1. write(8 chrs):Eureka!..OK.
+RDBACK-short-X. seek(0,SET)..OK.
+RDBACK-short-3. read()..OK.(49 chrs):Eureka!
+RDBACK-short-4. compare()..OK.
+#1-RDBACK. open(/dev/CDD256)..OK.
+RDBACK-long-1. write(49 chrs):Hello World 13049872138472130984721398749832174...OK.
+RDBACK-long-X. seek(0,SET)..OK.
+RDBACK-long-3. read()..OK.(49 chrs):Hello World 13049872138472130984721398749832174.
+RDBACK-long-4. compare()..OK.
+RDBACK-X. seek(0,SET)..OK.
+RDBACK-short-1. write(8 chrs):Eureka!..OK.
+RDBACK-short-X. seek(0,SET)..OK.
+RDBACK-short-3. read()..OK.(49 chrs):Eureka!
+RDBACK-short-4. compare()..OK.
 Read /proc/CDD entries
 Mode: Readable
 CDD2(0) Group Number: 42
-Team Members: Mike Mehr, Team Member #2
+Team Members: Mike Mehr, My Word!
 Buffer Length - Allocated: 4096
-Buffer Length - Used: 55
-# Opens: 1
+Buffer Length - Used: 49
+# Opens: 22
 Mode: Readable
 CDD16(1) Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 16
-Buffer Length - Used: 14
-# Opens: 3
+Buffer Length - Used: 8
+# Opens: 1
 Mode: Readable
 CDD64(2) Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 64
-Buffer Length - Used: 62
-# Opens: 2
+Buffer Length - Used: 49
+# Opens: 1
 Mode: Readable
 CDD128(3) Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 128
-Buffer Length - Used: 110
-# Opens: 3
+Buffer Length - Used: 49
+# Opens: 1
 Mode: Readable
 CDD256(4) Group Number: 42
 Team Members: Mike Mehr, Team Member #2
 Buffer Length - Allocated: 256
-Buffer Length - Used: 110
-# Opens: 2
+Buffer Length - Used: 49
+# Opens: 1
 
 # Grab the recent output of kernel message log too
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.388170] UNIQUE-KERNEL-MARKER
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446341] file 'CDD2' opened O_APPEND
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446345] file 'CDD2' opened with devno=255852544
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446403] file 'CDD16' opened O_APPEND
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446404] file 'CDD16' opened with devno=255852545
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446407] CDD_read: count=7
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446417] file 'CDD64' opened O_APPEND
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446418] file 'CDD64' opened with devno=255852546
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446421] CDD_read: count=55
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446425] file 'CDD128' opened O_APPEND
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446426] file 'CDD128' opened with devno=255852547
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446428] CDD_read: count=55
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446432] file 'CDD256' opened O_APPEND
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446433] file 'CDD256' opened with devno=255852548
-Apr  3 08:38:43 mike-VirtualBox kernel: [629365.446435] CDD_read: count=55
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.668214] UNIQUE-KERNEL-MARKER
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710448] file 'CDD2' opened O_TRUNC
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710452] file 'CDD2' opened with devno=256901120
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710458] CDD_write(App=0) try: count=49b @ ofs=0 bufpos=0, tot=4096: [start=0, end=49]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710459] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710460] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710461] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710463] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710465] CDD_write(App=0) try: count=8b @ ofs=0 bufpos=49, tot=4096: [start=0, end=8]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710466] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710466] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710467] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710472] file 'CDD16' opened O_TRUNC
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710473] file 'CDD16' opened with devno=256901121
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710475] CDD_write(App=0) try: count=49b @ ofs=0 bufpos=0, tot=16: [start=0, end=49]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710482] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:0, file:0
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710483] CDD_write(App=0) try: count=8b @ ofs=0 bufpos=0, tot=16: [start=0, end=8]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710484] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:8, file:8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710485] CDD_read try: count=128b @ ofs=0 fpos=8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710485] CDD_read: count=8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710489] file 'CDD64' opened O_TRUNC
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710490] file 'CDD64' opened with devno=256901122
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710492] CDD_write(App=0) try: count=49b @ ofs=0 bufpos=0, tot=64: [start=0, end=49]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710493] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710493] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710494] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710495] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710496] CDD_write(App=0) try: count=8b @ ofs=0 bufpos=49, tot=64: [start=0, end=8]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710497] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710498] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710498] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710502] file 'CDD128' opened O_TRUNC
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710503] file 'CDD128' opened with devno=256901123
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710504] CDD_write(App=0) try: count=49b @ ofs=0 bufpos=0, tot=128: [start=0, end=49]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710505] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710506] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710506] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710508] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710509] CDD_write(App=0) try: count=8b @ ofs=0 bufpos=49, tot=128: [start=0, end=8]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710510] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710511] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710512] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710515] file 'CDD256' opened O_TRUNC
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710516] file 'CDD256' opened with devno=256901124
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710518] CDD_write(App=0) try: count=49b @ ofs=0 bufpos=0, tot=256: [start=0, end=49]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710519] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710520] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710520] CDD_read: count=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710521] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710523] CDD_write(App=0) try: count=8b @ ofs=0 bufpos=49, tot=256: [start=0, end=8]
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710524] CDD_seek(0) try: set to (0)+(0)=(0) from buffer:49, file:8
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710524] CDD_read try: count=128b @ ofs=0 fpos=49
+Apr  3 14:25:03 mike-VirtualBox kernel: [20368.710525] CDD_read: count=49

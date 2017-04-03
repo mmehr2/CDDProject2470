@@ -40,7 +40,7 @@ int CDD_open (struct inode *inode, struct file *file)
     	}
 
         file->private_data=thisCDD;
-        
+
         printk(KERN_ALERT "file '%s' opened with devno=%d\n",
             file->f_path.dentry->d_name.name, thisCDD->devno);
 
@@ -67,6 +67,8 @@ ssize_t CDD_read (struct file *file, char *buf,
   // acquire read lock
     down_read(thisCDD->CDD_sem);
 
+    printk(KERN_DEBUG "CDD_read try: count=%db @ ofs=%d fpos=%d\n", (int)count, (int)*ppos, (int)thisCDD->counter);
+
     if( *ppos >= thisCDD->counter) {retval= 0; goto Done;}
     else if( *ppos + count >= thisCDD->counter)
       count = thisCDD->counter - *ppos;
@@ -90,50 +92,63 @@ Done:
 ssize_t CDD_write (struct file *file, const char *buf,
   size_t count, loff_t *ppos)
 {
-	int retval=0, pos=0;
+	int retval=0, pos=0, end=0;
   struct CDDdev_struct *thisCDD=file->private_data;
 
 // critical section for write
-  if (down_write_trylock(thisCDD->CDD_sem)) {
-
-    pos=(thisCDD->append)?thisCDD->counter:*ppos;
-
-    // make sure we never overflow the buffer
-    if ((pos + count) > thisCDD->alloc_len) {retval= -EFAULT; goto Done;}
-
-  	retval = copy_from_user(&(thisCDD->CDD_storage[pos]),buf,count);
-  	if (retval != 0) {retval= -EFAULT; goto Done;}
-
-  	thisCDD->counter += count;
-    *ppos += count;
-  	retval = count;
-    // end critical section
-  } else {
+  if (0 == down_write_trylock(thisCDD->CDD_sem)) {
     return -ERESTARTSYS; // no semaphore to release
   }
-  Done:
+
+  pos=(thisCDD->append)?thisCDD->counter:*ppos;
+  end = pos + count;
+
+  printk(KERN_DEBUG "CDD_write(App=%d) try: count=%db @ ofs=%d bufpos=%d, tot=%d: [start=%d, end=%d]\n"
+    , thisCDD->append, (int)count, (int)*ppos, (int)thisCDD->counter, thisCDD->alloc_len, pos, end);
+
+  // with seeking, *ppos can be negative or past EOF or buffer size
+  // make sure we never overflow the buffer
+  if (end > thisCDD->alloc_len) {retval= -EFAULT; goto Done;}
+  // make sure we never underflow the buffer
+  if (pos < 0) {retval= -EFAULT; goto Done;}
+
+	retval = copy_from_user(&(thisCDD->CDD_storage[pos]),buf,count);
+	if (retval != 0) {retval= -EFAULT; goto Done;}
+
+  // only update end of buffer if we have written past previous one
+  if (end > thisCDD->counter)
+	   thisCDD->counter = end;
+  *ppos += count;
+	retval = count;
+  // end critical section
+Done:
   up_write(thisCDD->CDD_sem);
   return retval;
 }
 
 loff_t CDD_llseek (struct file *file, loff_t newpos, int whence)
 {
-  int pos;
+  int pos, from = 0;
 	struct CDDdev_struct *thisCDD=file->private_data;
 
 	switch(whence) {
 		case SEEK_SET:        // CDDoffset can be 0 or +ve
-			pos=newpos;
+			from = 0;
 			break;
 		case SEEK_CUR:        // CDDoffset can be 0 or +ve
-			pos=(file->f_pos + newpos);
+      from = file->f_pos;
 			break;
 		case SEEK_END:        // CDDoffset can be 0 or +ve
-			pos=(thisCDD->counter + newpos);
+      from = thisCDD->counter;
 			break;
 		default:
 			return -EINVAL;
 	}
+
+  pos = from + newpos;
+  printk(KERN_DEBUG "CDD_seek(%d) try: set to (%d)+(%d)=(%d) from buffer:%d, file:%d\n"
+    , whence, (int)newpos, from, pos, (int)thisCDD->counter, (int)file->f_pos);
+
 	if ((pos < 0)||(pos>thisCDD->counter))
 		return -EINVAL;
 

@@ -16,25 +16,39 @@
 #define MYSTR "Eureka!"
 #define MYSTR2 "Hello World 13049872138472130984721398749832174."
 
+int reset_file(int fd, const char* tag) {
+	int len;
+	fprintf(stdout, "%s-X. seek(0,SET)..", tag);
+	if ((len = lseek(fd, 0, SEEK_SET)) < 0) {
+		fprintf(stdout," ERR(%d):%s\n", len, strerror(errno));
+		return(1);
+	} else {
+		fprintf(stdout, "OK.\n");
+	}
+}
+
 int test_readback(int fd, const char* str, const char* tag) {
 	char str2[128];
 
-	int len, wlen = strlen(str);
+	int len, wlen = strlen(str)+1; // include the null
 	fprintf(stdout, "%s-1. write(%d chrs):%s..", tag, (int)wlen, str);
-	if ((len = write(fd, str, wlen)) == -1) {
+	if ((len = write(fd, str, wlen)) < 0) {
 		fprintf(stdout," ERR(%d):%s\n", len, strerror(errno));
 		return(1);
 	} else { fprintf(stdout, "OK.\n"); }
 
-	fprintf(stdout, "%s-2. read()..", tag);
-	if ((len = read(fd, str2, 128)) == -1) {
+	reset_file(fd, tag);
+
+	fprintf(stdout, "%s-3. read()..", tag);
+	if ((len = read(fd, str2, 128)) < 0) {
 		fprintf(stdout," ERR(%d):%s\n", len, strerror(errno));
 		return(1);
 	} else {
+		str2[len] = 0; // terminate the received string
 		fprintf(stdout, "OK.(%d chrs):%s\n", (int)len, str2);
 	}
 
-	fprintf(stdout, "%s-3. compare()..", tag);
+	fprintf(stdout, "%s-4. compare()..", tag);
 	if ((len = strcmp(str, str2)) != 0) {
 		fprintf(stdout," ERR(%d):%s\n", len, "UNEQUAL");
 	} else { fprintf(stdout, "OK.\n"); }
@@ -63,14 +77,16 @@ int main() {
 	i = 0;
 	while (i<NUMDEVS) {
 		devname = get_devname("/dev/", i);
-		if((fd = open(devname, O_RDWR | O_APPEND)) == -1) {
-			fprintf(stderr,"#1-RDBACK. ERR:on open(%s):%s\n",devname, strerror(errno));
-		}
+		fprintf(stdout, "#1-RDBACK. open(%s)..", devname);
+		if((fd = open(devname, O_RDWR | O_TRUNC)) == -1) {
+			fprintf(stdout,"ERR:%s\n", strerror(errno));
+		} else { fprintf(stdout, "OK.\n"); }
 
-		strcpy(str, MYSTR);
-		test_readback(fd, str, "RDBACK-short");
 		strcpy(str, MYSTR2);
 		test_readback(fd, str, "RDBACK-long");
+		reset_file(fd, "RDBACK");
+		strcpy(str, MYSTR);
+		test_readback(fd, str, "RDBACK-short");
 
 		close(fd);
 		++i;

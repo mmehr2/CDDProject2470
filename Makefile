@@ -205,30 +205,30 @@ test4: CDD2 testApp_ch4
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: Test file O_TRUNC mode report"  >> $(CH04_OUTFILE)
 	echo "Hello World" > /dev/CDD2
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
 	cat /dev/CDD2  >> $(CH04_OUTFILE)
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: Test file O_APPEND mode report"  >> $(CH04_OUTFILE)
 	echo -n "Testing" > /dev/CDD2
 	echo ", 1, 2, 3 ..." >> /dev/CDD2
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
 	cat /dev/CDD2  >> $(CH04_OUTFILE)
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: Test buffer overrun report"  >> $(CH04_OUTFILE)
 	-yes | dd bs=1 count=5000 of=/dev/CDD2
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
 	cat /dev/CDD2 > /dev/null
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: test empty buffer report"  >> $(CH04_OUTFILE)
 	echo -n "" > /dev/CDD2
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
 	cat /dev/CDD2  >> $(CH04_OUTFILE)
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: Test writable proc entry (changes name of 2nd team member)"  >> $(CH04_OUTFILE)
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
-	echo "My Word!" > /proc/CDD/myCDD2
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
-	cat /proc/CDD/myCDD2  >> $(CH04_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
+	echo "My Word!" > /proc/CDD/CDD2
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
+	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.2 Test /proc/myps on current task"  >> $(CH04_OUTFILE)
 	cat /proc/myps  >> $(CH04_OUTFILE)
@@ -267,7 +267,7 @@ CH06_OUTFILE := ./Outputs/Chapter06.txt
 testApp_ch6: testApp_ch6.c
 	-gcc -o testApp_ch6 testApp_ch6.c;
 
-test6: testApp_ch6
+test6: CDD2 testApp_ch6
 	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 06"   > $(CH06_OUTFILE)
 	@echo ""  >> $(CH06_OUTFILE)
 	@echo "# UTIL - mark kernel log for later retrieval..."  >> $(CH06_OUTFILE)

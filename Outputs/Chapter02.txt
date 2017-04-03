@@ -2,110 +2,109 @@ HOMEWORK TEST OUTPUT FOR CHAPTER 02
 
 2.1: Output version info (single module via insmod):
 .. load:
-Mar 22 18:13:05 mike-VirtualBox kernel: [443817.225499] (0) Hello, Michael
-Mar 22 18:13:05 mike-VirtualBox kernel: [443817.225502] (1) Hello, Michael
-Mar 22 18:13:05 mike-VirtualBox kernel: [443817.225503] (2) Hello, Michael
-Mar 22 18:13:05 mike-VirtualBox kernel: [443817.225504]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
+Apr  3 14:24:52 mike-VirtualBox kernel: [20357.466013] (0) Hello, Michael
+Apr  3 14:24:52 mike-VirtualBox kernel: [20357.466016] (1) Hello, Michael
+Apr  3 14:24:52 mike-VirtualBox kernel: [20357.466017] (2) Hello, Michael
+Apr  3 14:24:52 mike-VirtualBox kernel: [20357.466018]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
 .. lsmod
 ch21                   16384  0
 .. symbols:
-ffffffffc045c000 t hello_init	[ch21]
-ffffffffc045e008 d whom	[ch21]
-ffffffffc045e000 d howmany	[ch21]
-ffffffffc045c020 t hello_exit	[ch21]
-ffffffffc045d038 r __param_howmany	[ch21]
-ffffffffc045d028 r __param_str_howmany	[ch21]
-ffffffffc045d060 r __param_whom	[ch21]
-ffffffffc045d030 r __param_str_whom	[ch21]
-ffffffffc045e040 d __this_module	[ch21]
-ffffffffc045c020 t cleanup_module	[ch21]
-ffffffffc045c000 t init_module	[ch21]
-ffffffffc045c0a0 t goodbye_greeter	[ch21]
-ffffffffc045c040 t hello_greeter	[ch21]
+ffffffffc034c000 t hello_init	[ch21]
+ffffffffc034e008 d whom	[ch21]
+ffffffffc034e000 d howmany	[ch21]
+ffffffffc034c020 t hello_exit	[ch21]
+ffffffffc034d038 r __param_howmany	[ch21]
+ffffffffc034d028 r __param_str_howmany	[ch21]
+ffffffffc034d060 r __param_whom	[ch21]
+ffffffffc034d030 r __param_str_whom	[ch21]
+ffffffffc034e040 d __this_module	[ch21]
+ffffffffc034c020 t cleanup_module	[ch21]
+ffffffffc034c000 t init_module	[ch21]
+ffffffffc034c0a0 t goodbye_greeter	[ch21]
+ffffffffc034c040 t hello_greeter	[ch21]
 .. symbols deps:
 kernel/drivers/ldd/ch21.ko:
 .. unload:
-Mar 22 18:13:05 mike-VirtualBox kernel: [443817.404590] Goodbye, cruel Michael
+Apr  3 14:24:52 mike-VirtualBox kernel: [20357.621174] Goodbye, cruel Michael
 
 2.1: Output version info (single module via modprobe):
 .. load:
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.236683] (0) Hello, Michael
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.236686] (1) Hello, Michael
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.236687] (2) Hello, Michael
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.236688]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.464456] (0) Hello, Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.464459] (1) Hello, Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.464460] (2) Hello, Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.464461]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
 .. lsmod
 ch21                   16384  0
 .. symbols:
-ffffffffc0457000 t hello_init	[ch21]
-ffffffffc0459008 d whom	[ch21]
-ffffffffc0459000 d howmany	[ch21]
-ffffffffc0457020 t hello_exit	[ch21]
-ffffffffc0458038 r __param_howmany	[ch21]
-ffffffffc0458028 r __param_str_howmany	[ch21]
-ffffffffc0458060 r __param_whom	[ch21]
-ffffffffc0458030 r __param_str_whom	[ch21]
-ffffffffc0459040 d __this_module	[ch21]
-ffffffffc0457020 t cleanup_module	[ch21]
-ffffffffc0457000 t init_module	[ch21]
-ffffffffc04570a0 t goodbye_greeter	[ch21]
-ffffffffc0457040 t hello_greeter	[ch21]
+ffffffffc0393000 t hello_init	[ch21]
+ffffffffc0395008 d whom	[ch21]
+ffffffffc0395000 d howmany	[ch21]
+ffffffffc0393020 t hello_exit	[ch21]
+ffffffffc0394038 r __param_howmany	[ch21]
+ffffffffc0394028 r __param_str_howmany	[ch21]
+ffffffffc0394060 r __param_whom	[ch21]
+ffffffffc0394030 r __param_str_whom	[ch21]
+ffffffffc0395040 d __this_module	[ch21]
+ffffffffc0393020 t cleanup_module	[ch21]
+ffffffffc0393000 t init_module	[ch21]
+ffffffffc03930a0 t goodbye_greeter	[ch21]
+ffffffffc0393040 t hello_greeter	[ch21]
 .. symbols deps:
 kernel/drivers/ldd/ch21.ko:
 .. unload:
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.409106] Goodbye, cruel Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.656822] Goodbye, cruel Michael
 
 2.2+3: Output version info (2 stacked modules via insmod):
 .. load (sub+main):
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.437583] Loading hello2 greeter module.
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.464112] (0) Hello, Michael
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.464115] (1) Hello, Michael
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.464116] (2) Hello, Michael
-Mar 22 18:13:06 mike-VirtualBox kernel: [443818.464117]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.692500] Loading hello2 greeter module.
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.709024] (0) Hello, Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.709027] (1) Hello, Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.709028] (2) Hello, Michael
+Apr  3 14:24:53 mike-VirtualBox kernel: [20358.709029]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
 .. lsmod
 ch22main               16384  0
 ch22sub                16384  1 ch22main
 .. symbols:
-ffffffffc0457000 t hello_init	[ch22main]
-ffffffffc0459008 d whom	[ch22main]
-ffffffffc0459000 d howmany	[ch22main]
-ffffffffc0457020 t hello_exit	[ch22main]
-ffffffffc0458038 r __param_howmany	[ch22main]
-ffffffffc0458028 r __param_str_howmany	[ch22main]
-ffffffffc0458060 r __param_whom	[ch22main]
-ffffffffc0458030 r __param_str_whom	[ch22main]
-ffffffffc0459040 d __this_module	[ch22main]
-ffffffffc0457020 t cleanup_module	[ch22main]
-ffffffffc0457000 t init_module	[ch22main]
+ffffffffc0393000 t hello_init	[ch22main]
+ffffffffc0395008 d whom	[ch22main]
+ffffffffc0395000 d howmany	[ch22main]
+ffffffffc0393020 t hello_exit	[ch22main]
+ffffffffc0394038 r __param_howmany	[ch22main]
+ffffffffc0394028 r __param_str_howmany	[ch22main]
+ffffffffc0394060 r __param_whom	[ch22main]
+ffffffffc0394030 r __param_str_whom	[ch22main]
+ffffffffc0395040 d __this_module	[ch22main]
+ffffffffc0393020 t cleanup_module	[ch22main]
+ffffffffc0393000 t init_module	[ch22main]
 .. symbols deps:
-kernel/drivers/ldd/ch22main.ko: kernel/drivers/ldd/ch22sub.ko
 .. unload(main+sub):
-Mar 22 18:13:07 mike-VirtualBox kernel: [443819.604326] Goodbye, cruel Michael
-Mar 22 18:13:07 mike-VirtualBox kernel: [443819.624278] Unloading hello2 greeter module.
+Apr  3 14:24:55 mike-VirtualBox kernel: [20359.843177] Goodbye, cruel Michael
+Apr  3 14:24:55 mike-VirtualBox kernel: [20359.872227] Unloading hello2 greeter module.
 
 2.2+3: Output version info (2 stacked modules via modprobe):
 .. load (sub+main):
-Mar 22 18:13:08 mike-VirtualBox kernel: [443820.489405] Loading hello2 greeter module.
-Mar 22 18:13:08 mike-VirtualBox kernel: [443820.491776] (0) Hello, Michael
-Mar 22 18:13:08 mike-VirtualBox kernel: [443820.491779] (1) Hello, Michael
-Mar 22 18:13:08 mike-VirtualBox kernel: [443820.491780] (2) Hello, Michael
-Mar 22 18:13:08 mike-VirtualBox kernel: [443820.491781]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
+Apr  3 14:24:55 mike-VirtualBox kernel: [20360.769755] Loading hello2 greeter module.
+Apr  3 14:24:55 mike-VirtualBox kernel: [20360.769927] (0) Hello, Michael
+Apr  3 14:24:55 mike-VirtualBox kernel: [20360.769928] (1) Hello, Michael
+Apr  3 14:24:55 mike-VirtualBox kernel: [20360.769929] (2) Hello, Michael
+Apr  3 14:24:55 mike-VirtualBox kernel: [20360.769930]    Kernel Version UTS_RELEASE="4.9.3-2470-126-042mlm", internally .. LINUX_VERSION_CODE="264451" KERNEL_VERSION=132352
 .. lsmod
 ch22main               16384  0
 ch22sub                16384  1 ch22main
 .. symbols:
-ffffffffc045c000 t hello_init	[ch22main]
-ffffffffc045e008 d whom	[ch22main]
-ffffffffc045e000 d howmany	[ch22main]
-ffffffffc045c020 t hello_exit	[ch22main]
-ffffffffc045d038 r __param_howmany	[ch22main]
-ffffffffc045d028 r __param_str_howmany	[ch22main]
-ffffffffc045d060 r __param_whom	[ch22main]
-ffffffffc045d030 r __param_str_whom	[ch22main]
-ffffffffc045e040 d __this_module	[ch22main]
-ffffffffc045c020 t cleanup_module	[ch22main]
-ffffffffc045c000 t init_module	[ch22main]
+ffffffffc034c000 t hello_init	[ch22main]
+ffffffffc034e008 d whom	[ch22main]
+ffffffffc034e000 d howmany	[ch22main]
+ffffffffc034c020 t hello_exit	[ch22main]
+ffffffffc034d038 r __param_howmany	[ch22main]
+ffffffffc034d028 r __param_str_howmany	[ch22main]
+ffffffffc034d060 r __param_whom	[ch22main]
+ffffffffc034d030 r __param_str_whom	[ch22main]
+ffffffffc034e040 d __this_module	[ch22main]
+ffffffffc034c020 t cleanup_module	[ch22main]
+ffffffffc034c000 t init_module	[ch22main]
 .. symbols deps:
 kernel/drivers/ldd/ch22main.ko: kernel/drivers/ldd/ch22sub.ko
 .. unload(main+sub):
-Mar 22 18:13:09 mike-VirtualBox kernel: [443821.648742] Goodbye, cruel Michael
-Mar 22 18:13:09 mike-VirtualBox kernel: [443821.650252] Unloading hello2 greeter module.
+Apr  3 14:24:57 mike-VirtualBox kernel: [20361.923637] Goodbye, cruel Michael
+Apr  3 14:24:57 mike-VirtualBox kernel: [20361.925526] Unloading hello2 greeter module.
