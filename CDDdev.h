@@ -14,6 +14,10 @@
 #define CDDLASTMINOR  	( CDDMINOR + CDDNUMDEVS )
 #define CDDNAMELEN  (32)
 
+#define CDDCMD_DEVSIZE (0)
+#define CDDCMD_DEVUSED (1)
+#define CDDCMD_DEVOPENS (2)
+
 struct CDDdev_struct {
         dev_t		        devno; // device number (major, minor)
         unsigned int    alloc_len; // total size of buffer
@@ -31,6 +35,7 @@ struct CDDdev_struct {
 extern struct CDDdev_struct* get_CDDdev(int minor_number);
 extern int get_devname_number(int minor_number);
 extern const char* get_devname(int minor_number);
+extern const char* get_CDD_usage(int type, struct CDDdev_struct *thisCDD);
 
 #endif
  /*

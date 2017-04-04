@@ -155,3 +155,25 @@ loff_t CDD_llseek (struct file *file, loff_t newpos, int whence)
 	file->f_pos = pos;
 	return pos;
 }
+
+const char* get_CDD_usage(int type, struct CDDdev_struct *thisCDD) {
+  static char retbuf[128];
+  const char* fmt = "";
+  int value = 0;
+  switch(type) {
+    case CDDCMD_DEVSIZE:
+      fmt = "Buffer Length - Allocated: %d";
+      value = thisCDD->alloc_len;
+      break;
+    case CDDCMD_DEVUSED:
+      fmt = "Buffer Length - Used: %d";
+      value = thisCDD->counter;
+      break;
+    case CDDCMD_DEVOPENS:
+      fmt = "# Opens: %d";
+      value = thisCDD->active_opens;
+      break;
+  }
+  sprintf(retbuf, fmt, value);
+  return retbuf;
+}

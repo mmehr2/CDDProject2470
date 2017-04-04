@@ -125,23 +125,28 @@ static ssize_t readproc_CDD2(struct file *file, char *buf,
 
   if (*eof!=0) { *eof=0; retval= 0; goto Done; }
   else {
+    static char result1[64], result2[64], result3[64];
+
+    strcpy(result1, get_CDD_usage(CDDCMD_DEVSIZE, thisCDD));
+    strcpy(result2, get_CDD_usage(CDDCMD_DEVUSED, thisCDD));
+    strcpy(result3, get_CDD_usage(CDDCMD_DEVOPENS, thisCDD));
 
     snprintf(buf,len,
        "Mode: %s\n"
        "%s(%d) Group Number: %d\n"
        "Team Members: %s, %s\n"
-       "Buffer Length - Allocated: %u\n"
-       "Buffer Length - Used: %u\n"
-       "# Opens: %d\n"
+       "%s\n"
+       "%s\n"
+       "%s\n"
       , ((usrsp->CDD_procflag!=0)? "Written": "Readable")
       , devfname
       , minor
       , 42
       , "Mike Mehr"
       , usrsp->CDD_procvalue
-      , thisCDD->alloc_len
-      , thisCDD->counter
-      , thisCDD->active_opens
+      , result1
+      , result2
+      , result3
     );
     usrsp->CDD_procflag=0;
 	}
