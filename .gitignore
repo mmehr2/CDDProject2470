@@ -1,2 +1,14 @@
 .tags*
 *.cmd
+Backups/
+Cache/
+CachedData/
+Cookies
+Cookies-journal
+Local Storage/
+storage.json
+User/
+*.sock
+Cookies
+Cookies-journal
+
