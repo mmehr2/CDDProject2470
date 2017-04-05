@@ -11,4 +11,5 @@ User/
 *.sock
 Cookies
 Cookies-journal
+.vscode/
 
