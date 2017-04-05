@@ -6,9 +6,11 @@
 //#include <asm/semaphore.h>
 #include <linux/spinlock.h>
 #include <linux/rwsem.h>
+#include <linux/ioctl.h>
 
 // multiple minor numbers scheme - start and count
 // NOTE: currently allows from 1-5 minor numbers (edit CDDNUMDEVS)
+#define CDDMAJOR  	(34)  // this must be specified for ioctl commands
 #define CDDMINOR  	(0)
 #define CDDNUMDEVS  	(5)
 #define CDDLASTMINOR  	( CDDMINOR + CDDNUMDEVS )
@@ -17,6 +19,12 @@
 #define CDDCMD_DEVSIZE (0)
 #define CDDCMD_DEVUSED (1)
 #define CDDCMD_DEVOPENS (2)
+
+// Ioctl commands
+// NOTE: Since the user provides the result buffer, we us _IOR
+#define CDDIO_DEVSIZE  _IOR(CDDMAJOR, CDDCMD_DEVSIZE, char*)
+#define CDDIO_DEVUSED  _IOR(CDDMAJOR, CDDCMD_DEVUSED, char*)
+#define CDDIO_DEVOPENS  _IOR(CDDMAJOR, CDDCMD_DEVOPENS, char*)
 
 struct CDDdev_struct {
         dev_t		        devno; // device number (major, minor)
