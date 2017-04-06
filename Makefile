@@ -328,3 +328,9 @@ test6: CDD2 testApp_ch6
 	@echo ""  >> $(CH06_OUTFILE)
 	@echo "# Ch.6.1 Test 2 - output of kernel message log"  >> $(CH06_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
+	@echo ""  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.2 Test - ioctl"  >> $(CH06_OUTFILE)
+	echo $(KERN-MARKER) > /proc/CDD/marker
+	./testApp_ch6 2  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.2 Test - output of kernel message log"  >> $(CH06_OUTFILE)
+	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
