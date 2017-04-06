@@ -15,6 +15,7 @@
 #define MYNUM 0x88888888
 #define MYSTR "Eureka!"
 #define MYSTR2 "Hello World 13049872138472130984721398749832174."
+#include "CDDioctl.h"
 
 int seek_file(int fd, const char* tag, int offs, int whence) {
 	int len;
@@ -63,6 +64,31 @@ int test_readback(int fd, const char* str, const char* tag, int offset, int when
 	return 0;
 }
 
+int test_ioctl(int fd, int cmd, const char* tag)
+{
+	int ret_val;
+	char message[100];
+
+/* 
+ * Warning - this is dangerous because we don't tell
+ * the kernel how far it's allowed to write, so it
+ * might overflow the buffer. In a real production
+ * program, we would have used two ioctls - one to tell
+ * the kernel the buffer length and another to give
+ * it the buffer to fill
+ */
+	ret_val = ioctl(fd, cmd, message);
+
+	fprintf(stdout, "%s. ioctl(%d:%d) ..", tag, _IOC_TYPE(cmd), _IOC_NR(cmd));
+	if (ret_val < 0) {
+		printf("ERR: %d(%s)\n", ret_val, strerror(errno));
+		return(1);
+	}
+
+	printf("OK. reply: %s\n", message);
+	return 0;
+}
+
 static char* devnames[] = {
 	"CDD2", "CDD16", "CDD64", "CDD128", "CDD256",
 };
@@ -102,6 +128,7 @@ int main(int argc, char**argv) {
 			"where testnum is as follows:\n"
 			"\t0\tRun readback test (write, seek, read, compare) on all CDD drivers.\n"
 			"\t1\tRun advanced seek test on all CDD drivers.\n"
+			"\t2\tRun ioctl test on all CDD drivers.\n"
 			"\tElse\tRun open/close test on all CDD drivers.\n"
 			, argv[0]);
 		exit(0);
@@ -133,6 +160,11 @@ int main(int argc, char**argv) {
 			test_readback(fd, str, "SEEK-(START+50)-short", 50, SEEK_SET);
 			test_readback(fd, str, "SEEK-(CUR-5)-short", -5, SEEK_CUR);
 			test_readback(fd, str, "SEEK-(CUR+5)-short", 5, SEEK_CUR);
+			break;
+		case 2:
+			test_ioctl(fd, CDDIO_DEVSIZE, "IOCTL0");
+			test_ioctl(fd, CDDIO_DEVUSED, "IOCTL1");
+			test_ioctl(fd, CDDIO_DEVOPENS, "IOCTL2");
 			break;
 		default:
 		// just open/close testing

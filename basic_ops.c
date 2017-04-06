@@ -177,3 +177,46 @@ const char* get_CDD_usage(int type, struct CDDdev_struct *thisCDD) {
   sprintf(retbuf, fmt, value);
   return retbuf;
 }
+
+long CDD_ioctl(	/* see include/linux/fs.h */
+		 struct file *file,	/* ditto */
+		 unsigned int ioctl_num,	/* number and param for ioctl */
+		 unsigned long ioctl_param)
+{
+	int i, retval;
+	char *temp = (char *)ioctl_param;
+  const char *str;
+	struct CDDdev_struct *thisCDD=file->private_data;
+
+/* 
+ * Switch according to the ioctl called 
+ */
+	switch (ioctl_num) {
+    case CDDIO_DEVSIZE:
+      i = CDDCMD_DEVSIZE;
+  		break;
+    case CDDIO_DEVUSED:
+      i = CDDCMD_DEVUSED;
+  		break;
+    case CDDIO_DEVOPENS:
+      i = CDDCMD_DEVOPENS;
+  		break;
+    default:
+      return -ENOTTY; // invalid ioctl
+	}
+
+  // acquire read lock
+  down_read(thisCDD->CDD_sem);
+  // get the requested usage string
+  str = get_CDD_usage(i, thisCDD);
+  // return to user
+  retval = copy_to_user(temp,str,strlen(str) + 1); // include the final null char
+  if (retval != 0) {retval= -EFAULT; goto Done;}
+
+	//retval = 0;
+  
+Done:
+// free the lock when done
+  up_read(thisCDD->CDD_sem);
+  return retval;
+}
