@@ -103,7 +103,7 @@ const char* get_devname(const char* prefix, int index) {
 }
 
 int main(int argc, char**argv) {
-	int fd, len, wlen, i=0, test=-1;
+	int fd, len, wlen, i=0, test=-1, openmode = O_RDONLY;
 	char str[128];
 	const char* devname, * tag;
 
@@ -113,13 +113,20 @@ int main(int argc, char**argv) {
 		switch (test) {
 		case 0:
 			tag = "RDBACK";
+			openmode = O_RDWR | O_TRUNC;
 			break;
 		case 1:
 			tag = "SEEK";
+			openmode = O_RDWR | O_TRUNC;
+			break;
+		case 2:
+			tag = "IOCTL";
+			openmode = O_RDONLY;
 			break;
 		default:
 			// just open/close testing
 			tag = "OPEN";
+			openmode = O_RDONLY;
 			break;
 		}
 } else {
@@ -137,7 +144,7 @@ int main(int argc, char**argv) {
 	while (i<NUMDEVS) {
 		devname = get_devname("/dev/", i);
 		fprintf(stdout, "#1-%s. open(%s)..", tag, devname);
-		if((fd = open(devname, O_RDWR | O_TRUNC)) == -1) {
+		if((fd = open(devname, openmode)) == -1) {
 			fprintf(stdout,"ERR:%s\n", strerror(errno));
 		} else { fprintf(stdout, "OK.\n"); }
 
