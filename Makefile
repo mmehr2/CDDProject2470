@@ -71,7 +71,7 @@ unload:
 #	-su -c "rmmod $(CH2_1);"
 
 clean: unload
-	-@rm -fr *.o $(APPS) .tmp_versions .[mM]odule* [mM]o* .*.o.d
+	-@rm -fr *.o $(APPS) .tmp_versions .[mM]odule* [mM]o* .*.o.d .*.cmd
 	-@rm -fr $(DRIVER)*.o $(DRIVER)*.ko .$(DRIVER)*.* $(DRIVER)*.*.*
 	-@rm -fr $(CH2_1)*.o $(CH2_1)*.ko .$(CH2_1)*.* $(CH2_1)*.*.*
 	-@rm -fr $(CH2_2)*.o $(CH2_2)*.ko .$(CH2_2)*.* $(CH2_2)*.*.*
