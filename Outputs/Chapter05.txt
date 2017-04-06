@@ -3,1271 +3,1280 @@ HOMEWORK TEST OUTPUT FOR CHAPTER 05
 # UTIL - mark kernel log for later retrieval...
 
 # Ch.5.2 Test /proc/myps on pid provided by writing to /proc/myps
-Task systemd-journal (pid 220), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task systemd-udevd (pid 232), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task ModemManager (pid 585), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task acpid (pid 600), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task avahi-daemon (pid 601), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task systemd-logind (pid 604), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task snapd (pid 605), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 6 open files.
-Task cron (pid 607), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task whoopsie (pid 608), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task dbus-daemon (pid 609), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task cups-browsed (pid 666), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task NetworkManager (pid 667), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task accounts-daemon (pid 668), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task rsyslogd (pid 669), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
-Task polkitd (pid 747), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task lightdm (pid 778), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task agetty (pid 815), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task VBoxService (pid 838), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 8 open files.
-Task rtkit-daemon (pid 1128), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=121(RT=0). 3 open files.
-Task upowerd (pid 1145), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task colord (pid 1157), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
-Task systemd (pid 1187), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task gnome-keyring-d (pid 1221), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
-Task VBoxClient (pid 1237), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task VBoxClient (pid 1247), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task VBoxClient (pid 1252), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task VBoxClient (pid 1260), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Task udisksd (pid 1818), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 5 open files.
-Task fwupd (pid 1862), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 7 open files.
+Task systemd-journal (pid 217), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task systemd-udevd (pid 240), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task avahi-daemon (pid 539), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task dbus-daemon (pid 542), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task rsyslogd (pid 600), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
+Task cron (pid 601), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task systemd-logind (pid 602), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task NetworkManager (pid 603), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task ModemManager (pid 608), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task accounts-daemon (pid 611), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task whoopsie (pid 617), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task cups-browsed (pid 618), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task acpid (pid 622), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task snapd (pid 638), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 6 open files.
+Task polkitd (pid 737), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task lightdm (pid 766), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task agetty (pid 806), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task systemd (pid 1315), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task dbus-daemon (pid 1335), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task dbus-launch (pid 1334), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Task gvfsd (pid 1345), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task gvfsd-fuse (pid 1350), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 6 open files.
+Task at-spi-bus-laun (pid 1341), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
+Task at-spi2-registr (pid 1356), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task notify-osd (pid 1339), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
+Task gnome-screensav (pid 1370), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 4 open files.
+Task upowerd (pid 1740), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task colord (pid 1866), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 3 open files.
+Task rtkit-daemon (pid 1942), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=121(RT=0). 3 open files.
+Task udisksd (pid 2093), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 5 open files.
+Task fwupd (pid 2196), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 7 open files.
+Task VBoxService (pid 4311), child of systemd (pid 1). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 8 open files.
 
 # Ch.5.2b,c: run test app with process prio and open file changes
 NOTE: Since fork() copies open files, the redirected output is duplicated each time.
-My TESTPID is 10994 (mine=10994,mypar=10993)
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Parent spawned process(15) pid=11050 successfully, prio set from 0 to 45 with 6 extra files open.
-Closed all 6 test files for pid=10994
-Opened 9/9 test files for id=16(by PID=10994)
-Parent spawned process(16) pid=11051 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
-Closed all 9 test files for pid=10994
-Opened 12/12 test files for id=17(by PID=10994)
-Parent spawned process(17) pid=11052 successfully, prio set from 0 to 51 with 12 extra files open.
-Closed all 12 test files for pid=10994
-Opened 15/15 test files for id=18(by PID=10994)
-Parent spawned process(18) pid=11053 successfully, prio set from 19 to 54 (RR) with 15 extra files open.
-Closed all 15 test files for pid=10994
-Opened 18/18 test files for id=19(by PID=10994)
-Parent spawned process(19) pid=11054 successfully, prio set from 0 to 57 with 18 extra files open.
-Closed all 18 test files for pid=10994
-Opened 1/1 test files for id=20(by PID=10994)
-Parent spawned process(20) pid=11055 successfully, prio set from 19 to 60 (RR) with 1 extra files open.
-Closed all 1 test files for pid=10994
-Opened 4/4 test files for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Parent spawned process(24) pid=11059 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=25(by PID=10994)
-Parent spawned process(25) pid=11060 successfully, prio set from 0 to 75 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=26(by PID=10994)
-Parent spawned process(26) pid=11061 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=27(by PID=10994)
-Parent spawned process(27) pid=11062 successfully, prio set from 0 to 81 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=28(by PID=10994)
-Parent spawned process(28) pid=11063 successfully, prio set from 19 to 84 (RR) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=29(by PID=10994)
-Parent spawned process(29) pid=11064 successfully, prio set from 0 to 87 with 8 extra files open.
-Closed all 8 test files for pid=10994
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Parent spawned process(15) pid=13925 successfully, prio set from 0 to 45 with 6 extra files open.
+Closed all 6 test files for pid=13869
+Opened 9/9 test files for id=16(by PID=13869)
+Parent spawned process(16) pid=13926 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
+Closed all 9 test files for pid=13869
+Opened 12/12 test files for id=17(by PID=13869)
+Parent spawned process(17) pid=13927 successfully, prio set from 0 to 51 with 12 extra files open.
+Closed all 12 test files for pid=13869
+Opened 15/15 test files for id=18(by PID=13869)
+Parent spawned process(18) pid=13928 successfully, prio set from 19 to 54 (RR) with 15 extra files open.
+Closed all 15 test files for pid=13869
+Opened 18/18 test files for id=19(by PID=13869)
+Parent spawned process(19) pid=13929 successfully, prio set from 0 to 57 with 18 extra files open.
+Closed all 18 test files for pid=13869
+Opened 1/1 test files for id=20(by PID=13869)
+Parent spawned process(20) pid=13930 successfully, prio set from 19 to 60 (RR) with 1 extra files open.
+Closed all 1 test files for pid=13869
+Opened 4/4 test files for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Parent spawned process(24) pid=13934 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=25(by PID=13869)
+Parent spawned process(25) pid=13935 successfully, prio set from 0 to 75 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=26(by PID=13869)
+Parent spawned process(26) pid=13936 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=27(by PID=13869)
+Parent spawned process(27) pid=13937 successfully, prio set from 0 to 81 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=28(by PID=13869)
+Parent spawned process(28) pid=13938 successfully, prio set from 19 to 84 (RR) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=29(by PID=13869)
+Parent spawned process(29) pid=13939 successfully, prio set from 0 to 87 with 8 extra files open.
+Closed all 8 test files for pid=13869
 Successfully created 30/30 child threads
 Output from reading /proc/myps:
-Task testApp_ch5 (pid 11035), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=0(RT=99). 1 open files.
-Task testApp_ch5 (pid 11036), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=123(RT=0). 1 open files.
-Task testApp_ch5 (pid 11037), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=93(RT=6). 1 open files.
-Task testApp_ch5 (pid 11038), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=129(RT=0). 1 open files.
-Task testApp_ch5 (pid 11039), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=87(RT=12). 1 open files.
-Task testApp_ch5 (pid 11040), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=135(RT=0). 1 open files.
-Task testApp_ch5 (pid 11041), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=81(RT=18). 1 open files.
-Task testApp_ch5 (pid 11042), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11043), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=75(RT=24). 1 open files.
-Task testApp_ch5 (pid 11044), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11045), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=69(RT=30). 1 open files.
-Task testApp_ch5 (pid 11046), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11047), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=63(RT=36). 1 open files.
-Task testApp_ch5 (pid 11048), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11049), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=57(RT=42). 1 open files.
-Task testApp_ch5 (pid 11050), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11051), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=51(RT=48). 1 open files.
-Task testApp_ch5 (pid 11052), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11053), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRMy TESTPID is 10994 (mine=10994,mypar=10993)
+Task testApp_ch5 (pid 13910), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=0(RT=99). 1 open files.
+Task testApp_ch5 (pid 13911), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=123(RT=0). 1 open files.
+Task testApp_ch5 (pid 13912), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=93(RT=6). 1 open files.
+Task testApp_ch5 (pid 13913), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=129(RT=0). 1 open files.
+Task testApp_ch5 (pid 13914), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=87(RT=12). 1 open files.
+Task testApp_ch5 (pid 13915), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=135(RT=0). 1 open files.
+Task testApp_ch5 (pid 13916), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=81(RT=18). 1 open files.
+Task testApp_ch5 (pid 13917), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13918), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=75(RT=24). 1 open files.
+Task testApp_ch5 (pid 13919), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13920), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=69(RT=30). 1 open files.
+Task testApp_ch5 (pid 13921), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13922), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=63(RT=36). 1 open files.
+Task testApp_ch5 (pid 13923), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13924), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=57(RT=42). 1 open files.
+Task testApp_ch5 (pid 13925), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13926), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=51(RT=48). 1 open files.
+Task testApp_ch5 (pid 13927), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13928), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRMy TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Thread 0 (pid=11035, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Thread 0 (pid=13910, ppid=13869) alive.
 Thread 0 dying.
-Closed all 0 test files for pid=11035
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Closed all 0 test files for pid=13910
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Parent spawned process(15) pid=11050 successfully, prio set from 0 to 45 with 6 extra files open.
-Closed all 6 test files for pid=10994
-Opened 9/9 test files for id=16(by PID=10994)
-Thread 16 (pid=11051, ppid=10994) alive.
-Thread 16 dying.
-Closed all 9 test files for pid=11051
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Thread 14 (pid=11049, ppid=10994) alive.
-Thread 14 dying.
-Closed all 3 test files for pid=11049
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Thread 12 (pid=11047, ppid=10994) alive.
-Thread 12 dying.
-Closed all 17 test files for pid=11047
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Thread 10 (pid=11045, ppid=10994) alive.
-Thread 10 dying.
-Closed all 11 test files for pid=11045
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Thread 8 (pid=11043, ppid=10994) alive.
-Thread 8 dying.
-Closed all 5 test files for pid=11043
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Thread 6 (pid=11041, ppid=10994) alive.
-Thread 6 dying.
-Closed all 19 test files for pid=11041
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Thread 4 (pid=11039, ppid=10994) alive.
-Thread 4 dying.
-Closed all 13 test files for pid=11039
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Thread 2 (pid=11037, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Thread 2 (pid=13912, ppid=13869) alive.
 Thread 2 dying.
-Closed all 7 test files for pid=11037
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Parent spawned process(24) pid=11059 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=25(by PID=10994)
-Parent spawned process(25) pid=11060 successfully, prio set from 0 to 75 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=26(by PID=10994)
-Parent spawned process(26) pid=11061 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=27(by PID=10994)
-Parent spawned process(27) pid=11062 successfully, prio set from 0 to 81 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=28(by PID=10994)
-Thread 28 (pid=11063, ppid=10994) alive.
-Thread 28 dying.
-Closed all 5 test files for pid=11063
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Parent spawned process(24) pid=11059 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=25(by PID=10994)
-Parent spawned process(25) pid=11060 successfully, prio set from 0 to 75 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=26(by PID=10994)
-Thread 26 (pid=11061, ppid=10994) alive.
-Thread 26 dying.
-Closed all 19 test files for pid=11061
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Thread 24 (pid=11059, ppid=10994) alive.
-Thread 24 dying.
-Closed all 13 test files for pid=11059
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Thread 22 (pid=11057, ppid=10994) alive.
-Thread 22 dying.
-Closed all 7 test files for pid=11057
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Closed all 7 test files for pid=13912
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Parent spawned process(15) pid=11050 successfully, prio set from 0 to 45 with 6 extra files open.
-Closed all 6 test files for pid=10994
-Opened 9/9 test files for id=16(by PID=10994)
-Parent spawned process(16) pid=11051 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
-Closed all 9 test files for pid=10994
-Opened 12/12 test files for id=17(by PID=10994)
-Parent spawned process(17) pid=11052 successfully, prio set from 0 to 51 with 12 extra files open.
-Closed all 12 test files for pid=10994
-Opened 15/15 test files for id=18(by PID=10994)
-Parent spawned process(18) pid=11053 successfully, prio set from 19 to 54 (RR) with 15 extra files open.
-Closed all 15 test files for pid=10994
-Opened 18/18 test files for id=19(by PID=10994)
-Parent spawned process(19) pid=11054 successfully, prio set from 0 to 57 with 18 extra files open.
-Closed all 18 test files for pid=10994
-Opened 1/1 test files for id=20(by PID=10994)
-Thread 20 (pid=11055, ppid=10994) alive.
-Thread 20 dying.
-Closed all 1 test files for pid=11055
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Thread 6 (pid=13916, ppid=13869) alive.
+Thread 6 dying.
+Closed all 19 test files for pid=13916
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Parent spawned process(15) pid=11050 successfully, prio set from 0 to 45 with 6 extra files open.
-Closed all 6 test files for pid=10994
-Opened 9/9 test files for id=16(by PID=10994)
-Parent spawned process(16) pid=11051 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
-Closed all 9 test files for pid=10994
-Opened 12/12 test files for id=17(by PID=10994)
-Parent spawned process(17) pid=11052 successfully, prio set from 0 to 51 with 12 extra files open.
-Closed all 12 test files for pid=10994
-Opened 15/15 test files for id=18(by PID=10994)
-Thread 18 (pid=11053, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Thread 4 (pid=13914, ppid=13869) alive.
+Thread 4 dying.
+Closed all 13 test files for pid=13914
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Thread 8 (pid=13918, ppid=13869) alive.
+Thread 8 dying.
+Closed all 5 test files for pid=13918
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Thread 12 (pid=13922, ppid=13869) alive.
+Thread 12 dying.
+Closed all 17 test files for pid=13922
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Thread 10 (pid=13920, ppid=13869) alive.
+Thread 10 dying.
+Closed all 11 test files for pid=13920
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Parent spawned process(15) pid=13925 successfully, prio set from 0 to 45 with 6 extra files open.
+Closed all 6 test files for pid=13869
+Opened 9/9 test files for id=16(by PID=13869)
+Parent spawned process(16) pid=13926 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
+Closed all 9 test files for pid=13869
+Opened 12/12 test files for id=17(by PID=13869)
+Parent spawned process(17) pid=13927 successfully, prio set from 0 to 51 with 12 extra files open.
+Closed all 12 test files for pid=13869
+Opened 15/15 test files for id=18(by PID=13869)
+Thread 18 (pid=13928, ppid=13869) alive.
 Thread 18 dying.
-Closed all 15 test files for pid=11053
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Closed all 15 test files for pid=13928
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Thread 11 (pid=11046, ppid=10994) alive.
-Thread 11 dying.
-Closed all 14 test files for pid=11046
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Parent spawned process(15) pid=13925 successfully, prio set from 0 to 45 with 6 extra files open.
+Closed all 6 test files for pid=13869
+Opened 9/9 test files for id=16(by PID=13869)
+Thread 16 (pid=13926, ppid=13869) alive.
+Thread 16 dying.
+Closed all 9 test files for pid=13926
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Thread 9 (pid=11044, ppid=10994) alive.
-Thread 9 dying.
-Closed all 8 test files for pid=11044
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Thread 14 (pid=13924, ppid=13869) alive.
+Thread 14 dying.
+Closed all 3 test files for pid=13924
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Thread 22 (pid=13932, ppid=13869) alive.
+Thread 22 dying.
+Closed all 7 test files for pid=13932
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Thread 7 (pid=11042, ppid=10994) alive.
-Thread 7 dying.
-Closed all 2 test files for pid=11042
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Parent spawned process(15) pid=13925 successfully, prio set from 0 to 45 with 6 extra files open.
+Closed all 6 test files for pid=13869
+Opened 9/9 test files for id=16(by PID=13869)
+Parent spawned process(16) pid=13926 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
+Closed all 9 test files for pid=13869
+Opened 12/12 test files for id=17(by PID=13869)
+Parent spawned process(17) pid=13927 successfully, prio set from 0 to 51 with 12 extra files open.
+Closed all 12 test files for pid=13869
+Opened 15/15 test files for id=18(by PID=13869)
+Parent spawned process(18) pid=13928 successfully, prio set from 19 to 54 (RR) with 15 extra files open.
+Closed all 15 test files for pid=13869
+Opened 18/18 test files for id=19(by PID=13869)
+Parent spawned process(19) pid=13929 successfully, prio set from 0 to 57 with 18 extra files open.
+Closed all 18 test files for pid=13869
+Opened 1/1 test files for id=20(by PID=13869)
+Thread 20 (pid=13930, ppid=13869) alive.
+Thread 20 dying.
+Closed all 1 test files for pid=13930
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Parent spawned process(24) pid=13934 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=25(by PID=13869)
+Parent spawned process(25) pid=13935 successfully, prio set from 0 to 75 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=26(by PID=13869)
+Parent spawned process(26) pid=13936 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=27(by PID=13869)
+Parent spawned process(27) pid=13937 successfully, prio set from 0 to 81 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=28(by PID=13869)
+Thread 28 (pid=13938, ppid=13869) alive.
+Thread 28 dying.
+Closed all 5 test files for pid=13938
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Parent spawned process(24) pid=13934 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=25(by PID=13869)
+Parent spawned process(25) pid=13935 successfully, prio set from 0 to 75 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=26(by PID=13869)
+Thread 26 (pid=13936, ppid=13869) alive.
+Thread 26 dying.
+Closed all 19 test files for pid=13936
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Thread 24 (pid=13934, ppid=13869) alive.
+Thread 24 dying.
+Closed all 13 test files for pid=13934
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Thread 5 (pid=11040, ppid=10994) alive.
-Thread 5 dying.
-Closed all 16 test files for pid=11040
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Thread 3 (pid=11038, ppid=10994) alive.
-Thread 3 dying.
-Closed all 10 test files for pid=11038
-My TESTPID is 10994 (mine=10994,mypar=10993)
-Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Thread 13 (pid=11048, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Thread 13 (pid=13923, ppid=13869) alive.
 Thread 13 dying.
-Closed all 0 test files for pid=11048
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Closed all 0 test files for pid=13923
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Thread 1 (pid=11036, ppid=10994) alive.
-Thread 1 dying.
-Closed all 4 test files for pid=11036
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Thread 11 (pid=13921, ppid=13869) alive.
+Thread 11 dying.
+Closed all 14 test files for pid=13921
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Thread 15 (pid=11050, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Thread 9 (pid=13919, ppid=13869) alive.
+Thread 9 dying.
+Closed all 8 test files for pid=13919
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Thread 7 (pid=13917, ppid=13869) alive.
+Thread 7 dying.
+Closed all 2 test files for pid=13917
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Thread 5 (pid=13915, ppid=13869) alive.
+Thread 5 dying.
+Closed all 16 test files for pid=13915
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Thread 3 (pid=13913, ppid=13869) alive.
+Thread 3 dying.
+Closed all 10 test files for pid=13913
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Thread 15 (pid=13925, ppid=13869) alive.
 Thread 15 dying.
-Closed all 6 test files for pid=11050
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Closed all 6 test files for pid=13925
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Parent spawned process(15) pid=11050 successfully, prio set from 0 to 45 with 6 extra files open.
-Closed all 6 test files for pid=10994
-Opened 9/9 test files for id=16(by PID=10994)
-Parent spawned process(16) pid=11051 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
-Closed all 9 test files for pid=10994
-Opened 12/12 test files for id=17(by PID=10994)
-Thread 17 (pid=11052, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Parent spawned process(15) pid=13925 successfully, prio set from 0 to 45 with 6 extra files open.
+Closed all 6 test files for pid=13869
+Opened 9/9 test files for id=16(by PID=13869)
+Parent spawned process(16) pid=13926 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
+Closed all 9 test files for pid=13869
+Opened 12/12 test files for id=17(by PID=13869)
+Thread 17 (pid=13927, ppid=13869) alive.
 Thread 17 dying.
-Closed all 12 test files for pid=11052
-My TESTPID is 10994 (mine=10994,mypar=10993)
+Closed all 12 test files for pid=13927
+My TESTPID is 13869 (mine=13869,mypar=13868)
 Spawning 30 child threads
-Opened 1/1 test files for id=10994(by PID=10994)
-Closed all 1 test files for pid=10994
-Opened 0/0 test files for id=0(by PID=10994)
-Parent spawned process(0) pid=11035 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 4/4 test files for id=1(by PID=10994)
-Parent spawned process(1) pid=11036 successfully, prio set from 0 to 3 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=2(by PID=10994)
-Parent spawned process(2) pid=11037 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=3(by PID=10994)
-Parent spawned process(3) pid=11038 successfully, prio set from 0 to 9 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=4(by PID=10994)
-Parent spawned process(4) pid=11039 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=5(by PID=10994)
-Parent spawned process(5) pid=11040 successfully, prio set from 0 to 15 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=6(by PID=10994)
-Parent spawned process(6) pid=11041 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=7(by PID=10994)
-Parent spawned process(7) pid=11042 successfully, prio set from 0 to 21 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=8(by PID=10994)
-Parent spawned process(8) pid=11043 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=9(by PID=10994)
-Parent spawned process(9) pid=11044 successfully, prio set from 0 to 27 with 8 extra files open.
-Closed all 8 test files for pid=10994
-Opened 11/11 test files for id=10(by PID=10994)
-Parent spawned process(10) pid=11045 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
-Closed all 11 test files for pid=10994
-Opened 14/14 test files for id=11(by PID=10994)
-Parent spawned process(11) pid=11046 successfully, prio set from 0 to 33 with 14 extra files open.
-Closed all 14 test files for pid=10994
-Opened 17/17 test files for id=12(by PID=10994)
-Parent spawned process(12) pid=11047 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
-Closed all 17 test files for pid=10994
-Opened 0/0 test files for id=13(by PID=10994)
-Parent spawned process(13) pid=11048 successfully, prio set from 0 to 39 with 0 extra files open.
-Closed all 0 test files for pid=10994
-Opened 3/3 test files for id=14(by PID=10994)
-Parent spawned process(14) pid=11049 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
-Closed all 3 test files for pid=10994
-Opened 6/6 test files for id=15(by PID=10994)
-Parent spawned process(15) pid=11050 successfully, prio set from 0 to 45 with 6 extra files open.
-Closed all 6 test files for pid=10994
-Opened 9/9 test files for id=16(by PID=10994)
-Parent spawned process(16) pid=11051 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
-Closed all 9 test files for pid=10994
-Opened 12/12 test files for id=17(by PID=10994)
-Parent spawned process(17) pid=11052 successfully, prio set from 0 to 51 with 12 extra files open.
-Closed all 12 test files for pid=10994
-Opened 15/15 test files for id=18(by PID=10994)
-Parent spawned process(18) pid=11053 successfully, prio set from 19 to 54 (RR) with 15 extra files open.
-Closed all 15 test files for pid=10994
-Opened 18/18 test files for id=19(by PID=10994)
-Thread 19 (pid=11054, ppid=10994) alive.
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Parent spawned process(1) pid=13911 successfully, prio set from 0 to 3 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=2(by PID=13869)
+Parent spawned process(2) pid=13912 successfully, prio set from 3 to 6 (FIFO) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=3(by PID=13869)
+Parent spawned process(3) pid=13913 successfully, prio set from 0 to 9 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=4(by PID=13869)
+Parent spawned process(4) pid=13914 successfully, prio set from 9 to 12 (FIFO) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=5(by PID=13869)
+Parent spawned process(5) pid=13915 successfully, prio set from 0 to 15 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=6(by PID=13869)
+Parent spawned process(6) pid=13916 successfully, prio set from 15 to 18 (FIFO) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=7(by PID=13869)
+Parent spawned process(7) pid=13917 successfully, prio set from 0 to 21 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=8(by PID=13869)
+Parent spawned process(8) pid=13918 successfully, prio set from 19 to 24 (FIFO) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=9(by PID=13869)
+Parent spawned process(9) pid=13919 successfully, prio set from 0 to 27 with 8 extra files open.
+Closed all 8 test files for pid=13869
+Opened 11/11 test files for id=10(by PID=13869)
+Parent spawned process(10) pid=13920 successfully, prio set from 19 to 30 (FIFO) with 11 extra files open.
+Closed all 11 test files for pid=13869
+Opened 14/14 test files for id=11(by PID=13869)
+Parent spawned process(11) pid=13921 successfully, prio set from 0 to 33 with 14 extra files open.
+Closed all 14 test files for pid=13869
+Opened 17/17 test files for id=12(by PID=13869)
+Parent spawned process(12) pid=13922 successfully, prio set from 19 to 36 (FIFO) with 17 extra files open.
+Closed all 17 test files for pid=13869
+Opened 0/0 test files for id=13(by PID=13869)
+Parent spawned process(13) pid=13923 successfully, prio set from 0 to 39 with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 3/3 test files for id=14(by PID=13869)
+Parent spawned process(14) pid=13924 successfully, prio set from 19 to 42 (RR) with 3 extra files open.
+Closed all 3 test files for pid=13869
+Opened 6/6 test files for id=15(by PID=13869)
+Parent spawned process(15) pid=13925 successfully, prio set from 0 to 45 with 6 extra files open.
+Closed all 6 test files for pid=13869
+Opened 9/9 test files for id=16(by PID=13869)
+Parent spawned process(16) pid=13926 successfully, prio set from 19 to 48 (RR) with 9 extra files open.
+Closed all 9 test files for pid=13869
+Opened 12/12 test files for id=17(by PID=13869)
+Parent spawned process(17) pid=13927 successfully, prio set from 0 to 51 with 12 extra files open.
+Closed all 12 test files for pid=13869
+Opened 15/15 test files for id=18(by PID=13869)
+Parent spawned process(18) pid=13928 successfully, prio set from 19 to 54 (RR) with 15 extra files open.
+Closed all 15 test files for pid=13869
+Opened 18/18 test files for id=19(by PID=13869)
+Thread 19 (pid=13929, ppid=13869) alive.
 Thread 19 dying.
-Closed all 18 test files for pid=11054
-for id=21(by PID=10994)
-Thread 21 (pid=11056, ppid=10994) alive.
+Closed all 18 test files for pid=13929
+My TESTPID is 13869 (mine=13869,mypar=13868)
+Spawning 30 child threads
+Opened 1/1 test files for id=13869(by PID=13869)
+Closed all 1 test files for pid=13869
+Opened 0/0 test files for id=0(by PID=13869)
+Parent spawned process(0) pid=13910 successfully, prio set from 0 to 99 (FIFO) with 0 extra files open.
+Closed all 0 test files for pid=13869
+Opened 4/4 test files for id=1(by PID=13869)
+Thread 1 (pid=13911, ppid=13869) alive.
+Thread 1 dying.
+Closed all 4 test files for pid=13911
+for id=21(by PID=13869)
+Thread 21 (pid=13931, ppid=13869) alive.
 Thread 21 dying.
-Closed all 4 test files for pid=11056
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Thread 23 (pid=11058, ppid=10994) alive.
+Closed all 4 test files for pid=13931
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Thread 23 (pid=13933, ppid=13869) alive.
 Thread 23 dying.
-Closed all 10 test files for pid=11058
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Parent spawned process(24) pid=11059 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=25(by PID=10994)
-Thread 25 (pid=11060, ppid=10994) alive.
-Thread 25 dying.
-Closed all 16 test files for pid=11060
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Parent spawned process(24) pid=11059 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=25(by PID=10994)
-Parent spawned process(25) pid=11060 successfully, prio set from 0 to 75 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=26(by PID=10994)
-Parent spawned process(26) pid=11061 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=27(by PID=10994)
-Thread 27 (pid=11062, ppid=10994) alive.
-Thread 27 dying.
-Closed all 2 test files for pid=11062
-for id=21(by PID=10994)
-Parent spawned process(21) pid=11056 successfully, prio set from 0 to 63 with 4 extra files open.
-Closed all 4 test files for pid=10994
-Opened 7/7 test files for id=22(by PID=10994)
-Parent spawned process(22) pid=11057 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
-Closed all 7 test files for pid=10994
-Opened 10/10 test files for id=23(by PID=10994)
-Parent spawned process(23) pid=11058 successfully, prio set from 0 to 69 with 10 extra files open.
-Closed all 10 test files for pid=10994
-Opened 13/13 test files for id=24(by PID=10994)
-Parent spawned process(24) pid=11059 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
-Closed all 13 test files for pid=10994
-Opened 16/16 test files for id=25(by PID=10994)
-Parent spawned process(25) pid=11060 successfully, prio set from 0 to 75 with 16 extra files open.
-Closed all 16 test files for pid=10994
-Opened 19/19 test files for id=26(by PID=10994)
-Parent spawned process(26) pid=11061 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
-Closed all 19 test files for pid=10994
-Opened 2/2 test files for id=27(by PID=10994)
-Parent spawned process(27) pid=11062 successfully, prio set from 0 to 81 with 2 extra files open.
-Closed all 2 test files for pid=10994
-Opened 5/5 test files for id=28(by PID=10994)
-Parent spawned process(28) pid=11063 successfully, prio set from 19 to 84 (RR) with 5 extra files open.
-Closed all 5 test files for pid=10994
-Opened 8/8 test files for id=29(by PID=10994)
-Thread 29 (pid=11064, ppid=10994) alive.
+Closed all 10 test files for pid=13933
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Parent spawned process(24) pid=13934 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=25(by PID=13869)
+Parent spawned process(25) pid=13935 successfully, prio set from 0 to 75 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=26(by PID=13869)
+Parent spawned process(26) pid=13936 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=27(by PID=13869)
+Parent spawned process(27) pid=13937 successfully, prio set from 0 to 81 with 2 extra files open.
+Closed all 2 test files for pid=13869
+Opened 5/5 test files for id=28(by PID=13869)
+Parent spawned process(28) pid=13938 successfully, prio set from 19 to 84 (RR) with 5 extra files open.
+Closed all 5 test files for pid=13869
+Opened 8/8 test files for id=29(by PID=13869)
+Thread 29 (pid=13939, ppid=13869) alive.
 Thread 29 dying.
-Closed all 8 test files for pid=11064
+Closed all 8 test files for pid=13939
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Parent spawned process(24) pid=13934 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=25(by PID=13869)
+Parent spawned process(25) pid=13935 successfully, prio set from 0 to 75 with 16 extra files open.
+Closed all 16 test files for pid=13869
+Opened 19/19 test files for id=26(by PID=13869)
+Parent spawned process(26) pid=13936 successfully, prio set from 19 to 78 (RR) with 19 extra files open.
+Closed all 19 test files for pid=13869
+Opened 2/2 test files for id=27(by PID=13869)
+Thread 27 (pid=13937, ppid=13869) alive.
+Thread 27 dying.
+Closed all 2 test files for pid=13937
+for id=21(by PID=13869)
+Parent spawned process(21) pid=13931 successfully, prio set from 0 to 63 with 4 extra files open.
+Closed all 4 test files for pid=13869
+Opened 7/7 test files for id=22(by PID=13869)
+Parent spawned process(22) pid=13932 successfully, prio set from 19 to 66 (RR) with 7 extra files open.
+Closed all 7 test files for pid=13869
+Opened 10/10 test files for id=23(by PID=13869)
+Parent spawned process(23) pid=13933 successfully, prio set from 0 to 69 with 10 extra files open.
+Closed all 10 test files for pid=13869
+Opened 13/13 test files for id=24(by PID=13869)
+Parent spawned process(24) pid=13934 successfully, prio set from 19 to 72 (RR) with 13 extra files open.
+Closed all 13 test files for pid=13869
+Opened 16/16 test files for id=25(by PID=13869)
+Thread 25 (pid=13935, ppid=13869) alive.
+Thread 25 dying.
+Closed all 16 test files for pid=13935
 UPTIBLE), priority=45(RT=54). 1 open files.
-Task testApp_ch5 (pid 11054), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11055), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=39(RT=60). 1 open files.
-Task testApp_ch5 (pid 11056), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11057), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=33(RT=66). 1 open files.
-Task testApp_ch5 (pid 11058), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11059), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=27(RT=72). 1 open files.
-Task testApp_ch5 (pid 11060), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11061), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=21(RT=78). 1 open files.
-Task testApp_ch5 (pid 11062), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task testApp_ch5 (pid 11063), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=15(RT=84). 1 open files.
-Task testApp_ch5 (pid 11064), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
-Task sh (pid 11067), child of testApp_ch5 (pid 10994). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
-Shut down thread pid=11035
-Shut down thread pid=11037
-Shut down thread pid=11039
-Shut down thread pid=11041
-Shut down thread pid=11043
-Shut down thread pid=11045
-Shut down thread pid=11047
-Shut down thread pid=11049
-Shut down thread pid=11051
-Shut down thread pid=11036
-Shut down thread pid=11038
-Shut down thread pid=11040
-Shut down thread pid=11042
-Shut down thread pid=11044
-Shut down thread pid=11046
-Shut down thread pid=11048
-Shut down thread pid=11050
-Shut down thread pid=11052
-Shut down thread pid=11053
-Shut down thread pid=11054
-Shut down thread pid=11055
-Shut down thread pid=11056
-Shut down thread pid=11057
-Shut down thread pid=11058
-Shut down thread pid=11059
-Shut down thread pid=11060
-Shut down thread pid=11061
-Shut down thread pid=11062
-Shut down thread pid=11063
-Shut down thread pid=11064
+Task testApp_ch5 (pid 13929), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13930), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=39(RT=60). 1 open files.
+Task testApp_ch5 (pid 13931), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13932), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=33(RT=66). 1 open files.
+Task testApp_ch5 (pid 13933), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13934), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=27(RT=72). 1 open files.
+Task testApp_ch5 (pid 13935), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13936), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=21(RT=78). 1 open files.
+Task testApp_ch5 (pid 13937), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task testApp_ch5 (pid 13938), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=15(RT=84). 1 open files.
+Task testApp_ch5 (pid 13939), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=139(RT=0). 1 open files.
+Task sh (pid 13942), child of testApp_ch5 (pid 13869). State=1(TASK_INTERRUPTIBLE), priority=120(RT=0). 1 open files.
+Shut down thread pid=13910
+Shut down thread pid=13912
+Shut down thread pid=13914
+Shut down thread pid=13916
+Shut down thread pid=13918
+Shut down thread pid=13920
+Shut down thread pid=13922
+Shut down thread pid=13924
+Shut down thread pid=13926
+Shut down thread pid=13928
+Shut down thread pid=13930
+Shut down thread pid=13932
+Shut down thread pid=13934
+Shut down thread pid=13936
+Shut down thread pid=13938
+Shut down thread pid=13915
+Shut down thread pid=13917
+Shut down thread pid=13919
+Shut down thread pid=13921
+Shut down thread pid=13923
+Shut down thread pid=13911
+Shut down thread pid=13913
+Shut down thread pid=13925
+Shut down thread pid=13927
+Shut down thread pid=13929
+Shut down thread pid=13931
+Shut down thread pid=13933
+Shut down thread pid=13939
+Shut down thread pid=13937
+Shut down thread pid=13935
 
 # Grab the recent output of kernel message log too
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.168238] UNIQUE-KERNEL-MARKER
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.172563] Myps WRITE: test PID set to 1
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.172563] (1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.172567] Myps WRITE: found task named systemd(pid=1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181038] Myps SEQ: first START call in task systemd (pid 1) with 29 children.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181041] Myps SEQ: child shown: task systemd-journal (pid 220).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181044] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181045] Myps SEQ: child shown: task systemd-udevd (pid 232).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181047] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181048] Myps SEQ: child shown: task ModemManager (pid 585).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181049] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181050] Myps SEQ: child shown: task acpid (pid 600).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181052] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181053] Myps SEQ: child shown: task avahi-daemon (pid 601).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181055] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181056] Myps SEQ: child shown: task systemd-logind (pid 604).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181057] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181058] Myps SEQ: child shown: task snapd (pid 605).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181060] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181061] Myps SEQ: child shown: task cron (pid 607).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181063] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181064] Myps SEQ: child shown: task whoopsie (pid 608).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181065] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181066] Myps SEQ: child shown: task dbus-daemon (pid 609).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181068] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181069] Myps SEQ: child shown: task cups-browsed (pid 666).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181071] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181072] Myps SEQ: child shown: task NetworkManager (pid 667).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181073] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181074] Myps SEQ: child shown: task accounts-daemon (pid 668).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181076] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181077] Myps SEQ: child shown: task rsyslogd (pid 669).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181079] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181080] Myps SEQ: child shown: task polkitd (pid 747).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181081] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181082] Myps SEQ: child shown: task lightdm (pid 778).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181084] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181085] Myps SEQ: child shown: task agetty (pid 815).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181086] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181088] Myps SEQ: child shown: task VBoxService (pid 838).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181089] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181091] Myps SEQ: child shown: task rtkit-daemon (pid 1128).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181092] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181093] Myps SEQ: child shown: task upowerd (pid 1145).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181095] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181096] Myps SEQ: child shown: task colord (pid 1157).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181098] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181099] Myps SEQ: child shown: task systemd (pid 1187).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181100] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181101] Myps SEQ: child shown: task gnome-keyring-d (pid 1221).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181103] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181104] Myps SEQ: child shown: task VBoxClient (pid 1237).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181106] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181107] Myps SEQ: child shown: task VBoxClient (pid 1247).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181108] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181109] Myps SEQ: child shown: task VBoxClient (pid 1252).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181111] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181112] Myps SEQ: child shown: task VBoxClient (pid 1260).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181113] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181207] Myps SEQ: child shown: task udisksd (pid 1818).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181209] Myps SEQ: NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181210] Myps SEQ: child shown: task fwupd (pid 1862).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181212] Myps SEQ: final NEXT call in task systemd (pid 1).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181213] MyPS SEQ: STOP NULL iterator.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181233] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.181234] MyPS SEQ: STOP NULL iterator.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.444740] Myps WRITE: test PID set to 10994
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.444740] (10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.444749] Myps WRITE: found task named testApp_ch5(pid=10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449127] Myps SEQ: first START call in task testApp_ch5 (pid 10994) with 31 children.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449129] Myps SEQ: child shown: task testApp_ch5 (pid 11035).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449132] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449133] Myps SEQ: child shown: task testApp_ch5 (pid 11036).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449134] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449136] Myps SEQ: child shown: task testApp_ch5 (pid 11037).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449137] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449138] Myps SEQ: child shown: task testApp_ch5 (pid 11038).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449140] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449141] Myps SEQ: child shown: task testApp_ch5 (pid 11039).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449143] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449144] Myps SEQ: child shown: task testApp_ch5 (pid 11040).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449145] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449146] Myps SEQ: child shown: task testApp_ch5 (pid 11041).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449148] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449149] Myps SEQ: child shown: task testApp_ch5 (pid 11042).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449151] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449152] Myps SEQ: child shown: task testApp_ch5 (pid 11043).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449153] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449154] Myps SEQ: child shown: task testApp_ch5 (pid 11044).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449156] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449157] Myps SEQ: child shown: task testApp_ch5 (pid 11045).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449161] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449163] Myps SEQ: child shown: task testApp_ch5 (pid 11046).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449164] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449165] Myps SEQ: child shown: task testApp_ch5 (pid 11047).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449167] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449168] Myps SEQ: child shown: task testApp_ch5 (pid 11048).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449170] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449171] Myps SEQ: child shown: task testApp_ch5 (pid 11049).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449173] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449174] Myps SEQ: child shown: task testApp_ch5 (pid 11050).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449175] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449176] Myps SEQ: child shown: task testApp_ch5 (pid 11051).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449178] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449179] Myps SEQ: child shown: task testApp_ch5 (pid 11052).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449181] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449182] Myps SEQ: child shown: task testApp_ch5 (pid 11053).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449184] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449185] Myps SEQ: child shown: task testApp_ch5 (pid 11054).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449186] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449187] Myps SEQ: child shown: task testApp_ch5 (pid 11055).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449189] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449204] Myps SEQ: child shown: task testApp_ch5 (pid 11056).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449206] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449207] Myps SEQ: child shown: task testApp_ch5 (pid 11057).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449209] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449213] Myps SEQ: child shown: task testApp_ch5 (pid 11058).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449214] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449216] Myps SEQ: child shown: task testApp_ch5 (pid 11059).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449217] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449218] Myps SEQ: child shown: task testApp_ch5 (pid 11060).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449220] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449221] Myps SEQ: child shown: task testApp_ch5 (pid 11061).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449223] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449224] Myps SEQ: child shown: task testApp_ch5 (pid 11062).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449226] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449227] Myps SEQ: child shown: task testApp_ch5 (pid 11063).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449229] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449230] Myps SEQ: child shown: task testApp_ch5 (pid 11064).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449232] Myps SEQ: NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449233] Myps SEQ: child shown: task sh (pid 11067).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449235] Myps SEQ: final NEXT call in task testApp_ch5 (pid 10994).
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.449236] MyPS SEQ: STOP NULL iterator.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.450634] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
-Apr  3 14:25:00 mike-VirtualBox kernel: [20365.450636] MyPS SEQ: STOP NULL iterator.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.643302] UNIQUE-KERNEL-MARKER
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.653308] Myps WRITE: test PID set to 1
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.653308] (1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.653312] Myps WRITE: found task named systemd(pid=1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655524] Myps SEQ: first START call in task systemd (pid 1) with 32 children.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655526] Myps SEQ: child shown: task systemd-journal (pid 217).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655528] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655529] Myps SEQ: child shown: task systemd-udevd (pid 240).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655531] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655532] Myps SEQ: child shown: task avahi-daemon (pid 539).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655534] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655534] Myps SEQ: child shown: task dbus-daemon (pid 542).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655536] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655537] Myps SEQ: child shown: task rsyslogd (pid 600).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655539] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655540] Myps SEQ: child shown: task cron (pid 601).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655541] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655542] Myps SEQ: child shown: task systemd-logind (pid 602).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655544] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655545] Myps SEQ: child shown: task NetworkManager (pid 603).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655546] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655547] Myps SEQ: child shown: task ModemManager (pid 608).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655549] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655550] Myps SEQ: child shown: task accounts-daemon (pid 611).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655552] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655553] Myps SEQ: child shown: task whoopsie (pid 617).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655554] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655555] Myps SEQ: child shown: task cups-browsed (pid 618).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655557] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655558] Myps SEQ: child shown: task acpid (pid 622).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655560] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655560] Myps SEQ: child shown: task snapd (pid 638).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655562] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655563] Myps SEQ: child shown: task polkitd (pid 737).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655565] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655566] Myps SEQ: child shown: task lightdm (pid 766).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655567] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655568] Myps SEQ: child shown: task agetty (pid 806).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655570] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655571] Myps SEQ: child shown: task systemd (pid 1315).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655572] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655573] Myps SEQ: child shown: task dbus-daemon (pid 1335).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655575] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655576] Myps SEQ: child shown: task dbus-launch (pid 1334).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655577] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655578] Myps SEQ: child shown: task gvfsd (pid 1345).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655580] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655581] Myps SEQ: child shown: task gvfsd-fuse (pid 1350).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655583] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655584] Myps SEQ: child shown: task at-spi-bus-laun (pid 1341).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655585] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655586] Myps SEQ: child shown: task at-spi2-registr (pid 1356).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655588] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655589] Myps SEQ: child shown: task notify-osd (pid 1339).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655590] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655591] Myps SEQ: child shown: task gnome-screensav (pid 1370).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655593] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655594] Myps SEQ: child shown: task upowerd (pid 1740).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655595] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655596] Myps SEQ: child shown: task colord (pid 1866).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655598] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655599] Myps SEQ: child shown: task rtkit-daemon (pid 1942).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655601] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655602] Myps SEQ: child shown: task udisksd (pid 2093).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655603] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655604] Myps SEQ: child shown: task fwupd (pid 2196).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655606] Myps SEQ: NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655607] Myps SEQ: child shown: task VBoxService (pid 4311).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655608] Myps SEQ: final NEXT call in task systemd (pid 1).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655609] MyPS SEQ: STOP NULL iterator.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655718] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.655719] MyPS SEQ: STOP NULL iterator.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.744546] Myps WRITE: test PID set to 13869
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.744546] (13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.744550] Myps WRITE: found task named testApp_ch5(pid=13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750916] Myps SEQ: first START call in task testApp_ch5 (pid 13869) with 31 children.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750919] Myps SEQ: child shown: task testApp_ch5 (pid 13910).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750921] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750922] Myps SEQ: child shown: task testApp_ch5 (pid 13911).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750924] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750925] Myps SEQ: child shown: task testApp_ch5 (pid 13912).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750927] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750928] Myps SEQ: child shown: task testApp_ch5 (pid 13913).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750930] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750931] Myps SEQ: child shown: task testApp_ch5 (pid 13914).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750933] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750934] Myps SEQ: child shown: task testApp_ch5 (pid 13915).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750936] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750937] Myps SEQ: child shown: task testApp_ch5 (pid 13916).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750939] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750939] Myps SEQ: child shown: task testApp_ch5 (pid 13917).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750941] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750942] Myps SEQ: child shown: task testApp_ch5 (pid 13918).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750944] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750945] Myps SEQ: child shown: task testApp_ch5 (pid 13919).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750947] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750948] Myps SEQ: child shown: task testApp_ch5 (pid 13920).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750950] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750951] Myps SEQ: child shown: task testApp_ch5 (pid 13921).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750953] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750954] Myps SEQ: child shown: task testApp_ch5 (pid 13922).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750955] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750956] Myps SEQ: child shown: task testApp_ch5 (pid 13923).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750961] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750962] Myps SEQ: child shown: task testApp_ch5 (pid 13924).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750964] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750965] Myps SEQ: child shown: task testApp_ch5 (pid 13925).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750967] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750968] Myps SEQ: child shown: task testApp_ch5 (pid 13926).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750969] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750970] Myps SEQ: child shown: task testApp_ch5 (pid 13927).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750972] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750973] Myps SEQ: child shown: task testApp_ch5 (pid 13928).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750975] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750975] Myps SEQ: child shown: task testApp_ch5 (pid 13929).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750977] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750978] Myps SEQ: child shown: task testApp_ch5 (pid 13930).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750980] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750981] Myps SEQ: child shown: task testApp_ch5 (pid 13931).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750982] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750983] Myps SEQ: child shown: task testApp_ch5 (pid 13932).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750985] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750986] Myps SEQ: child shown: task testApp_ch5 (pid 13933).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750987] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750988] Myps SEQ: child shown: task testApp_ch5 (pid 13934).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750990] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750991] Myps SEQ: child shown: task testApp_ch5 (pid 13935).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750992] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750993] Myps SEQ: child shown: task testApp_ch5 (pid 13936).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750995] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750995] Myps SEQ: child shown: task testApp_ch5 (pid 13937).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750997] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.750998] Myps SEQ: child shown: task testApp_ch5 (pid 13938).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751000] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751000] Myps SEQ: child shown: task testApp_ch5 (pid 13939).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751002] Myps SEQ: NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751003] Myps SEQ: child shown: task sh (pid 13942).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751004] Myps SEQ: final NEXT call in task testApp_ch5 (pid 13869).
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751005] MyPS SEQ: STOP NULL iterator.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751047] Myps SEQ: final(?) START unable to retrieve iterator from filp, nonzero *pos=1.
+Apr  5 23:36:23 mike-VirtualBox kernel: [ 9449.751048] MyPS SEQ: STOP NULL iterator.
