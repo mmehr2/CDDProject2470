@@ -274,7 +274,7 @@ test6: CDD2 testApp_ch6
 	echo $(KERN-MARKER) > /proc/CDD/marker
 	#echo "*** KERNEL MARKER ***" > /proc/CDD/marker
 	@echo ""  >> $(CH06_OUTFILE)
-	@echo "# Ch.6.1 Test 1 - multi-minor read-write"  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1a Test - multi-minor read-write"  >> $(CH06_OUTFILE)
 	./testApp_ch6 0  >> $(CH06_OUTFILE)
 	@echo "Read /dev and /proc/CDD entries"  >> $(CH06_OUTFILE)
 	@echo "cat /dev/CDD2:"  >> $(CH06_OUTFILE)
@@ -298,10 +298,16 @@ test6: CDD2 testApp_ch6
 	@echo ""  >> $(CH06_OUTFILE)
 	cat /proc/CDD/CDD256  >> $(CH06_OUTFILE)
 	@echo ""  >> $(CH06_OUTFILE)
-	@echo "# Ch.6.1 Test 1 - output of kernel message log"  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1a Test - output of kernel message log"  >> $(CH06_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
 	@echo ""  >> $(CH06_OUTFILE)
-	@echo "# Ch.6.1 Test 2 - multi-minor seek"  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1b Test - ioctl"  >> $(CH06_OUTFILE)
+	echo $(KERN-MARKER) > /proc/CDD/marker
+	./testApp_ch6 2  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1b Test - output of kernel message log"  >> $(CH06_OUTFILE)
+	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
+	@echo ""  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1c Test - multi-minor seek"  >> $(CH06_OUTFILE)
 	echo $(KERN-MARKER) > /proc/CDD/marker
 	./testApp_ch6 1  >> $(CH06_OUTFILE)
 	@echo "Read /dev and /proc/CDD entries"  >> $(CH06_OUTFILE)
@@ -326,11 +332,5 @@ test6: CDD2 testApp_ch6
 	@echo ""  >> $(CH06_OUTFILE)
 	cat /proc/CDD/CDD256  >> $(CH06_OUTFILE)
 	@echo ""  >> $(CH06_OUTFILE)
-	@echo "# Ch.6.1 Test 2 - output of kernel message log"  >> $(CH06_OUTFILE)
-	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
-	@echo ""  >> $(CH06_OUTFILE)
-	@echo "# Ch.6.2 Test - ioctl"  >> $(CH06_OUTFILE)
-	echo $(KERN-MARKER) > /proc/CDD/marker
-	./testApp_ch6 2  >> $(CH06_OUTFILE)
-	@echo "# Ch.6.2 Test - output of kernel message log"  >> $(CH06_OUTFILE)
+	@echo "# Ch.6.1c Test - output of kernel message log"  >> $(CH06_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
