@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <sys/poll.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -85,7 +86,66 @@ int test_ioctl(int fd, int cmd, const char* tag)
 		return(1);
 	}
 
-	printf("OK. reply: %s\n", message);
+	fprintf(stdout, "OK. reply: %s\n", message);
+	return 0;
+}
+
+int test_poll(int fd, const char* tag)
+{
+	int len, wlen;
+	char str[128];
+	int num, rnum;
+
+	struct pollfd pollfd[1];
+
+	memset(pollfd, 0, sizeof(struct pollfd));	// zero'd pollfd
+	pollfd->fd=fd;								// init 
+	pollfd->events |= POLLIN | POLLOUT;			// init 
+
+	fprintf(stdout, "%s. poll(POLLIN|POLLOUT) ..", tag);
+	if ((num = poll(pollfd,1,-1)) < 0) {
+		fprintf(stdout,"ERR:on poll():%s\n",strerror(errno));
+		return(1);
+	}
+	else if (num) {		// poll() returned an event
+		
+		memset(str,0,sizeof(str));
+		if (pollfd->revents & POLLOUT) {
+
+			// write (append short)
+			strcpy(str, MYSTR);
+			wlen = strlen(str);
+			fprintf(stdout, "\n.. writing <%s>", str);
+			if ((len = write(fd, str, wlen)) == -1) {
+				fprintf(stdout,"ERR:on write(short):%s\n",strerror(errno));
+				return(1);
+			}
+
+			// write (append long)
+			strcpy(str, MYSTR2);
+			wlen = strlen(str);
+			fprintf(stdout, "\n.. writing <%s>", str);
+			if ((len = write(fd, str, wlen)) == -1) {
+				fprintf(stdout,"ERR:on write(long):%s\n",strerror(errno));
+				return(1);
+			}
+		} else {
+			fprintf(stdout, "polled write not allowed\n");
+		}
+	
+		if(pollfd->revents & POLLIN) {
+
+			// read .. can use "while" loop to "consume" chars 
+			if ((len = read(fd, str, sizeof(str))) == -1) {
+				fprintf(stdout,"ERR:on read():%s\n",strerror(errno));
+				return(1);
+			}
+			fprintf(stdout, "\n.. read back <%s>\n", str);
+
+		} else {
+			fprintf(stdout, "polled read not allowed\n");
+		}
+	}
 	return 0;
 }
 
@@ -123,6 +183,14 @@ int main(int argc, char**argv) {
 			tag = "IOCTL";
 			openmode = O_RDONLY;
 			break;
+		case 3:
+			tag = "BLKOPEN";
+			openmode = O_RDONLY;
+			break;
+		case 4:
+			tag = "POLL";
+			openmode = O_RDWR | O_APPEND | O_TRUNC;
+			break;
 		default:
 			// just open/close testing
 			tag = "OPEN";
@@ -136,6 +204,8 @@ int main(int argc, char**argv) {
 			"\t0\tRun readback test (write, seek, read, compare) on all CDD drivers.\n"
 			"\t1\tRun advanced seek test on all CDD drivers.\n"
 			"\t2\tRun ioctl test on all CDD drivers.\n"
+			"\t3\tRun blocking open test on all CDD drivers.\n"
+			"\t4\tRun poll test on all CDD drivers.\n"
 			"\tElse\tRun open/close test on all CDD drivers.\n"
 			, argv[0]);
 		exit(0);
@@ -172,6 +242,11 @@ int main(int argc, char**argv) {
 			test_ioctl(fd, CDDIO_DEVSIZE, "IOCTL0");
 			test_ioctl(fd, CDDIO_DEVUSED, "IOCTL1");
 			test_ioctl(fd, CDDIO_DEVOPENS, "IOCTL2");
+			break;
+		case 3:
+			break;
+		case 4:
+			test_poll(fd, tag);
 			break;
 		default:
 		// just open/close testing

@@ -4,6 +4,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <asm/uaccess.h> // for copy_*_user
+#include <linux/poll.h>                	// for poll() functions and macros
 
 #include "basic_ops.h"
 #include "CDDdev.h"
@@ -219,4 +220,15 @@ Done:
 // free the lock when done
   up_read(thisCDD->CDD_sem);
   return retval;
+}
+
+
+unsigned int CDD_poll (struct file *file, struct poll_table_struct *polltbl) 
+{
+	unsigned int mask=0;
+
+	mask |= POLLIN | POLLRDNORM;
+	mask |= POLLOUT | POLLWRNORM;
+
+	return mask;
 }
