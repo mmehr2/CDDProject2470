@@ -3,10 +3,11 @@
 
 #include <linux/cdev.h>		// 2.6
 #include <linux/types.h>		// dev_t
-//#include <asm/semaphore.h>
 #include <linux/spinlock.h>
 #include <linux/rwsem.h>
 #include <linux/ioctl.h>
+//#include <linux/mutex.h>
+#include <linux/wait.h>
 
 #include "CDDioctl.h"
 
@@ -28,13 +29,19 @@ struct CDDdev_struct {
         struct rw_semaphore* CDD_sem; // for RW and RO access to this structure
 
         unsigned int    active_opens; // open() counter
-        spinlock_t      CDDspinlock; // guard for open counter
+ 
+        spinlock_t      CDD_spinlock; // guard for blocking open() vars
+		//struct mutex CDD_oblk_mutex; // guard for blocking open() vars
+		wait_queue_head_t CDD_inq; // for blocking open()
+		kuid_t CDD_owner; // blocking open owner process
+		int CDD_oblk_count; // blocking open count
 };
 
 extern struct CDDdev_struct* get_CDDdev(int minor_number);
 extern int get_devname_number(int minor_number);
 extern const char* get_devname(int minor_number);
 extern const char* get_CDD_usage(int type, struct CDDdev_struct *thisCDD);
+extern int release_oblk(struct CDDdev_struct *);
 
 #endif
  /*

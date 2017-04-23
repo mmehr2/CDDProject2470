@@ -24,6 +24,7 @@
 #include <asm/uaccess.h>
 #include <linux/vmalloc.h>
 #include <linux/slab.h> // for kmalloc/kfree
+#include <linux/semaphore.h>
 
 #include "basic_ops.h"
 #include "CDDdev.h"
@@ -126,6 +127,15 @@ static int CDD_init(void)
 		thisCDD->append = 0;
 		thisCDD->active_opens = 0;
 
+		spin_lock_init(&thisCDD->CDD_spinlock);
+
+		// initialize CDD_dev variables, mutex, and wait queue for blocking open
+		//mutex_init(&thisCDD->CDD_oblk_mutex); // should it be a spinlock? text says so
+		init_waitqueue_head(&thisCDD->CDD_inq);
+		thisCDD->CDD_owner = INVALID_UID;
+		thisCDD->CDD_oblk_count = 0;
+		//acquire_oblk_mutex(thisCDD);
+
 		// use read/write semaphore to separate read and write access to this
 		thisCDD->CDD_sem=(struct rw_semaphore *)
 	     kmalloc(sizeof(struct rw_semaphore),GFP_KERNEL);
@@ -137,9 +147,6 @@ static int CDD_init(void)
 		thisCDD->CDD_storage=vmalloc(storage_length);
 		if (thisCDD->CDD_storage == NULL) { err = -ENOMEM; goto Minor_dev_error; }
 		thisCDD->alloc_len=storage_length;
-
-		// initialize CDD_dev spinlock
-		spin_lock_init(&(thisCDD->CDDspinlock));
 
 		//  Step 2a of 2:  initialize thisCDD->cdev struct
 	 	cdev_init(&thisCDD->cdev, &CDD_fops);
@@ -228,6 +235,8 @@ static void CDD_exit(void)
 		// NOTE: maybe the wait happens here, if the kernel is oK with it
 		// this way, you can't even create new ones while you're waiting
 		// BUT if something is in progress, does the cdev_del() cause a panic?
+
+		release_oblk(thisCDD); // if needed
 
 		// free allocated memory
 		vfree(thisCDD->CDD_storage);

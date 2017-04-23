@@ -9,16 +9,140 @@
 #include "basic_ops.h"
 #include "CDDdev.h"
 
-// functions .. exported to kernel
+// functions .. exported to module, but not kernel
+
+// test for readiness of reading
+//NOTE: caller must hold CDD_sem
+int content_is_unavailable(struct CDDdev_struct *thisCDD, struct file *file) {
+  int empty_init = (thisCDD->counter == 0)? 1: 0; // E flag
+  unsigned int accmode = file->f_flags & O_ACCMODE; // R/W bits
+  int open_writeable = (accmode != O_RDONLY); // W flag
+  int open_truncreq = (file->f_flags & O_TRUNC); // T flag
+
+  //int would_block = 0; // flag to trigger blocking-open mutex acquire (Block flag)
+  int would_sleep =  // flag to trigger sleeping/wait call (wAit flag)
+    (!open_writeable && (empty_init || open_truncreq));
+  return would_sleep;
+}
+
+// unprotected form of above (no requirement to hold the CDD_sem)
+// this will acqiore CDD_sem for reading, returning <0 if unable
+int content_is_unavailable_unprot(struct CDDdev_struct *thisCDD, struct file *file) {
+  int result;
+    // acquire read lock (to read the counter)
+    // NOTE - opposite convention: 0 means success here
+    if (0 != down_read_trylock(thisCDD->CDD_sem))
+      return -ERESTARTSYS;
+    result = content_is_unavailable(thisCDD, file);
+    up_read(thisCDD->CDD_sem); // release read lock
+    return result;
+}
+
+
+// mechanism to restrict usage to one user at a time (for open blocking)
+static int acquire_user(struct CDDdev_struct *thisCDD) {
+  // grab exclusive ownership section
+  spin_lock(&thisCDD->CDD_spinlock);
+  if (thisCDD->CDD_oblk_count && 
+    (!uid_eq(thisCDD->CDD_owner, current_uid())) && // allow known user
+    (!uid_eq(thisCDD->CDD_owner, current_euid())) && // allow who did su
+    !capable(CAP_DAC_OVERRIDE) /// still allow root
+  ) {
+    spin_unlock(&thisCDD->CDD_spinlock);
+    return -EBUSY;
+  }
+
+  if (thisCDD->CDD_oblk_count == 0)
+    thisCDD->CDD_owner = current_uid();
+
+  thisCDD->CDD_oblk_count++;
+  spin_unlock(&thisCDD->CDD_spinlock);
+  return 0;
+}
+
+// release count on current user (called from release method)
+static void release_user(struct CDDdev_struct *thisCDD) {
+  spin_lock(&thisCDD->CDD_spinlock);
+  thisCDD->CDD_oblk_count--;
+  spin_unlock(&thisCDD->CDD_spinlock);
+}
+
+// release the block-on-open-empty mechanism
+//NOTE: caller must hold CDD_sem
+int release_oblk(struct CDDdev_struct *thisCDD) {
+  int blocked = 0;
+  // wake up ALL waiting non-exclusive threads (and one exclusive one)
+  // for final release, it makes sense to do this before exiting, so don't use exclusive;
+  // if we use exclusive waiting, we need a loop to free all of them before exit
+  //   and a separate call to free only the one - pass a flag maybe
+  wake_up_interruptible(&thisCDD->CDD_inq);
+  return blocked;
+}
+
+// put caller to sleep (to be called in open method)
+//NOTE: caller must hold CDD_sem; will be released on error
+static int wait_for_content(struct CDDdev_struct *thisCDD, struct file *file) {
+  int ret;
+  while (content_is_unavailable(thisCDD, file)) {
+    // empty: wait a bit
+    DEFINE_WAIT(wait);
+
+    up_write(thisCDD->CDD_sem); // release write lock
+
+    // support non-blocking opens specifically
+    if (file->f_flags & O_NONBLOCK) {
+      return -EAGAIN;
+    }
+
+    printk(KERN_ALERT "%s: open-for-read blocked, ", current->comm);
+    prepare_to_wait(&thisCDD->CDD_inq, &wait, TASK_INTERRUPTIBLE);
+    ret = content_is_unavailable_unprot(thisCDD, file);
+    if (ret < 0) {
+      printk(KERN_ALERT "returning with error %d\n", ret); //strerror(ret));
+      return ret;
+    }
+    else if (ret > 0) {
+      printk(KERN_ALERT "sleeping.\n");
+      schedule();
+      printk(KERN_ALERT "%s returning from sleep.\n", current->comm);
+    }
+
+    finish_wait(&thisCDD->CDD_inq, &wait);
+    if (signal_pending(current))
+      return -ERESTARTSYS;
+    // acquire write lock again
+    if (0 == down_write_trylock(thisCDD->CDD_sem))
+      return -ERESTARTSYS;
+  }
+  return 0;
+}
+
+// release the mechanism and awaken reader(s)
+//NOTE: caller must hold CDD_sem, call in write or exit methods only
 
 int CDD_open (struct inode *inode, struct file *file)
 {
         struct CDDdev_struct *thisCDD=
                 container_of(inode->i_cdev, struct CDDdev_struct, cdev);
 
-      // acquire write lock on data structure
+      int result;
+
+      // acquire write lock on rest of data structure
       if (0 == down_write_trylock(thisCDD->CDD_sem))
         return -ERESTARTSYS;
+
+      // INSERT SLEEP CODE FROM TEXT
+      result = wait_for_content(thisCDD, file);
+      if (result) {
+        // wait routine releases CDD_sem on error return
+        return result;
+      }
+
+      // insert exclusive-caller code from text (other users get EBUSY)
+      result = acquire_user(thisCDD);
+      if (result) {
+        return result;
+      }
 
       // count the open called
       ++thisCDD->active_opens;
@@ -52,10 +176,10 @@ int CDD_open (struct inode *inode, struct file *file)
 
 int CDD_release (struct inode *inode, struct file *file)
 {
-// 	struct CDDdev_struct *thisCDD=file->private_data;
+ 	struct CDDdev_struct *thisCDD=file->private_data;
 
-	//if( thisCDD->counter <= 0 ) return 0; // -> for compiler warning msg.
-	// MOD_DEC_USE_COUNT;
+  // release count of active user
+  release_user(thisCDD);
 	return 0;
 }
 
@@ -77,8 +201,6 @@ ssize_t CDD_read (struct file *file, char *buf,
     if( count <= 0 ) {retval= 0; goto Done;}
   	printk(KERN_ALERT "CDD_read: count=%d\n", (int)count);
 
-  	// bzero(buf,64);  // a bogus 64byte initialization
-  	//memset(buf,0,64);  // a bogus 64byte initialization
   	retval = copy_to_user(buf,&(thisCDD->CDD_storage[*ppos]),count);
   	if (retval != 0) {retval= -EFAULT; goto Done;}
 
@@ -124,6 +246,10 @@ ssize_t CDD_write (struct file *file, const char *buf,
   // end critical section
 Done:
   up_write(thisCDD->CDD_sem);
+  if (retval >= 0) {
+    // something was written, release anyone blocked on empty open
+    release_oblk(thisCDD);
+  }
   return retval;
 }
 
