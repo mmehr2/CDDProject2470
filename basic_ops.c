@@ -39,33 +39,33 @@ int content_is_unavailable_unprot(struct CDDdev_struct *thisCDD, struct file *fi
 }
 
 
-// mechanism to restrict usage to one user at a time (for open blocking)
-static int acquire_user(struct CDDdev_struct *thisCDD) {
-  // grab exclusive ownership section
-  spin_lock(&thisCDD->CDD_spinlock);
-  if (thisCDD->CDD_oblk_count && 
-    (!uid_eq(thisCDD->CDD_owner, current_uid())) && // allow known user
-    (!uid_eq(thisCDD->CDD_owner, current_euid())) && // allow who did su
-    !capable(CAP_DAC_OVERRIDE) /// still allow root
-  ) {
-    spin_unlock(&thisCDD->CDD_spinlock);
-    return -EBUSY;
-  }
+// // mechanism to restrict usage to one user at a time (for open blocking)
+// static int acquire_user(struct CDDdev_struct *thisCDD) {
+//   // grab exclusive ownership section
+//   spin_lock(&thisCDD->CDD_spinlock);
+//   if (thisCDD->CDD_oblk_count && 
+//     (!uid_eq(thisCDD->CDD_owner, current_uid())) && // allow known user
+//     (!uid_eq(thisCDD->CDD_owner, current_euid())) && // allow who did su
+//     !capable(CAP_DAC_OVERRIDE) /// still allow root
+//   ) {
+//     spin_unlock(&thisCDD->CDD_spinlock);
+//     return -EBUSY;
+//   }
 
-  if (thisCDD->CDD_oblk_count == 0)
-    thisCDD->CDD_owner = current_uid();
+//   if (thisCDD->CDD_oblk_count == 0)
+//     thisCDD->CDD_owner = current_uid();
 
-  thisCDD->CDD_oblk_count++;
-  spin_unlock(&thisCDD->CDD_spinlock);
-  return 0;
-}
+//   thisCDD->CDD_oblk_count++;
+//   spin_unlock(&thisCDD->CDD_spinlock);
+//   return 0;
+// }
 
-// release count on current user (called from release method)
-static void release_user(struct CDDdev_struct *thisCDD) {
-  spin_lock(&thisCDD->CDD_spinlock);
-  thisCDD->CDD_oblk_count--;
-  spin_unlock(&thisCDD->CDD_spinlock);
-}
+// // release count on current user (called from release method)
+// static void release_user(struct CDDdev_struct *thisCDD) {
+//   spin_lock(&thisCDD->CDD_spinlock);
+//   thisCDD->CDD_oblk_count--;
+//   spin_unlock(&thisCDD->CDD_spinlock);
+// }
 
 // release the block-on-open-empty mechanism
 //NOTE: caller must hold CDD_sem
@@ -96,7 +96,7 @@ static int wait_for_content(struct CDDdev_struct *thisCDD, struct file *file) {
 
     printk(KERN_ALERT "%s: open-for-read blocked, ", current->comm);
     prepare_to_wait(&thisCDD->CDD_inq, &wait, TASK_INTERRUPTIBLE);
-    ret = content_is_unavailable_unprot(thisCDD, file);
+    ret = content_is_unavailable(thisCDD, file);
     if (ret < 0) {
       printk(KERN_ALERT "returning with error %d\n", ret); //strerror(ret));
       return ret;
@@ -139,10 +139,10 @@ int CDD_open (struct inode *inode, struct file *file)
       }
 
       // insert exclusive-caller code from text (other users get EBUSY)
-      result = acquire_user(thisCDD);
-      if (result) {
-        return result;
-      }
+      // result = acquire_user(thisCDD);
+      // if (result) {
+      //   return result;
+      // }
 
       // count the open called
       ++thisCDD->active_opens;
@@ -176,10 +176,10 @@ int CDD_open (struct inode *inode, struct file *file)
 
 int CDD_release (struct inode *inode, struct file *file)
 {
- 	struct CDDdev_struct *thisCDD=file->private_data;
+ 	//struct CDDdev_struct *thisCDD=file->private_data;
 
   // release count of active user
-  release_user(thisCDD);
+  //release_user(thisCDD);
 	return 0;
 }
 
