@@ -149,6 +149,9 @@ static int CDD_init(void)
 		// thisCDD->CDD_storage=vmalloc(storage_length);
 		// if (thisCDD->CDD_storage == NULL) { err = -ENOMEM; goto Minor_dev_error; }
 		thisCDD->alloc_len = storage_length;
+		thisCDD->alloc_type = ALLOC_VMALLOC;
+		thisCDD->bufcache = kmem_cache_create(get_devname(0), 256, 0, SLAB_HWCACHE_ALIGN, NULL); // no ctor/dtor func
+	 	if (thisCDD->bufcache == NULL) { err = -ENOMEM; goto Minor_dev_error; }
 
 		//  Step 2a of 2:  initialize thisCDD->cdev struct
 	 	cdev_init(&thisCDD->cdev, &CDD_fops);
@@ -184,10 +187,11 @@ Partial_decommission_exit:
 		// otherwise, we had a failed call to add the driver
 		printk(KERN_ALERT "Decommissioned CDD%d(#%d, n=%d)\n", get_devname_number(i), i, thisCDD->devno);
 		// free any allocated memory
-		if (thisCDD->CDD_storage) {
-			vfree(thisCDD->CDD_storage);
-			thisCDD->CDD_storage = NULL;
-		}
+		// NOTE: cannot happen, since this will not be allocated now until open() (ch8.1)
+		// if (thisCDD->CDD_storage) {
+		// 	free_storage(thisCDD);
+		// 	thisCDD->CDD_storage = NULL;
+		// }
 
 		// free the lock last
 		if (thisCDD->CDD_sem) {
@@ -197,6 +201,11 @@ Partial_decommission_exit:
 	}
 	// after looping, if no devices are left, unregister the region of numbers
 	if (!some_devices_ok) {
+		// destroy the slab cache
+		if (thisCDD->bufcache) {
+			kmem_cache_destroy(thisCDD->bufcache);
+			thisCDD->bufcache = NULL;
+		}
 		//  Step 2b of 2:  Release request/reserve of Major Number from Kernel
 	 	unregister_chrdev_region(firstdevno, CDDNUMDEVS);
 
@@ -241,12 +250,18 @@ static void CDD_exit(void)
 		release_oblk(thisCDD); // if needed
 
 		// free allocated memory
-		vfree(thisCDD->CDD_storage);
+		free_storage(thisCDD);
 		thisCDD->CDD_storage = NULL;
 
 		// free the lock last
 		kfree(thisCDD->CDD_sem);
 		thisCDD->CDD_sem = NULL;
+	}
+
+	// destroy the slab cache used by (possibly) all devices last
+	if (thisCDD->bufcache) {
+		kmem_cache_destroy(thisCDD->bufcache);
+		thisCDD->bufcache = NULL;
 	}
 
  	//  Step 2b of 2:  Release request/reserve of Major Number from Kernel

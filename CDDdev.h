@@ -6,7 +6,7 @@
 #include <linux/spinlock.h>
 #include <linux/rwsem.h>
 #include <linux/ioctl.h>
-//#include <linux/mutex.h>
+//#include <linux/slab.h>
 #include <linux/wait.h>
 
 #include "CDDioctl.h"
@@ -18,13 +18,26 @@
 #define CDDLASTMINOR  	( CDDMINOR + CDDNUMDEVS )
 #define CDDNAMELEN  (32)
 
+// implement choice of storage types for buffer
+enum {
+	ALLOC_VMALLOC,
+	ALLOC_KMALLOC,
+	ALLOC_KMALLOC_HIGH,
+	ALLOC_KMALLOC_DMA,
+	ALLOC_KMEMCACHE
+};
+
+struct kmem_cache; // fwd.ref.
+
 struct CDDdev_struct {
         dev_t		        devno; // device number (major, minor)
         unsigned int    alloc_len; // total size of buffer
         unsigned int    counter; // current fill level of buffer (==0: empty, ==alloc_len: full)
         char            *CDD_storage; // buffer ptr
         struct cdev     cdev; // kernel device struct
-        int							append; // append-in-progress flag
+        int				append; // append-in-progress flag
+		int				alloc_type; // type of allocation used for storage
+		struct kmem_cache*	bufcache; // slab cache allocator
 
         struct rw_semaphore* CDD_sem; // for RW and RO access to this structure
 
@@ -38,11 +51,14 @@ struct CDDdev_struct {
 };
 
 extern struct CDDdev_struct* get_CDDdev(int minor_number);
+extern int get_storage_type(int minor_number);
+extern const char* get_storage_type_name(int minor_number);
 extern int get_storage_length(int minor_number);
 extern int get_devname_number(int minor_number);
 extern const char* get_devname(int minor_number);
 extern const char* get_CDD_usage(int type, struct CDDdev_struct *thisCDD);
 extern int release_oblk(struct CDDdev_struct *);
+extern void free_storage(struct CDDdev_struct *);
 
 #endif
  /*

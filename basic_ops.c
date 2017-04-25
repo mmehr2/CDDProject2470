@@ -6,6 +6,7 @@
 #include <asm/uaccess.h> // for copy_*_user
 #include <linux/poll.h>                	// for poll() functions and macros
 #include <linux/vmalloc.h>
+#include <linux/slab.h>
 
 #include "basic_ops.h"
 #include "CDDdev.h"
@@ -118,15 +119,103 @@ static int wait_for_content(struct CDDdev_struct *thisCDD, struct file *file) {
   return 0;
 }
 
-// release the mechanism and awaken reader(s)
-//NOTE: caller must hold CDD_sem, call in write or exit methods only
+// Ch8.2 - choice of storage types for buffer
+int get_storage_type(int minor_number) {
+  return (minor_number - CDDMINOR); // as a storage_type enum
+}
+
+static const char* get_storage_type_name_int(int type) {
+  static const char* names[] = {
+    "vmalloc",
+    "kmalloc",
+    "kmalloc(hi)",
+    "kmalloc(dma)",
+    "kmem_cache_alloc",
+  };
+  return names[type];
+}
+
+const char* get_storage_type_name(int minor) {
+  return get_storage_type_name_int(minor - CDDMINOR);
+}
+
+// Ch8.2 allocation routine - caller must hold CDD_sem
+static void *allocate_storage(struct CDDdev_struct *thisCDD) {
+  void* result = NULL;
+  int minor, storage_type;
+  ssize_t storage_length;
+
+  minor =  MINOR(thisCDD->devno);
+  storage_length = get_storage_length(minor);
+  storage_type = get_storage_type(minor);
+
+  switch (storage_type) {
+  case ALLOC_VMALLOC:
+    result = vmalloc(storage_length);
+    break;
+  case ALLOC_KMALLOC:
+    result = kmalloc(storage_length, GFP_KERNEL);
+    break;
+  case ALLOC_KMALLOC_HIGH:
+    result = kmalloc(storage_length, GFP_KERNEL | __GFP_HIGHMEM);
+    break;
+  case ALLOC_KMALLOC_DMA:
+    result = kmalloc(storage_length, GFP_KERNEL | __GFP_DMA);
+    break;
+  case ALLOC_KMEMCACHE:
+    result = kmem_cache_alloc(thisCDD->bufcache, GFP_KERNEL);
+    break;
+  }
+
+  if (result == NULL) {
+
+    printk(KERN_ALERT "OPEN(%s): Unable to %s(%d) bytes for device buffer.\n", 
+      get_devname(minor), get_storage_type_name_int(storage_type), (int)storage_length); 
+
+  } else {
+
+    thisCDD->CDD_storage = result;
+    thisCDD->alloc_len = storage_length;
+
+    printk(KERN_ALERT "OPEN(%s): %s got %d bytes for device buffer.\n", 
+      get_devname(minor), get_storage_type_name_int(storage_type), (int)storage_length); 
+  }
+
+  return result;
+}
+
+void free_storage(struct CDDdev_struct *thisCDD) {
+  void* ptr = thisCDD->CDD_storage;
+  int storage_length = thisCDD->alloc_len;
+  int minor =  MINOR(thisCDD->devno);
+
+  if (ptr) {
+      switch (thisCDD->alloc_type) {
+        case ALLOC_VMALLOC:
+          vfree(ptr);
+          break;
+        case ALLOC_KMALLOC:
+        case ALLOC_KMALLOC_HIGH:
+        case ALLOC_KMALLOC_DMA:
+          kfree(ptr);
+          break;
+        case ALLOC_KMEMCACHE:
+          kmem_cache_free(thisCDD->bufcache, ptr);
+          break;
+      }
+      thisCDD->CDD_storage = NULL;
+      thisCDD->alloc_len = 0;
+      printk(KERN_ALERT "EXIT(%s): freed %d bytes from %s buffer.\n", 
+        get_devname(minor), (int)storage_length, get_storage_type_name(minor)); 
+  }
+}
 
 int CDD_open (struct inode *inode, struct file *file)
 {
         struct CDDdev_struct *thisCDD=
                 container_of(inode->i_cdev, struct CDDdev_struct, cdev);
 
-      int result = 0, storage_length, minor;
+      int result = 0;
 
       // acquire write lock on rest of data structure
       if (0 == down_write_trylock(thisCDD->CDD_sem))
@@ -134,22 +223,10 @@ int CDD_open (struct inode *inode, struct file *file)
 
       // Ch.8: assure that memory is allocated on first usage
       // BENEFIT: if device never used, memory is never allocated
+      thisCDD->CDD_storage = allocate_storage(thisCDD);
       if (thisCDD->CDD_storage == NULL) {
-
-        minor =  MINOR(thisCDD->devno);
-        storage_length = get_storage_length(minor);
-        thisCDD->CDD_storage = vmalloc(storage_length);
-
-        if (thisCDD->CDD_storage == NULL) {
-          printk(KERN_ALERT "OPEN(%s): Unable to vmalloc(%d) bytes for device buffer.\n", 
-            get_devname(minor), storage_length); 
-          result = -ENOMEM; goto Dev_error; 
-        } else {
-          printk(KERN_ALERT "OPEN(%s): Vmallocated(%d) bytes for device buffer.\n", 
-            get_devname(minor), storage_length); 
-        }
-
-        thisCDD->alloc_len = storage_length;
+        result = -ENOMEM;
+        goto Dev_error;
       }
 
       // INSERT SLEEP CODE FROM TEXT
