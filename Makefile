@@ -38,7 +38,7 @@ apps:  $(APPS) testApp_ch1
 
 compile: $(DRIVER).o $(CH2_1).o $(CH2_2).o $(CH2_2s).o apps
 
-tests: test2 test3 test4 test5 test6 test8
+tests: test8 test2 test3 test4 test5 test6
 
 load: $(DRIVER).o
 	su -c "{ insmod ./$(DRIVER).ko CDDparm=$(CDDparm);} || \
