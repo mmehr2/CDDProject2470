@@ -5,6 +5,7 @@
 #include <linux/kernel.h>
 #include <asm/uaccess.h> // for copy_*_user
 #include <linux/poll.h>                	// for poll() functions and macros
+#include <linux/vmalloc.h>
 
 #include "basic_ops.h"
 #include "CDDdev.h"
@@ -125,11 +126,31 @@ int CDD_open (struct inode *inode, struct file *file)
         struct CDDdev_struct *thisCDD=
                 container_of(inode->i_cdev, struct CDDdev_struct, cdev);
 
-      int result;
+      int result = 0, storage_length, minor;
 
       // acquire write lock on rest of data structure
       if (0 == down_write_trylock(thisCDD->CDD_sem))
         return -ERESTARTSYS;
+
+      // Ch.8: assure that memory is allocated on first usage
+      // BENEFIT: if device never used, memory is never allocated
+      if (thisCDD->CDD_storage == NULL) {
+
+        minor =  MINOR(thisCDD->devno);
+        storage_length = get_storage_length(minor);
+        thisCDD->CDD_storage = vmalloc(storage_length);
+
+        if (thisCDD->CDD_storage == NULL) {
+          printk(KERN_ALERT "OPEN(%s): Unable to vmalloc(%d) bytes for device buffer.\n", 
+            get_devname(minor), storage_length); 
+          result = -ENOMEM; goto Dev_error; 
+        } else {
+          printk(KERN_ALERT "OPEN(%s): Vmallocated(%d) bytes for device buffer.\n", 
+            get_devname(minor), storage_length); 
+        }
+
+        thisCDD->alloc_len = storage_length;
+      }
 
       // INSERT SLEEP CODE FROM TEXT
       result = wait_for_content(thisCDD, file);
@@ -164,14 +185,15 @@ int CDD_open (struct inode *inode, struct file *file)
           thisCDD->append = 1;
     	}
 
-        file->private_data=thisCDD;
+      file->private_data=thisCDD;
 
-        printk(KERN_ALERT "file '%s' opened with devno=%d\n",
-            file->f_path.dentry->d_name.name, thisCDD->devno);
+      printk(KERN_ALERT "file '%s' opened with devno=%d by %s(%d)\n",
+          file->f_path.dentry->d_name.name, thisCDD->devno, current->comm, (int)current->pid);
 
-        up_write(thisCDD->CDD_sem); // release write lock
+Dev_error:
+  up_write(thisCDD->CDD_sem); // release write lock
 
-	return 0;
+	return result;
 }
 
 int CDD_release (struct inode *inode, struct file *file)
@@ -192,14 +214,14 @@ ssize_t CDD_read (struct file *file, char *buf,
   // acquire read lock
     down_read(thisCDD->CDD_sem);
 
-    printk(KERN_DEBUG "CDD_read try: count=%db @ ofs=%d fpos=%d\n", (int)count, (int)*ppos, (int)thisCDD->counter);
+    //printk(KERN_DEBUG "CDD_read try: count=%db @ ofs=%d fpos=%d\n", (int)count, (int)*ppos, (int)thisCDD->counter);
 
     if( *ppos >= thisCDD->counter) {retval= 0; goto Done;}
     else if( *ppos + count >= thisCDD->counter)
       count = thisCDD->counter - *ppos;
 
     if( count <= 0 ) {retval= 0; goto Done;}
-  	printk(KERN_ALERT "CDD_read: count=%d\n", (int)count);
+  	printk(KERN_ALERT "CDD_read: count=%d by %s(%d)\n", (int)count, current->comm, (int)current->pid);
 
   	retval = copy_to_user(buf,&(thisCDD->CDD_storage[*ppos]),count);
   	if (retval != 0) {retval= -EFAULT; goto Done;}
@@ -226,8 +248,8 @@ ssize_t CDD_write (struct file *file, const char *buf,
   pos=(thisCDD->append)?thisCDD->counter:*ppos;
   end = pos + count;
 
-  printk(KERN_DEBUG "CDD_write(App=%d) try: count=%db @ ofs=%d bufpos=%d, tot=%d: [start=%d, end=%d]\n"
-    , thisCDD->append, (int)count, (int)*ppos, (int)thisCDD->counter, thisCDD->alloc_len, pos, end);
+  //printk(KERN_DEBUG "CDD_write(App=%d) try: count=%db @ ofs=%d bufpos=%d, tot=%d: [start=%d, end=%d]\n"
+  //  , thisCDD->append, (int)count, (int)*ppos, (int)thisCDD->counter, thisCDD->alloc_len, pos, end);
 
   // with seeking, *ppos can be negative or past EOF or buffer size
   // make sure we never overflow the buffer
@@ -243,6 +265,7 @@ ssize_t CDD_write (struct file *file, const char *buf,
 	   thisCDD->counter = end;
   *ppos += count;
 	retval = count;
+ 	printk(KERN_ALERT "CDD_write: count=%d by %s(%d)\n", (int)count, current->comm, (int)current->pid);
   // end critical section
 Done:
   up_write(thisCDD->CDD_sem);

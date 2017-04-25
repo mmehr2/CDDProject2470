@@ -38,6 +38,7 @@ struct CDDdev_struct {
 };
 
 extern struct CDDdev_struct* get_CDDdev(int minor_number);
+extern int get_storage_length(int minor_number);
 extern int get_devname_number(int minor_number);
 extern const char* get_devname(int minor_number);
 extern const char* get_CDD_usage(int type, struct CDDdev_struct *thisCDD);

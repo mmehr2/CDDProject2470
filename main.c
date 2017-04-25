@@ -119,7 +119,7 @@ static int CDD_init(void)
 	}
 
 	for (i=CDDMINOR; i<CDDLASTMINOR; ++i) {
-		int storage_length;
+		int storage_length = 0;
 		thisCDD = get_CDDdev(i);
 
 		//thisCDD->devno = 0; // in case of failure...
@@ -143,10 +143,12 @@ static int CDD_init(void)
 		init_rwsem(thisCDD->CDD_sem);
 
 		// acquire write access for allocation and cdev setup
-		storage_length = get_storage_length(i);
-		thisCDD->CDD_storage=vmalloc(storage_length);
-		if (thisCDD->CDD_storage == NULL) { err = -ENOMEM; goto Minor_dev_error; }
-		thisCDD->alloc_len=storage_length;
+		thisCDD->CDD_storage = NULL;
+		// Ch.8: moved to basic open() to save alloc memory if device unused.
+		// storage_length = get_storage_length(i);
+		// thisCDD->CDD_storage=vmalloc(storage_length);
+		// if (thisCDD->CDD_storage == NULL) { err = -ENOMEM; goto Minor_dev_error; }
+		thisCDD->alloc_len = storage_length;
 
 		//  Step 2a of 2:  initialize thisCDD->cdev struct
 	 	cdev_init(&thisCDD->cdev, &CDD_fops);
