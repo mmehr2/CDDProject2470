@@ -1,0 +1,56 @@
+HOMEWORK TEST OUTPUT FOR CHAPTER 08
+
+# UTIL - mark kernel log for later retrieval...
+# Ch.8.1: Test no alloc until use 
+Mode: Readable
+CDD2(0) Group Number: 42
+Team Members: Mike Mehr, My Word!
+Buffer Length - Allocated: 4096
+Buffer Length - Used: 55
+# Opens: 25
+Mode: Readable
+CDD2(0) Group Number: 42
+Team Members: Mike Mehr, My Word!
+Buffer Length - Allocated: 4096
+Buffer Length - Used: 12
+# Opens: 26
+Hello World
+Mode: Readable
+CDD2(0) Group Number: 42
+Team Members: Mike Mehr, My Word!
+Buffer Length - Allocated: 4096
+Buffer Length - Used: 12
+# Opens: 27
+
+Mode: Readable
+CDD128(3) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 128
+Buffer Length - Used: 55
+# Opens: 6
+Mode: Readable
+CDD128(3) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 128
+Buffer Length - Used: 12
+# Opens: 7
+Hello World
+Mode: Readable
+CDD128(3) Group Number: 42
+Team Members: Mike Mehr, Team Member #2
+Buffer Length - Allocated: 128
+Buffer Length - Used: 12
+# Opens: 8
+
+# Ch.8.1 Test - output of kernel message log
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.337668] UNIQUE-KERNEL-MARKER
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.339889] file 'CDD2' opened O_TRUNC
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.339891] file 'CDD2' opened with devno=257949696 by sh(13266)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.339898] CDD_write: count=12 by sh(13266)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.344634] file 'CDD2' opened with devno=257949696 by cat(13270)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.344641] CDD_read: count=12 by cat(13270)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.349616] file 'CDD128' opened O_TRUNC
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.349619] file 'CDD128' opened with devno=257949699 by sh(13276)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.349624] CDD_write: count=12 by sh(13276)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.354022] file 'CDD128' opened with devno=257949699 by cat(13280)
+Apr 24 22:22:02 mike-VirtualBox kernel: [107985.354031] CDD_read: count=12 by cat(13280)

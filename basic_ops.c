@@ -95,7 +95,7 @@ static int wait_for_content(struct CDDdev_struct *thisCDD, struct file *file) {
       return -EAGAIN;
     }
 
-    printk(KERN_ALERT "%s: open-for-read blocked, ", current->comm);
+    printk(KERN_ALERT "%s(%d): open-for-read blocked, ", current->comm, current->pid);
     prepare_to_wait(&thisCDD->CDD_inq, &wait, TASK_INTERRUPTIBLE);
     ret = content_is_unavailable(thisCDD, file);
     if (ret < 0) {
@@ -105,7 +105,7 @@ static int wait_for_content(struct CDDdev_struct *thisCDD, struct file *file) {
     else if (ret > 0) {
       printk(KERN_ALERT "sleeping.\n");
       schedule();
-      printk(KERN_ALERT "%s returning from sleep.\n", current->comm);
+      printk(KERN_ALERT "%s(%d) returning from sleep.\n", current->comm, current->pid);
     }
 
     finish_wait(&thisCDD->CDD_inq, &wait);

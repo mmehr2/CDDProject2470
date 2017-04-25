@@ -38,7 +38,7 @@ apps:  $(APPS) testApp_ch1
 
 compile: $(DRIVER).o $(CH2_1).o $(CH2_2).o $(CH2_2s).o apps
 
-tests: test2 test3 test4 test5 test6
+tests: test2 test3 test4 test5 test6 test8
 
 load: $(DRIVER).o
 	su -c "{ insmod ./$(DRIVER).ko CDDparm=$(CDDparm);} || \
@@ -187,7 +187,7 @@ test3: CDD2 testApp_ch3
 	@echo ""  >> $(CH03_OUTFILE)
 	@echo "# Ch.3: test empty buffer"  >> $(CH03_OUTFILE)
 	echo -n "" > /dev/CDD2
-	cat /dev/CDD2 >> $(CH03_OUTFILE)
+	echo "cat /dev/CDD2 would sleep since ch.6.1e" >> $(CH03_OUTFILE)
 	@echo ""  >> $(CH03_OUTFILE)
 	@echo "# Ch.3: run test app"  >> $(CH03_OUTFILE)
 	./testApp_ch3  >> $(CH03_OUTFILE)
@@ -222,7 +222,7 @@ test4: CDD2 testApp_ch4
 	@echo "# Ch.4.1: test empty buffer report"  >> $(CH04_OUTFILE)
 	echo -n "" > /dev/CDD2
 	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
-	cat /dev/CDD2  >> $(CH04_OUTFILE)
+	echo "cat /dev/CDD2 would sleep since ch.6.1e"  >> $(CH04_OUTFILE)
 	@echo ""  >> $(CH04_OUTFILE)
 	@echo "# Ch.4.1: Test writable proc entry (changes name of 2nd team member)"  >> $(CH04_OUTFILE)
 	cat /proc/CDD/CDD2  >> $(CH04_OUTFILE)
@@ -341,3 +341,26 @@ test6: CDD2 testApp_ch6
 	@echo ""  >> $(CH06_OUTFILE)
 	@echo "# Ch.6.1e Test - output of kernel message log"  >> $(CH06_OUTFILE)
 	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH06_OUTFILE)
+
+CH08_OUTFILE := ./Outputs/Chapter08.txt
+
+test8: CDD2
+	@echo "HOMEWORK TEST OUTPUT FOR CHAPTER 08"   > $(CH08_OUTFILE)
+	@echo ""  >> $(CH08_OUTFILE)
+	@echo "# UTIL - mark kernel log for later retrieval..."  >> $(CH08_OUTFILE)
+	echo $(KERN-MARKER) > /proc/CDD/marker
+	@echo "# Ch.8.1: Test no alloc until use " >> $(CH08_OUTFILE)
+	cat /proc/CDD/CDD2 >> $(CH08_OUTFILE)
+	echo "Hello World" > /dev/CDD2
+	cat /proc/CDD/CDD2 >> $(CH08_OUTFILE)
+	cat /dev/CDD2 >> $(CH08_OUTFILE)
+	cat /proc/CDD/CDD2 >> $(CH08_OUTFILE)
+	@echo ""  >> $(CH08_OUTFILE)
+	cat /proc/CDD/CDD128 >> $(CH08_OUTFILE)
+	echo "Hello World" > /dev/CDD128
+	cat /proc/CDD/CDD128 >> $(CH08_OUTFILE)
+	cat /dev/CDD128 >> $(CH08_OUTFILE)
+	cat /proc/CDD/CDD128 >> $(CH08_OUTFILE)
+	@echo ""  >> $(CH08_OUTFILE)
+	@echo "# Ch.8.1 Test - output of kernel message log"  >> $(CH08_OUTFILE)
+	tac $(KERN-LOG) | grep "$(shell /bin/cat /proc/CDD/marker)" -B6000 -m1 | tac  >> $(CH08_OUTFILE)

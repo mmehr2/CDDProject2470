@@ -9,6 +9,7 @@ Testing, 1, 2, 3 ...
 # Ch.3: Test buffer overrun
 
 # Ch.3: test empty buffer
+cat /dev/CDD2 would sleep since ch.6.1e
 
 # Ch.3: run test app
 Eureka!Hello World 13049872138472130984721398749832174.
